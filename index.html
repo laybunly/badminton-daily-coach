@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2E6A52">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Daily Coach">
+<style>html,body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}</style>
+<title>Badminton Daily Coach</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: one-screen trainer. Court + aligned side-view height strip fill the free space; the compact decision panel sits below (phone) or beside (wide) and scrolls on its own, so the court never leaves the screen. */
+:root{
+  --bg:#E8EEEB; --surface:#FFFFFF; --ink:#15211C; --muted:#56665F; --line:#C9D5D0;
+  --mat:#2E6A52; --mat-edge:#1F4D3A; --court-line:#F3F8F5; --side:#D9E4DF; --side-ink:#4A5D55;
+  --you:#F2B134; --opp:#E4585D;
+  --best:#178C61; --good:#2F6FC6; --inacc:#B07A0E; --mistake:#C93A42;
+  --accent:#2E6A52; --on-accent:#FFFFFF;
+  --m-best:#8FF5C3; --m-good:#A6CCFF; --m-inacc:#FFD166; --m-mistake:#FF8E93; --m-neutral:rgba(243,248,245,.75);
+  --f-display:"Barlow Condensed","Arial Narrow",sans-serif;
+  --f-body:"Barlow",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D1412; --surface:#16201C; --ink:#E5EDE9; --muted:#98A9A1; --line:#2A3832;
+  --mat:#25573F; --mat-edge:#173A2A; --court-line:#E9F1ED; --side:#1B2722; --side-ink:#9DB1A8;
+  --you:#F5BC4A; --opp:#EE6A6F;
+  --best:#3CC08C; --good:#6AA4F0; --inacc:#E6AC3A; --mistake:#EE6B74;
+  --accent:#62C495; --on-accent:#0D1412; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D1412; --surface:#16201C; --ink:#E5EDE9; --muted:#98A9A1; --line:#2A3832;
+  --mat:#25573F; --mat-edge:#173A2A; --court-line:#E9F1ED; --side:#1B2722; --side-ink:#9DB1A8;
+  --you:#F5BC4A; --opp:#EE6A6F;
+  --best:#3CC08C; --good:#6AA4F0; --inacc:#E6AC3A; --mistake:#EE6B74;
+  --accent:#62C495; --on-accent:#0D1412; color-scheme:dark}
+html{height:100%;box-sizing:border-box;background:var(--bg)}
+body{height:100%;background:var(--bg);color:var(--ink);font:15px/1.45 var(--f-body)}
+*,*::before,*::after{box-sizing:border-box}
+.app{height:100%;max-width:1000px;margin:0 auto;padding-inline:16px;padding-block:8px;display:flex;flex-direction:column;gap:8px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:none}
+.brand{white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis;font:700 20px/1 var(--f-display);letter-spacing:.02em;text-transform:uppercase}
+.brand small{display:block;font:600 11px/1.1 var(--f-body);letter-spacing:.16em;color:var(--muted)}
+.stats{display:flex;gap:6px;align-items:stretch}
+.lang{font:700 13px var(--f-body);letter-spacing:.04em;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:0 9px;cursor:pointer}
+.lang:focus-visible{outline:3px solid var(--good);outline-offset:2px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:3px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:56px}
+.stat b{font:700 18px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.stat small{font-size:9px;line-height:1.2;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.delta-up{color:var(--best)} .delta-down{color:var(--mistake)}
+.dots{display:flex;gap:5px;overflow-x:auto;flex:none;padding:2px}
+.dot{flex:none;width:28px;height:28px;border-radius:50%;border:2px solid var(--line);background:var(--surface);color:var(--muted);font:600 14px var(--f-display);cursor:pointer;padding:0}
+.dot.cur{border-color:var(--ink);color:var(--ink)}
+.dot.r-best{background:var(--best);border-color:var(--best);color:#fff}
+.dot.r-good{background:var(--good);border-color:var(--good);color:#fff}
+.dot.r-inacc{background:var(--inacc);border-color:var(--inacc);color:#fff}
+.dot.r-mistake{background:var(--mistake);border-color:var(--mistake);color:#fff}
+.dot.cur.r-best,.dot.cur.r-good,.dot.cur.r-inacc,.dot.cur.r-mistake{outline:2px solid var(--ink);outline-offset:1px}
+.main{flex:1;min-height:0;display:flex;flex-direction:column;gap:8px}
+.board{flex:1 1 0;min-height:0;display:flex;flex-direction:column;gap:4px}
+.legend{flex:none;display:flex;gap:10px;align-items:center;justify-content:space-between;font-size:12px;color:var(--muted)}
+.legend .keys{display:flex;gap:10px;flex-wrap:wrap}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px;vertical-align:-1px}
+.replay{font:600 13px var(--f-body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 10px;cursor:pointer;flex:none}
+#svg{flex:1 1 0;min-height:0;width:100%;height:100%;display:block;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.panel{flex:none;max-height:42%;overflow-y:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:8px;min-width:0}
+@media (min-width:760px){
+  .main{flex-direction:row}
+  .panel{width:380px;max-height:100%;padding:16px;gap:12px}
+}
+.head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap}
+h2{font:700 22px/1.05 var(--f-display);margin:0;text-wrap:balance}
+.meta{font-size:12px;color:var(--muted);white-space:nowrap}
+.q{margin:0;font-size:15px}
+.q .step{font:600 11px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.opt{display:flex;align-items:center;gap:8px;width:100%;text-align:left;font:500 14px/1.25 var(--f-body);color:var(--ink);background:var(--bg);border:2px solid transparent;border-radius:9px;padding:7px 8px;cursor:pointer;min-width:0}
+.opt .k{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--mat);color:#fff;font:700 14px var(--f-display)}
+.opt .lbl{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.g{align-self:flex-start;font:600 10px var(--f-body);letter-spacing:.06em;text-transform:uppercase;padding:2px 5px;border-radius:4px;color:#fff}
+.opt.sel{border-color:var(--ink)}
+.opt.view{background:var(--surface);border-color:var(--line)}
+.g-best{background:var(--best)} .g-good{background:var(--good)} .g-inacc{background:var(--inacc)} .g-mistake{background:var(--mistake)}
+.pick{display:flex;gap:6px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:6px;font:600 14px var(--f-body);color:var(--ink);background:var(--bg);border:2px solid transparent;border-radius:999px;padding:5px 12px;cursor:pointer}
+.chip.on{border-color:var(--ink);background:var(--surface)}
+.chip i{width:10px;height:10px;border-radius:50%;background:var(--you)}
+.per{display:flex;gap:6px;align-items:baseline;flex-wrap:wrap;font-size:14px}
+.hint{font-size:13px;color:var(--muted);margin:0}
+.verdict{border-radius:9px;padding:8px 10px;background:var(--bg);display:flex;flex-direction:column;gap:5px;font-size:14px}
+.verdict .badge{align-self:flex-start;font:700 15px/1 var(--f-display);letter-spacing:.04em;text-transform:uppercase;color:#fff;padding:5px 8px;border-radius:5px}
+.verdict p{margin:0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.stick{position:sticky;bottom:-10px;background:var(--surface);padding-block:6px 2px;margin-top:-2px}
+.btn{font:600 15px var(--f-body);border-radius:9px;padding:9px 16px;cursor:pointer;border:2px solid var(--accent);background:var(--accent);color:var(--on-accent)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn:focus-visible,.opt:focus-visible,.dot:focus-visible,.chip:focus-visible,.replay:focus-visible{outline:3px solid var(--good);outline-offset:2px}
+.lesson{border-left:4px solid var(--accent);padding:2px 0 2px 10px;font-size:15px;font-weight:500}
+.score{font:700 36px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.small{font-size:12px;color:var(--muted);margin:0}
+#three{flex:1 1 0;min-height:0;position:relative;touch-action:none;border-radius:12px;overflow:hidden}
+#three canvas{display:block;width:100%;height:100%}
+.hint3{position:absolute;left:8px;bottom:8px;font-size:11px;color:#fff;background:rgba(0,0,0,.5);padding:3px 9px;border-radius:999px;pointer-events:none}
+.load3{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);font-size:14px}
+.ctrls{display:flex;gap:6px;align-items:center;flex:none}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--surface)}
+.seg button{font:600 13px var(--f-body);padding:4px 11px;border:0;background:none;color:var(--muted);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.seg button:focus-visible{outline:3px solid var(--good);outline-offset:-3px}
+/* svg */
+.mat{fill:var(--mat)} .cl{stroke:var(--court-line);stroke-width:5;fill:none}
+.net{stroke:var(--court-line);stroke-width:9}
+.myhalf{fill:var(--court-line);opacity:0} .myhalf.on{opacity:.07}
+.tok circle{stroke:var(--mat-edge);stroke-width:4}
+.tok.y circle{fill:var(--you)} .tok.o circle{fill:var(--opp)}
+.tok text{font:700 30px var(--f-display);fill:#1A1A1A} .tok.o text{fill:#FFFFFF}
+.tok.faded{opacity:.35} .tok.faded circle{stroke-dasharray:7 6}
+.tok.ghost circle{fill:none;stroke:var(--court-line);stroke-width:4;stroke-dasharray:8 6} .tok.ghost text{fill:var(--court-line)}
+.zone-good{fill:none;stroke:var(--court-line);stroke-width:3;stroke-dasharray:10 8;opacity:.8}
+.zone-best{fill:var(--court-line);fill-opacity:.2;stroke:var(--court-line);stroke-width:3}
+.ring{fill:none;stroke:var(--you);stroke-width:5}
+.trail{fill:none;stroke:var(--court-line);stroke-width:3;stroke-dasharray:3 10;stroke-linecap:round;opacity:.7}
+.side-bg{fill:var(--side)} .side-grid{stroke:var(--side-ink);stroke-width:1.5;opacity:.35;stroke-dasharray:4 8}
+.side-txt{font:600 28px var(--f-display);fill:var(--side-ink);letter-spacing:.04em}
+.side-net{stroke:var(--side-ink);stroke-width:7}
+.side-trail{fill:none;stroke:var(--side-ink);stroke-width:3;stroke-dasharray:3 9;stroke-linecap:round}
+.side-sh{fill:var(--ink)}
+.lbl-half{font:600 22px var(--f-display);letter-spacing:.14em;fill:var(--muted)}
+.arrow{stroke-width:6;fill:none;stroke-linecap:round}
+.arrow.n{stroke:var(--m-neutral);stroke-dasharray:12 10}
+.tgt circle{stroke:var(--mat-edge);stroke-width:3}
+.tgt text{font:700 26px var(--f-display);fill:#16201C}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <header class="top">
+    <div class="brand"><small>Badminton</small>Daily Coach</div>
+    <div class="stats">
+      <button class="lang" id="lang" type="button">EN</button>
+      <div class="stat"><b id="rating">1200</b><small id="l-rating">Wertung</small></div>
+      <div class="stat"><b id="streak">0</b><small id="l-streak">Serie</small></div>
+    </div>
+  </header>
+  <nav class="dots" id="dots" aria-label="Rätsel"></nav>
+  <main class="main">
+    <section class="board">
+      <div class="legend">
+        <div class="keys"><span><i style="background:var(--you)"></i><span id="l-you">Du · P Partner</span></span><span><i style="background:var(--opp)"></i><span id="l-opp">A, B Gegner</span></span></div>
+        <div class="ctrls"><div class="seg" role="group" aria-label="Ansicht"><button type="button" data-v="0" aria-pressed="true">2D</button><button type="button" data-v="1" aria-pressed="false">3D</button></div><button class="replay" id="replay" type="button" aria-label="Ballflug nochmal ansehen">↻</button></div>
+      </div>
+      <svg id="svg" viewBox="-48 -56 1030 1446" role="img" aria-label="Badmintonfeld von oben, daneben die Flughöhe des Balls von der Seite"></svg>
+      <div id="three" hidden><div class="load3" id="load3">3D wird geladen …</div><div class="hint3" id="l-drag">Ziehen zum Drehen</div></div>
+    </section>
+    <section class="panel" id="panel" aria-live="polite"></section>
+  </main>
+</div>
+
+<script>
+// Feldmaße in cm. x: 0–610 (Breite), y: 0–1340 (Länge). Netz bei y=670. Deine Hälfte: y>670.
+const PUZ_DE = [
+ {id:'serve-base', theme:'Aufschlag', title:'Hinter dem Aufschläger', rating:950,
+  lesson:'Der Aufschläger deckt das Netz. Der Partner wartet mittig dahinter und deckt Push und Flick nach hinten.',
+  steps:[{type:'place', who:'Y',
+   players:{Y:[470,1185],P:[350,890],A:[225,440],B:[320,180]},
+   shuttle:{from:[350,880,110],to:[230,470,140],peak:175},
+   q:'Dein Partner schlägt kurz auf. Tippe, wo du für den Return stehen solltest.',
+   best:[300,1070], rBest:75, rGood:140,
+   why:{best:'Mittig hinter dem Aufschläger, etwa auf halber Tiefe. Dein Partner deckt das Netz, du deckst Push und Flick nach hinten. Aus der Mitte sind beide hinteren Ecken gleich weit entfernt.',
+        good:'Knapp. Stell dich genau in die Mitte, damit beide hinteren Ecken gleich weit weg sind.'}}]},
+
+ {id:'tape', theme:'Netzspiel', title:'Über der Netzkante', rating:1000,
+  lesson:'Über der Netzkante: nach unten schlagen. Unter der Netzkante: Netzdrop oder Lift.',
+  steps:[{type:'shot',
+   players:{Y:[345,775],P:[300,1120],A:[280,560],B:[330,330]},
+   shuttle:{from:[280,600,90],to:[330,700,172],peak:205},
+   q:'A spielt einen Netzdrop, der zu hoch kommt. Du triffst den Ball knapp über der Netzkante. Was spielst du?',
+   options:[
+    {t:'Push nach unten in die Lücke', d:[470,420], g:'best', why:'Über der Netzkante kannst du nach unten schlagen. Ein schneller Push in die Lücke zwischen beiden erzwingt einen schwachen Lift, den dein Partner smashen kann.'},
+    {t:'Enger Netzdrop', d:[320,630], g:'good', why:'Nicht falsch, aber du verschenkst die Chance, nach unten zu schlagen. Heb ihn dir auf, wenn der Ball schon unter die Netzkante gefallen ist.'},
+    {t:'Cross-Netzdrop', d:[120,630], g:'inacc', why:'Der lange Weg entlang des Netzes gibt A Zeit, hinüberzugehen. Als Überraschung möglich, aber riskanter als nach unten zu schlagen.'},
+    {t:'Lift nach hinten', d:[300,90], g:'mistake', why:'Du hattest den Ball über der Netzkante und hast daraus Verteidigung für dein Team gemacht.'}]}]},
+
+ {id:'stay-front', theme:'Rotation', title:'Lift über den Vorderspieler', rating:1000,
+  lesson:'Der Vorderspieler bleibt vorne. Alles dahinter gehört dem Hinterspieler.',
+  steps:[{type:'place', who:'Y',
+   players:{Y:[300,800],P:[210,1130],A:[300,560],B:[440,320]},
+   shuttle:{from:[300,580,80],to:[500,1250,230],peak:560},
+   q:'A liftet hoch über dich in deine hintere Vorhandecke. Dein Partner läuft hin. Tippe, wo du stehen solltest.',
+   best:[350,860], rBest:75, rGood:140,
+   why:{best:'Bleib vorne nahe dem T, leicht zur Seite des Balls verschoben. Dein Partner greift von hinten an, du übernimmst alles Kurze. Läufst du nach hinten, ist das ganze Vorderfeld offen.',
+        good:'Richtige Zone. Verschieb dich leicht zu der Seite, von der dein Partner schlägt: Gerade Returns kommen dorthin zurück.'}}]},
+
+ {id:'lift-side', theme:'Rotation', title:'Verteidigen nach einem Lift', rating:1100,
+  lesson:'Nach einem Lift verteidigt ihr nebeneinander. Gegen einen Cross-Smash spielst du gerade zurück.',
+  steps:[
+   {type:'place',
+    players:{Y:[330,1130],P:[230,830],A:[300,520],B:[150,170]},
+    shuttle:{from:[230,760,50],to:[150,150,250],peak:620},
+    q:'Dein Partner musste in die hintere Ecke liften. B wird smashen. Stellt euch beide zur Verteidigung auf.',
+    targets:{Y:{best:[335,995],rBest:70,rGood:130}, P:{best:[165,1010],rBest:70,rGood:130}},
+    why:{best:'Nebeneinander, und das ganze Paar verschiebt sich zur Seite des Balls. Dein Partner steht in Linie mit dem Ball und deckt den geraden Smash. Du stehst nah an der Mittellinie: Der Cross-Smash ist länger unterwegs, also hast du mehr Zeit und deckst auch die Mitte.',
+         good:'Richtige Idee. Prüf die Aufteilung: Der gerade Verteidiger steht in Linie mit dem Ball, der Cross-Verteidiger nah an der Mittellinie.'}},
+   {type:'shot',
+    players:{Y:[335,995],P:[165,1010],A:[310,520],B:[150,150]},
+    shuttle:{from:[150,150,250],to:[365,1015,95],peak:250},
+    q:'B smasht cross auf deine Vorhandhüfte. Deine Antwort?',
+    options:[
+     {t:'Flacher Drive gerade', d:[440,300], g:'best', why:'B steckt in der hinteren Ecke fest und A sichert das Netz. Ein flacher Drive auf deiner Linie fliegt an A vorbei ins leere Mittelfeld. Sie verlieren den Angriff.'},
+     {t:'Gerader Block ans Netz', d:[430,575], g:'good', why:'Sicher und weit weg vom Smasher. A kommt noch dran, also muss der Block knapp sein.'},
+     {t:'Tiefer Lift', d:[420,90], g:'inacc', why:'Sicher, aber du gibst ihnen den Angriff zurück. Heb ihn dir auf, wenn du zu spät oder aus dem Gleichgewicht bist.'},
+     {t:'Cross-Block', d:[140,580], g:'mistake', why:'Der Ball fliegt direkt vor A am Netz vorbei. Ein leichter Kill.'}]}]},
+
+ {id:'smash-front', theme:'Rotation', title:'Angriff nach deinem Smash', rating:1150,
+  lesson:'Wenn dein Team angreift, spielt ihr vorne-hinten. Beide verschieben sich zur Seite des Smashs.',
+  steps:[{type:'place',
+   players:{Y:[180,1210],P:[430,1010],A:[140,320],B:[440,320]},
+   shuttle:{from:[180,1210,270],to:[140,330,90],peak:270},
+   q:'Du smashst gerade von hinten. Stellt euch beide für den nächsten Schlag auf.',
+   targets:{P:{best:[250,860],rBest:75,rGood:140}, Y:{best:[200,1110],rBest:80,rGood:150}},
+   why:{best:'Vorne-hinten. Dein Partner geht nach vorne zum T, verschoben zur Seite deines Smashs, weil Blocks und Drives meist dort zurückkommen. Du rückst nach dem Smash einen Schritt nach, bleibst aber auf derselben Seite, bereit für den nächsten Lift.',
+        good:'Vorne-hinten stimmt. Ihr verschiebt euch beide zur Seite des Smashs, und du rückst nach dem Schlag etwas nach.'}}]},
+
+ {id:'drive', theme:'Mittelfeld', title:'Drive-Duell', rating:1150,
+  lesson:'Im flachen Ballwechsel verliert meist das Team den Angriff, das zuerst liftet. Bleib flach oder spiel kurz.',
+  steps:[{type:'shot',
+   players:{Y:[190,1010],P:[420,1000],A:[150,320],B:[420,310]},
+   shuttle:{from:[150,330,130],to:[185,1000,130],peak:160},
+   q:'A spielt einen flachen Drive auf Brusthöhe zu dir. Beide Gegner stehen hinten im Mittelfeld. Deine Antwort?',
+   options:[
+    {t:'Weicher Push ins Vorderfeld', d:[300,565], g:'best', why:'Beide Gegner stehen tief. Ein kurzer, flacher Push in den Raum vor ihnen zwingt einen zum Lift, und dein Team bekommt den Angriff.'},
+    {t:'Flacher Drive gerade', d:[140,320], g:'good', why:'Hält den Ballwechsel ausgeglichen. In Ordnung, aber damit gewinnst du den Angriff noch nicht.'},
+    {t:'Hoher Lift', d:[300,90], g:'inacc', why:'Du hattest einen flachen Ball auf Brusthöhe. Mit einem Lift schenkst du ihnen einen Smash.'},
+    {t:'Halbhoher Lift ins Mittelfeld', d:[300,330], g:'mistake', why:'Zu kurz und zu langsam, das Schlechteste aus beidem. Sie smashen ihn aus kurzer Distanz.'}]}]},
+
+ {id:'late', theme:'Unter Druck', title:'Zu spät in der hinteren Ecke', rating:1200,
+  lesson:'Rot: Bist du zu spät und der Ball tief hinter dir, spiel hoch und tief, um Zeit zu gewinnen.',
+  steps:[{type:'shot',
+   players:{Y:[110,1190],P:[420,950],A:[380,560],B:[250,250]},
+   shuttle:{from:[380,570,110],to:[90,1270,140],peak:330},
+   q:'A pusht schnell in deine hintere Rückhandecke. Du kommst zu spät, der Ball ist schon tief hinter dir.',
+   options:[
+    {t:'Hoher Clear in die Mitte', d:[300,100], g:'best', why:'Du bist spät und aus dem Gleichgewicht. Ein hoher, tiefer Clear in die Mitte gibt dir Zeit zurückzukommen und dem Smasher weniger Winkel.'},
+    {t:'Gerader hoher Clear', d:[110,90], g:'good', why:'Auch in Ordnung, aber kommt er in ihrer Ecke zu kurz, smashen sie gerade zurück, bevor du bereit bist.'},
+    {t:'Rückhand-Drop', d:[120,560], g:'inacc', why:'Von tief hinter dir ist der Drop langsam und schwebt. Ist er nicht perfekt, wartet A am Netz.'},
+    {t:'Cross-Drive', d:[500,360], g:'mistake', why:'Ein flacher Cross aus deiner hinteren Ecke fliegt direkt an A am Netz vorbei. Leicht abzufangen.'}]}]},
+
+ {id:'attack-middle', theme:'Angriff', title:'Hoher Ball im Mittelfeld', rating:1250,
+  lesson:'Grün: Greif die Mitte oder den Körper an.',
+  steps:[{type:'shot',
+   players:{Y:[220,1060],P:[330,840],A:[180,300],B:[430,300]},
+   shuttle:{from:[430,320,70],to:[220,1050,280],peak:520},
+   q:'B liftet kurz in dein Mittelfeld. Der Ball ist hoch vor dir. Wohin smashst du?',
+   options:[
+    {t:'Smash zwischen die beiden', d:[305,255], g:'best', why:'Die Mitte ist im Doppel am schwersten zu verteidigen: Beide wollen hin, oder keiner. Der Return kommt außerdem mittig zurück, wo dein Partner wartet.'},
+    {t:'Smash auf die Hüfte von A', d:[195,310], g:'good', why:'Körpersmashes sind schwer gut zurückzuspielen. Eine starke Wahl, nur etwas leichter zu blocken als die Mitte.'},
+    {t:'Cross-Smash an die Seitenlinie', d:[560,250], g:'inacc', why:'Der längere Weg gibt B mehr Zeit, und der gerade Block läuft von deinem Partner weg.'},
+    {t:'Clear nach hinten', d:[300,90], g:'mistake', why:'Du hattest einen hohen Ball im Mittelfeld und hast den Angriff hergegeben.'}]}]},
+
+ {id:'cross-front', theme:'Rotation', title:'Vorderspieler nach Cross-Smash', rating:1250,
+  lesson:'Der Vorderspieler folgt dem Ball: Verschieb dich zu der Seite, auf die dein Partner geschlagen hat.',
+  steps:[{type:'place',
+   players:{Y:[300,880],P:[150,1200],A:[180,310],B:[470,310]},
+   shuttle:{from:[150,1200,270],to:[480,320,95],peak:270},
+   q:'Dein Partner smasht cross von hinten. Stell dich (vorne) und deinen Partner (hinten) auf.',
+   targets:{Y:{best:[385,845],rBest:65,rGood:125}, P:{best:[300,1130],rBest:80,rGood:150}},
+   why:{best:'B spielt meist gerade zurück, als Block oder Drive auf seiner Linie. Das ist deine rechte Seite, also verschiebst du dich dorthin, um den Block zu killen oder den Drive abzufangen. Dein Partner kommt aus der Ecke Richtung Mitte des Hinterfelds zurück, bereit für einen Lift auf beide Seiten.',
+        good:'Gute Grundform. Du verschiebst dich mehr zur Seite des Smashs, dein Partner kommt in die Mitte des Hinterfelds zurück.'}}]},
+
+ {id:'deep-drop', theme:'Angriff', title:'Tief im Hinterfeld', rating:1350,
+  lesson:'Gelb im Hinterfeld: Ist der Ball sehr tief, hält ein schneller Drop den Angriff besser als ein schwacher Smash.',
+  steps:[{type:'shot',
+   players:{Y:[430,1250],P:[300,860],A:[190,320],B:[430,330]},
+   shuttle:{from:[430,340,60],to:[420,1290,240],peak:600},
+   q:'B liftet sehr tief in deine Vorhandecke. Du kommst hin, aber der Ball ist leicht hinter dir.',
+   options:[
+    {t:'Schneller, steiler Drop gerade', d:[440,580], g:'best', why:'Von so tief kommt ein Smash langsam und flach an. Ein schneller Drop hält dein Team im Angriff und zieht die Gegner nach vorne, wo dein Partner wartet.'},
+    {t:'Smash in die Mitte', d:[305,320], g:'good', why:'Möglich, wenn du hinten stark bist, aber der Weg ist lang und sie können mit einem Drive kontern.'},
+    {t:'Clear nach hinten', d:[300,90], g:'inacc', why:'Neutral und sicher, aber es gibt ihnen Zeit. Du verlierst den Angriff.'},
+    {t:'Langsamer Cross-Drop', d:[150,590], g:'mistake', why:'Langer, langsamer Weg quer über das Feld. A ist früh da und killt ihn oder spielt einen engen Netzdrop.'}]}]}
+];
+
+const G = {best:{l:'Bester',v:1}, good:{l:'Gut',v:.7}, inacc:{l:'Ungenau',v:.35}, mistake:{l:'Fehler',v:0}};
+const MAT = {best:'var(--m-best)',good:'var(--m-good)',inacc:'var(--m-inacc)',mistake:'var(--m-mistake)'};
+const NAME={Y:'Du',P:'Partner'}, LABEL={Y:'Du',P:'P',A:'A',B:'B'};
+
+const store = {
+  get(k,d){try{const v=localStorage.getItem('cs_'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+  set(k,v){try{localStorage.setItem('cs_'+k,JSON.stringify(v))}catch(e){}}
+};
+const PUZ_EN_TEXT = {
+ 'serve-base':{theme:'Serve',title:'Behind the server',
+  lesson:'The server covers the net. The partner waits in the centre behind and covers pushes and flicks to the back.',
+  steps:[{q:'Your partner serves short. Tap where you should stand for the return.',
+   why:{best:'Centred, behind the server, at about mid-court depth. Your partner covers the net, you cover pushes and flicks to the back. From the middle both back corners are equally close.',
+        good:'Close. Stand right in the centre so both back corners are the same distance away.'}}]},
+ 'tape':{theme:'Net play',title:'Above the tape',
+  lesson:'Above the tape, hit down. Below the tape, play a net shot or lift.',
+  steps:[{q:'A plays a net shot that floats too high. You meet it just above the tape. What do you play?',
+   opts:[['Push down into the gap','Above the tape you can hit down. A quick push into the space between them forces a weak lift that your partner can smash.'],
+         ['Tight net shot','Not wrong, but you waste the chance to hit down. Save it for when the shuttle has already dropped below the tape.'],
+         ['Cross-court net shot','A long flight along the net gives A time to step across. A surprise option, but riskier than hitting down.'],
+         ['Lift to the back','You had the shuttle above the tape and turned it into defence for your team.']]}]},
+ 'stay-front':{theme:'Rotation',title:'Lifted over the net player',
+  lesson:'The front player stays in front. Everything behind belongs to the back player.',
+  steps:[{q:'A lifts high over you to your back forehand corner. Your partner runs to take it. Tap where you should be.',
+   why:{best:'Stay in front near the T, shifted slightly toward the shuttle side. Your partner attacks from the back and you take everything short. If you run back, the whole front court is open.',
+        good:'Right zone. Shift slightly toward the side your partner hits from: straight replies come back there.'}}]},
+ 'lift-side':{theme:'Rotation',title:'Defend after a lift',
+  lesson:'After a lift, defend side by side. Against a cross smash, reply straight.',
+  steps:[{q:'Your partner was forced to lift to the back corner. B will smash. Place both of you for the defence.',
+    why:{best:'Side by side, and the whole pair shifts toward the shuttle side. Your partner stands in line with the shuttle to cover the straight smash. You stand close to the centre line: the cross smash travels further, so you have more time and also cover the middle.',
+         good:'Right idea. Check the split: the straight defender in line with the shuttle, the cross defender near the centre line.'}},
+   {q:'B smashes cross-court at your forehand hip. Your reply?',
+    opts:[['Flat drive straight','B is stuck in the far corner and A guards the net. A flat drive down your line flies past A into the empty mid-court. They lose the attack.'],
+          ['Straight block to the net','Safe and far away from the smasher. A can still reach it, so the block has to be tight.'],
+          ['Deep lift','Safe, but you hand them the attack again. Keep it for when you are late or off balance.'],
+          ['Cross-court block','The shuttle crosses right in front of A at the net. That is an easy kill.']]}]},
+ 'smash-front':{theme:'Rotation',title:'Attack after your smash',
+  lesson:'When your team attacks, play front and back. Both of you shift toward the side of the smash.',
+  steps:[{q:'You smash straight from the back. Place yourself and your partner for the next shot.',
+   why:{best:'Front and back. Your partner moves forward to the T, shifted toward the side you smashed, because blocks and drives come back there most often. You follow your smash a step forward but stay on the same side, ready for the next lift.',
+        good:'Front and back is right. Both of you shift toward the side of the smash, and you step forward after hitting.'}}]},
+ 'drive':{theme:'Mid-court',title:'Flat drive battle',
+  lesson:'In flat rallies, the first team to lift usually loses the attack. Stay flat or go short.',
+  steps:[{q:'A drives flat at chest height to you. Both opponents stand back in the mid-court. Your reply?',
+   opts:[['Soft push into the forecourt','Both opponents are deep. A short, flat push into the space in front of them forces one of them to lift, and your team gets the attack.'],
+         ['Flat drive straight','Keeps the rally even. Fine, but it does not win you the attack yet.'],
+         ['High lift','You had a flat ball at chest height. Lifting gives them a free smash.'],
+         ['Half-high lift to the mid-court','Too short and too slow: the worst of both. They smash it from close range.']]}]},
+ 'late':{theme:'Under pressure',title:'Late in the back corner',
+  lesson:'Red light: when you are late and the shuttle is low behind you, play high and deep to buy time.',
+  steps:[{q:'A pushes fast to your backhand back corner. You arrive late and the shuttle is already low behind you.',
+   opts:[['High clear to the middle','You are late and off balance. A high, deep clear to the centre buys time to recover and gives the smasher less angle.'],
+         ['Straight high clear','Also fine, but if it falls short in their corner they smash straight back at you before you are set.'],
+         ['Backhand drop','From low behind you the drop is slow and floats. If it is not perfect, A at the net is waiting.'],
+         ['Cross-court drive','A flat cross from your deep corner passes right next to A at the net. Easy intercept.']]}]},
+ 'attack-middle':{theme:'Attack',title:'High ball in the mid-court',
+  lesson:'Green light: attack the middle or the body.',
+  steps:[{q:'B lifts short to your mid-court. The shuttle is high in front of you. Where do you smash?',
+   opts:[['Smash between them','The middle is the hardest spot to defend in doubles: both may go for it, or neither. The return also comes back central, where your partner waits.'],
+         ['Smash at the hip of A','Body smashes are hard to return well. A strong choice, just slightly easier to block than the middle.'],
+         ['Cross-court smash to the sideline','A longer flight gives B more time, and the straight block runs away from your partner.'],
+         ['Clear to the back','You had a high shuttle in the mid-court and gave the attack away.']]}]},
+ 'cross-front':{theme:'Rotation',title:'Front player after a cross smash',
+  lesson:'The front player follows the shuttle: shift toward the side your partner hit to.',
+  steps:[{q:'Your partner smashes cross-court from the back. Place yourself (front) and your partner (back).',
+   why:{best:'B will most likely reply straight, with a block or drive back down his line. That is your right side, so you shift toward it to kill the block or cut off the drive. Your partner recovers from the corner toward the middle of the back court, ready for a lift to either side.',
+        good:'Good shape. You shift more toward the side the smash went to, and your partner recovers to the middle of the back court.'}}]},
+ 'deep-drop':{theme:'Attack',title:'Deep at the back',
+  lesson:'Yellow light at the back: when the shuttle is very deep, a fast drop keeps the attack better than a weak smash.',
+  steps:[{q:'B lifts very deep to your forehand corner. You get there, but the shuttle is slightly behind you.',
+   opts:[['Fast, steep drop straight','From this deep, a smash arrives slow and flat. A fast drop keeps your team attacking and pulls them forward, where your partner waits.'],
+         ['Smash to the middle','Possible if you are strong at the back, but it is a long way and they can counter with a drive.'],
+         ['Clear to the back','Neutral and safe, but it gives them time. You lose the attack.'],
+         ['Slow cross-court drop','A long, slow flight across the court. A arrives early and kills it or plays a tight net shot.']]}]}
+};
+const I18N={
+ de:{rating:'Wertung',streak:'Serie',puzzles:'Rätsel',legYou:'Du · P Partner',legOpp:'A, B Gegner',view:'Ansicht',replay:'Ballflug nochmal ansehen',
+  svg:'Badmintonfeld von oben, daneben die Flughöhe des Balls von der Seite',load3:'3D wird geladen …',no3d:'3D ist auf diesem Gerät nicht verfügbar.',drag:'Ziehen zum Drehen',
+  opp:'GEGNER',mine:'DEINE SEITE',height:'FLUGHÖHE (SEITE)',net:'Netz',dec:',',
+  back:'zu weit hinten',front:'zu nah am Netz',right:'zu weit rechts',left:'zu weit links',and:' und ',
+  puzzle:'Rätsel',level:'Stufe',saved:(d,r)=>`Wertung ${d} → ${r}. Dein Ergebnis wird auf diesem Gerät gespeichert.`,
+  next:'Nächstes Rätsel',back1:'Zurück zu Rätsel 1',retry:'Nochmal versuchen',step:'Schritt',who:'Wen platzieren',chipY:'Du',chipP:'Partner (P)',
+  watch:'Schau dem Ball zu …',moveName:'Tippe auf einen Namen, um diesen Spieler zu verschieben, dann bestätigen.',adjust:'Tippe erneut zum Korrigieren, dann bestätigen.',
+  placeY:'Tippe auf deine Spielfeldhälfte, um <b>dich (Du)</b> zu platzieren.',placeP:'Tippe auf deine Spielfeldhälfte, um <b>deinen Partner (P)</b> zu platzieren.',
+  lock1:'Position bestätigen',lockN:'Positionen bestätigen',exact:'Genau richtig.',zones:'Volle Fläche: beste Zone. Gestrichelt: gute Zone.',
+  nextStep:'Nächster Schritt',result:'Ergebnis ansehen',others:'Tippe auf die anderen Optionen, um zu sehen, warum sie besser oder schlechter sind.',
+  langBtn:'EN',langAria:'Switch to English',grades:['Bester','Gut','Ungenau','Fehler'],you:'Du'},
+ en:{rating:'Rating',streak:'Streak',puzzles:'Puzzles',legYou:'You · P partner',legOpp:'A, B opponents',view:'View',replay:'Replay the shuttle',
+  svg:'Badminton court from above, with the shuttle height seen from the side',load3:'Loading 3D …',no3d:'3D is not available on this device.',drag:'Drag to rotate',
+  opp:'OPPONENTS',mine:'YOUR SIDE',height:'HEIGHT (SIDE VIEW)',net:'net',dec:'.',
+  back:'too far back',front:'too close to the net',right:'too far right',left:'too far left',and:' and ',
+  puzzle:'Puzzle',level:'Level',saved:(d,r)=>`Rating ${d} → ${r}. Your result is saved on this device.`,
+  next:'Next puzzle',back1:'Back to puzzle 1',retry:'Try again',step:'Step',who:'Who to place',chipY:'You',chipP:'Partner (P)',
+  watch:'Watch the shuttle …',moveName:'Tap a name to move that player, then lock it in.',adjust:'Tap again to adjust, then lock it in.',
+  placeY:'Tap your half of the court to place <b>yourself (You)</b>.',placeP:'Tap your half of the court to place <b>your partner (P)</b>.',
+  lock1:'Lock in position',lockN:'Lock in positions',exact:'In the right spot.',zones:'Solid: best zone. Dashed: good zone.',
+  nextStep:'Next step',result:'See result',others:'Tap the other options to see why they are better or worse.',
+  langBtn:'DE',langAria:'Auf Deutsch umschalten',grades:['Best','Good','Inaccuracy','Mistake'],you:'You'}
+};
+PUZ_DE.forEach(p=>p.steps.forEach(s=>(s.options||[]).forEach(o=>{o.k=kindOf(o);})));
+const PUZ_EN=JSON.parse(JSON.stringify(PUZ_DE));
+PUZ_EN.forEach(p=>{const e=PUZ_EN_TEXT[p.id];if(!e)return;p.theme=e.theme;p.title=e.title;p.lesson=e.lesson;
+  p.steps.forEach((s,i)=>{const es=e.steps[i];if(!es)return;s.q=es.q;if(es.why)s.why=es.why;if(es.opts)s.options.forEach((o,j)=>{o.t=es.opts[j][0];o.why=es.opts[j][1];});});});
+let LANG, T, PUZZLES;
+function detectLang(){const st=store.get('lang',null);if(st==='de'||st==='en')return st;
+  const ls=(navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||'en']);
+  for(const l of ls){const p=String(l).slice(0,2).toLowerCase();if(p==='de'||p==='en')return p;}return 'en';}
+function applyLang(l,save){
+  LANG=l; T=I18N[l]; PUZZLES=l==='de'?PUZ_DE:PUZ_EN; if(save)store.set('lang',l);
+  document.documentElement.lang=l;
+  ['best','good','inacc','mistake'].forEach((k,i)=>G[k].l=T.grades[i]);
+  NAME.Y=T.you; LABEL.Y=T.you;
+  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+  set('l-rating',T.rating);set('l-streak',T.streak);set('l-you',T.legYou);set('l-opp',T.legOpp);set('load3',T.load3);set('l-drag',T.drag);
+  document.getElementById('dots').setAttribute('aria-label',T.puzzles);
+  document.querySelector('.seg').setAttribute('aria-label',T.view);
+  document.getElementById('replay').setAttribute('aria-label',T.replay);
+  document.getElementById('svg').setAttribute('aria-label',T.svg);
+  const lb=document.getElementById('lang');lb.textContent=T.langBtn;lb.setAttribute('aria-label',T.langAria);lb.title=T.langAria;
+}
+applyLang(detectLang(),false);
+
+const S = {rating:store.get('rating',1200), streak:store.get('streak',0), results:store.get('results',{}),
+  pi:0, si:0, answers:[], taps:{}, active:'Y', view:null, phase:'play', t:1, delta:null};
+{const i=PUZZLES.findIndex(p=>S.results[p.id]==null); S.pi=i<0?0:i;}
+
+const SX=660, HS=300/700, LET='ABCD';
+const svg=document.getElementById('svg'), panel=document.getElementById('panel');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const P=()=>PUZZLES[S.pi], ST=()=>P().steps[S.si];
+function TG(st){return st.targets||{[st.who]:{best:st.best,rBest:st.rBest,rGood:st.rGood}};}
+
+function shPos(sh,t){const [x0,y0,h0]=sh.from,[x1,y1,h1]=sh.to;
+  const bump=Math.max(0,sh.peak-Math.max(h0,h1))*4*t*(1-t);
+  return [x0+(x1-x0)*t, y0+(y1-y0)*t, h0+(h1-h0)*t+bump];}
+function trail(sh,side){let d='';for(let i=0;i<=30;i++){const [x,y,h]=shPos(sh,i/30);d+=(i?'L':'M')+(side?(SX+h*HS).toFixed(1):x.toFixed(1))+' '+y.toFixed(1);}return d;}
+function tok(x,y,k,cls){return `<g class="tok ${cls}" transform="translate(${x} ${y})"><circle r="30"/><text y="10" text-anchor="middle">${LABEL[k]}</text></g>`;}
+function gradeOf(s){return s>=.85?'best':s>=.6?'good':s>=.3?'inacc':'mistake';}
+
+function court(){
+  return `<rect x="-24" y="-24" width="658" height="1388" rx="14" class="mat"/>
+  <rect x="0" y="670" width="610" height="670" class="myhalf ${ST().type==='place'&&S.phase==='play'?'on':''}"/>
+  <g class="cl"><rect x="0" y="0" width="610" height="1340"/>
+   <line x1="46" y1="0" x2="46" y2="1340"/><line x1="564" y1="0" x2="564" y2="1340"/>
+   <line x1="0" y1="76" x2="610" y2="76"/><line x1="0" y1="1264" x2="610" y2="1264"/>
+   <line x1="0" y1="472" x2="610" y2="472"/><line x1="0" y1="868" x2="610" y2="868"/>
+   <line x1="305" y1="0" x2="305" y2="472"/><line x1="305" y1="868" x2="305" y2="1340"/></g>
+  <line x1="-16" y1="670" x2="626" y2="670" class="net"/>
+  <text class="lbl-half" transform="translate(-32 335) rotate(-90)" text-anchor="middle">${T.opp}</text>
+  <text class="lbl-half" transform="translate(-32 1005) rotate(-90)" text-anchor="middle">${T.mine}</text>`;
+}
+function sideView(sh){
+  let g=`<rect x="${SX-8}" y="-24" width="${300+28}" height="1388" rx="12" class="side-bg"/>
+  <text class="side-txt" x="${SX+150}" y="-30" text-anchor="middle">${T.height}</text>`;
+  for(let m=1;m<=6;m++){const x=SX+m*100*HS;g+=`<line x1="${x}" y1="-10" x2="${x}" y2="1350" class="side-grid"/>${m%2?'':`<text class="side-txt" x="${x}" y="1380" text-anchor="middle">${m} m</text>`}`;}
+  g+=`<line x1="${SX}" y1="-10" x2="${SX}" y2="1350" stroke="var(--side-ink)" stroke-width="4"/>
+  <line x1="${SX}" y1="670" x2="${SX+155*HS}" y2="670" class="side-net"/>
+  <text class="side-txt" x="${SX+155*HS+8}" y="664">${T.net}</text>
+  <path d="${trail(sh,true)}" class="side-trail"/>
+  <circle id="sh-side" r="11" class="side-sh"/>
+  <text id="sh-side-lbl" class="side-txt" x="0" y="0"></text>`;
+  return g;
+}
+function defs(){
+  let d='<defs>';
+  for(const [k,c] of Object.entries({n:'var(--m-neutral)',...MAT}))
+    d+=`<marker id="ah-${k}" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:${c}"/></marker>`;
+  return d+'</defs>';
+}
+
+function renderSVG(){
+  const st=ST(), sh=st.shuttle, answered=S.phase!=='play';
+  let s=defs()+court()+sideView(sh)+`<path d="${trail(sh,false)}" class="trail"/>`;
+  if(st.type==='shot'){
+    const [cx,cy]=sh.to;
+    st.options.forEach((o,i)=>{
+      const [tx,ty]=o.d, L=Math.hypot(tx-cx,ty-cy), ex=tx-(tx-cx)/L*34, ey=ty-(ty-cy)/L*34;
+      const k=answered?o.g:'n', col=answered?MAT[o.g]:'var(--m-neutral)';
+      const sel=answered&&S.answers[S.si]&&S.answers[S.si].i===i;
+      s+=`<line x1="${cx}" y1="${cy}" x2="${ex}" y2="${ey}" class="arrow ${answered?'':'n'}" style="stroke:${col};${answered&&!sel&&S.view!==i?'opacity:.45':''}" marker-end="url(#ah-${k})"/>`;
+      s+=`<g class="tgt" transform="translate(${tx} ${ty})"><circle r="${sel?26:22}" style="fill:${col}"/><text y="9" text-anchor="middle">${LET[i]}</text></g>`;
+    });
+  }
+  if(st.type==='place'&&answered){
+    for(const [k,t] of Object.entries(TG(st))){
+      s+=`<circle cx="${t.best[0]}" cy="${t.best[1]}" r="${t.rGood}" class="zone-good"/><circle cx="${t.best[0]}" cy="${t.best[1]}" r="${t.rBest}" class="zone-best"/>`;
+      s+=tok(t.best[0],t.best[1],k,'ghost');}
+  }
+  for(const [k,v] of Object.entries(st.players)){
+    const cls=(k==='Y'||k==='P')?'y':'o';
+    if(st.type==='place'&&TG(st)[k]){
+      s+=tok(v[0],v[1],k,cls+' faded');
+      const tp=S.taps[k];
+      if(tp) s+=tok(tp[0],tp[1],k,cls);
+      if(S.phase==='play'&&S.active===k&&Object.keys(TG(st)).length>1){const c=tp||v;s+=`<circle cx="${c[0]}" cy="${c[1]}" r="42" class="ring"/>`;}
+    } else s+=tok(v[0],v[1],k,cls);
+  }
+  if(st.type==='shot') s+=`<circle cx="${st.players.Y[0]}" cy="${st.players.Y[1]}" r="40" class="ring"/>`;
+  s+=`<ellipse id="sh-shadow" rx="13" ry="8" fill="rgba(0,0,0,.35)"/><g id="sh-top"><circle r="12" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="3"/><circle r="5" fill="#1A1A1A"/></g>`;
+  svg.innerHTML=s;
+  if(V3.on&&R3) render3D();
+  drawShuttle(S.t);
+}
+function drawShuttle(t){
+  const sh=ST().shuttle, [x,y,h]=shPos(sh,t);
+  const top=document.getElementById('sh-top'), sd=document.getElementById('sh-shadow'), sv=document.getElementById('sh-side'), lb=document.getElementById('sh-side-lbl');
+  if(!top) return;
+  top.setAttribute('transform',`translate(${x} ${y}) scale(${1+h/600})`);
+  sd.setAttribute('cx',x); sd.setAttribute('cy',y+6);
+  sv.setAttribute('cx',SX+h*HS); sv.setAttribute('cy',y);
+  lb.textContent=t>=1?(h/100).toFixed(1).replace('.',T.dec)+' m':'';
+  lb.setAttribute('x',Math.min(SX+h*HS+18,SX+220)); lb.setAttribute('y',y+(t>=1?-16:0));
+  if(V3.on&&R3) drawShuttle3D(t);
+}
+let rafId=0;
+function play(){
+  cancelAnimationFrame(rafId);
+  if(reduce){S.t=1;drawShuttle(1);renderPanel();return;}
+  const t0=performance.now(), dur=1200;
+  S.t=0;
+  const f=now=>{S.t=Math.min(1,(now-t0)/dur);drawShuttle(S.t);if(S.t<1)rafId=requestAnimationFrame(f);else renderPanel();};
+  rafId=requestAnimationFrame(f);
+}
+
+
+// ---------- 3D-Ansicht (three.js, wird erst beim Umschalten geladen) ----------
+const V3={on:store.get('view3d',false)};
+let R3=null;
+const box3=document.getElementById('three');
+const MATC={best:'#8FF5C3',good:'#A6CCFF',inacc:'#FFD166',mistake:'#FF8E93'};
+function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()||'#ffffff';}
+function W(x,y,h=0){return new THREE.Vector3((x-305)/100,h/100,(y-670)/100);}
+function loadThree(){return new Promise((res,rej)=>{if(window.THREE)return res();const sc=document.createElement('script');sc.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';sc.onload=res;sc.onerror=rej;document.head.appendChild(sc);});}
+function mat(color,op=1,basic=false){const M=basic?THREE.MeshBasicMaterial:THREE.MeshLambertMaterial;return new M({color:new THREE.Color(color),transparent:op<1,opacity:op,depthWrite:op>=1});}
+function flat(geo,color,op,y,cm){const m=new THREE.Mesh(geo,mat(color,op,true));m.rotation.x=-Math.PI/2;m.position.y=y;if(cm){const p=W(cm[0],cm[1]);m.position.x=p.x;m.position.z=p.z;}return m;}
+function seg3(p0,p1,w,color,op,y){const a=W(p0[0],p0[1]),b=W(p1[0],p1[1]),len=a.distanceTo(b);
+  const m=new THREE.Mesh(new THREE.BoxGeometry(w,.004,len),mat(color,op,true));
+  m.position.set((a.x+b.x)/2,y,(a.z+b.z)/2);m.rotation.y=Math.atan2(b.x-a.x,b.z-a.z);return m;}
+function label3(text,bg,fg,s){const c=document.createElement('canvas');c.width=256;c.height=128;const g=c.getContext('2d');
+  g.font='700 70px "Barlow Condensed","Arial Narrow",sans-serif';const w=Math.min(250,g.measureText(text).width+50),x=(256-w)/2,r=44;
+  g.fillStyle=bg;g.beginPath();g.moveTo(x+r,16);g.lineTo(x+w-r,16);g.arc(x+w-r,64,48,-Math.PI/2,Math.PI/2);g.lineTo(x+r,112);g.arc(x+r,64,48,Math.PI/2,Math.PI*1.5);g.fill();
+  g.fillStyle=fg;g.textAlign='center';g.textBaseline='middle';g.fillText(text,128,68);
+  const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c),depthTest:false,transparent:true}));sp.scale.set(s*2,s,1);sp.renderOrder=10;return sp;}
+function clearGroup(g){while(g.children.length){const c=g.children.pop();c.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material){if(o.material.map)o.material.map.dispose();o.material.dispose();}});}}
+function player3(k,x,y,mode){
+  const g=new THREE.Group(), mine=(k==='Y'||k==='P'), col=css(mine?'--you':'--opp');
+  const op=mode==='solid'?1:mode==='faded'?.3:.45, c=mode==='ghost'?'#ffffff':col, basic=mode==='ghost';
+  const body=new THREE.Mesh(new THREE.CylinderGeometry(.2,.26,1.15,20),mat(c,op,basic));body.position.y=.575;
+  const head=new THREE.Mesh(new THREE.SphereGeometry(.16,20,14),mat(c,op,basic));head.position.y=1.33;
+  g.add(body,head);
+  if(mode==='solid'){const sd=flat(new THREE.CircleGeometry(.32,24),'#000000',.25,.008);g.add(sd);}
+  if(mode!=='faded'){const l=label3(LABEL[k],mode==='ghost'?'rgba(255,255,255,.9)':col,(mine||mode==='ghost')?'#1A1A1A':'#FFFFFF',.34);l.position.y=1.9;g.add(l);}
+  const p=W(x,y);g.position.set(p.x,0,p.z);return g;}
+function ring3(c,col){return flat(new THREE.RingGeometry(.38,.47,48),col,1,.015,c);}
+
+function init3D(){
+  const renderer=new THREE.WebGLRenderer({antialias:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+  box3.insertBefore(renderer.domElement,box3.firstChild);
+  const scene=new THREE.Scene(), camera=new THREE.PerspectiveCamera(40,1,.1,100);
+  scene.add(new THREE.HemisphereLight(0xffffff,0x2a3a30,.9));
+  const dl=new THREE.DirectionalLight(0xffffff,.55);dl.position.set(4,10,7);scene.add(dl);
+  const stat=new THREE.Group(), dyn=new THREE.Group();scene.add(stat,dyn);
+  const sh=new THREE.Group();
+  const cork=new THREE.Mesh(new THREE.SphereGeometry(.045,16,12),mat('#ffffff'));
+  const skirt=new THREE.Mesh(new THREE.ConeGeometry(.075,.13,16,1,true),new THREE.MeshLambertMaterial({color:0xf2f2f2,side:THREE.DoubleSide}));
+  skirt.rotation.x=Math.PI;skirt.position.y=.085;sh.add(cork,skirt);sh.scale.setScalar(2.2);scene.add(sh);
+  const shadow=flat(new THREE.CircleGeometry(.13,20),'#000000',.4,.018);scene.add(shadow);
+  const dg=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(),new THREE.Vector3()]);
+  const drop=new THREE.Line(dg,new THREE.LineDashedMaterial({color:0xffffff,dashSize:.08,gapSize:.08,transparent:true,opacity:.7}));scene.add(drop);
+  R3={renderer,scene,camera,stat,dyn,sh,shadow,drop,hlbl:null,az:0,el:.6,rad:16};
+  new ResizeObserver(resize3D).observe(box3);
+  const cv=renderer.domElement; let pd=null;
+  cv.addEventListener('pointerdown',e=>{pd={x:e.clientX,y:e.clientY,az:R3.az,el:R3.el,drag:false};try{cv.setPointerCapture(e.pointerId);}catch(_){}});
+  cv.addEventListener('pointermove',e=>{if(!pd)return;const dx=e.clientX-pd.x,dy=e.clientY-pd.y;
+    if(!pd.drag&&Math.hypot(dx,dy)>8)pd.drag=true;
+    if(pd.drag){R3.az=Math.max(-1.6,Math.min(1.6,pd.az-dx*.008));R3.el=Math.max(.12,Math.min(1.45,pd.el+dy*.006));draw3();}});
+  const up=e=>{if(pd&&!pd.drag){const r=cv.getBoundingClientRect();
+      const v=new THREE.Vector2((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);
+      const rc=new THREE.Raycaster();rc.setFromCamera(v,R3.camera);const out=new THREE.Vector3();
+      if(rc.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0,1,0),0),out)) placeAt(out.x*100+305,out.z*100+670);}
+    pd=null;};
+  cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',()=>{pd=null;});
+}
+function draw3(){if(!R3)return;const {camera:c}=R3, t=new THREE.Vector3(0,.5,.9);
+  c.position.set(t.x+R3.rad*Math.sin(R3.az)*Math.cos(R3.el),t.y+R3.rad*Math.sin(R3.el),t.z+R3.rad*Math.cos(R3.az)*Math.cos(R3.el));
+  c.lookAt(t);R3.renderer.render(R3.scene,c);}
+function resize3D(){if(!R3)return;const w=box3.clientWidth,h=box3.clientHeight;if(!w||!h)return;
+  R3.renderer.setSize(w,h,false);R3.camera.aspect=w/h;R3.camera.updateProjectionMatrix();
+  const a=w/h;R3.rad=a<1?15+(1-a)*17:15;draw3();}
+
+
+// Flugkurve einer Schlagoption: Start auf Treffhöhe, Landung am Ziel, über das Netz gehoben.
+const SHOT_KIND={high:{peak:620,p:1},half:{peak:320,p:1},smash:{peak:0,p:1.8},drop:{peak:0,p:2.2},
+  drive:{peak:0,p:2.5},push:{peak:0,p:2},net:{peak:0,p:1.5},block:{peak:0,p:1.5}};
+function kindOf(o){if(o.k)return o.k;const t=o.t.toLowerCase();
+  if(t.includes('halbhoh'))return 'half'; if(t.includes('smash'))return 'smash'; if(t.includes('netzdrop'))return 'net';
+  if(t.includes('drop'))return 'drop'; if(t.includes('drive'))return 'drive'; if(t.includes('push'))return 'push';
+  if(t.includes('block'))return 'block'; if(t.includes('clear')||t.includes('lift'))return 'high'; return 'drive';}
+function shotPath(o,from){
+  const K=SHOT_KIND[kindOf(o)], [x0,y0,h0]=from, [x1,y1]=o.d;
+  const A=Math.max(0,K.peak-h0); let B=0, q=1;
+  const f=t=>[x0+(x1-x0)*t, y0+(y1-y0)*t, h0*(1-Math.pow(t,K.p))+A*4*t*(1-t)+B*Math.sin(Math.PI*Math.pow(t,q))];
+  if((y0-670)*(y1-670)<0){const tn=Math.min(.95,Math.max(.05,(y0-670)/(y0-y1)));
+    q=Math.log(.5)/Math.log(tn); const need=172-f(tn)[2]; if(need>0)B=need;}
+  return f;
+}
+function render3D(){
+  const {stat,dyn}=R3; clearGroup(stat); clearGroup(dyn); R3.hlbl=null;
+  const st=ST(), sh=st.shuttle, answered=S.phase!=='play', line=css('--court-line');
+  R3.renderer.setClearColor(new THREE.Color(css('--bg')));
+  stat.add(flat(new THREE.PlaneGeometry(8.4,16.2),css('--mat-edge'),1,0));
+  stat.add(flat(new THREE.PlaneGeometry(6.1,13.4),css('--mat'),1,.002));
+  if(st.type==='place'&&!answered){const m=flat(new THREE.PlaneGeometry(6.1,6.7),line,.08,.003);m.position.z=3.35;stat.add(m);}
+  [[0,0,610,0],[0,1340,610,1340],[0,0,0,1340],[610,0,610,1340],[46,0,46,1340],[564,0,564,1340],[0,76,610,76],[0,1264,610,1264],
+   [0,472,610,472],[0,868,610,868],[305,0,305,472],[305,868,305,1340]].forEach(l=>stat.add(seg3([l[0],l[1]],[l[2],l[3]],.04,line,1,.004)));
+  for(const sx of [-3.1,3.1]){const p=new THREE.Mesh(new THREE.CylinderGeometry(.025,.025,1.55,10),mat('#d6dbd8'));p.position.set(sx,.775,0);stat.add(p);}
+  const net=new THREE.Mesh(new THREE.PlaneGeometry(6.2,.76),new THREE.MeshBasicMaterial({color:0x0c110f,transparent:true,opacity:.45,side:THREE.DoubleSide,depthWrite:false}));
+  net.position.set(0,1.17,0);stat.add(net);
+  const tape=new THREE.Mesh(new THREE.BoxGeometry(6.2,.05,.02),mat('#ffffff',1,true));tape.position.set(0,1.525,0);stat.add(tape);
+  const pts=[];for(let i=0;i<=40;i++){const [x,y,h]=shPos(sh,i/40);pts.push(W(x,y,h));}
+  const tr=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineDashedMaterial({color:0xffffff,dashSize:.18,gapSize:.14,transparent:true,opacity:.8}));
+  tr.computeLineDistances();dyn.add(tr);
+  if(st.type==='shot'){
+    st.options.forEach((o,i)=>{
+      const col=answered?MATC[o.g]:'#ffffff', sel=answered&&S.answers[S.si]&&S.answers[S.si].i===i;
+      const op=answered?((sel||S.view===i)?1:.4):.8;
+      const f=shotPath(o,sh.to), pts=[];
+      for(let j=0;j<=48;j++){const [x,y,h]=f(j/48);pts.push(W(x,y,h));}
+      const tube=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),64,sel?.045:.032,8,false),mat(col,op,true));
+      dyn.add(tube);
+      dyn.add(seg3([sh.to[0],sh.to[1]],o.d,.03,col,op*.35,.011));
+      const tip=pts[48], dir=tip.clone().sub(pts[45]).normalize();
+      const cone=new THREE.Mesh(new THREE.ConeGeometry(.1,.26,14),mat(col,op,true));
+      cone.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dir);
+      cone.position.copy(tip).addScaledVector(dir,-.13); cone.position.y=Math.max(cone.position.y,.12);
+      dyn.add(cone);
+      dyn.add(flat(new THREE.CircleGeometry(sel?.26:.21,32),col,op<1?.7:1,.014,o.d));
+      const m=pts[26], lb=label3(LET[i],col,'#16201C',.3); lb.position.set(m.x,m.y+.28,m.z); dyn.add(lb);
+    });
+  }
+  if(st.type==='place'&&answered){
+    for(const [k,t] of Object.entries(TG(st))){
+      dyn.add(flat(new THREE.RingGeometry(t.rGood/100-.02,t.rGood/100+.02,64),line,.8,.013,t.best));
+      dyn.add(flat(new THREE.CircleGeometry(t.rBest/100,48),line,.25,.012,t.best));
+      dyn.add(player3(k,t.best[0],t.best[1],'ghost'));
+    }
+  }
+  for(const [k,v] of Object.entries(st.players)){
+    if(st.type==='place'&&TG(st)[k]){
+      dyn.add(player3(k,v[0],v[1],'faded'));
+      const tp=S.taps[k]; if(tp) dyn.add(player3(k,tp[0],tp[1],'solid'));
+      if(S.phase==='play'&&S.active===k&&Object.keys(TG(st)).length>1) dyn.add(ring3(tp||v,css('--you')));
+    } else dyn.add(player3(k,v[0],v[1],'solid'));
+  }
+  if(st.type==='shot') dyn.add(ring3(st.players.Y,css('--you')));
+}
+function drawShuttle3D(t){
+  const [x,y,h]=shPos(ST().shuttle,t), p=W(x,y,h);
+  R3.sh.position.copy(p); R3.shadow.position.set(p.x,.018,p.z);
+  const a=R3.drop.geometry.attributes.position; a.setXYZ(0,p.x,p.y,p.z); a.setXYZ(1,p.x,0,p.z); a.needsUpdate=true; R3.drop.computeLineDistances();
+  if(t>=1){ if(!R3.hlbl){R3.hlbl=label3((h/100).toFixed(1).replace('.',T.dec)+' m','rgba(16,24,20,.85)','#FFFFFF',.26);R3.dyn.add(R3.hlbl);}
+    R3.hlbl.visible=true; R3.hlbl.position.set(p.x+.5,p.y+.3,p.z); }
+  else if(R3.hlbl) R3.hlbl.visible=false;
+  draw3();
+}
+async function setView(on){
+  V3.on=on; store.set('view3d',on);
+  document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',String((b.dataset.v==='1')===on)));
+  if(!on){box3.hidden=true;svg.removeAttribute('hidden');return;}
+  svg.setAttribute('hidden','');box3.hidden=false;
+  if(!R3){
+    const ld=document.getElementById('load3');ld.textContent=T.load3;ld.hidden=false;
+    try{await loadThree();init3D();document.getElementById('load3').hidden=true;}
+    catch(e){document.getElementById('load3').textContent=T.no3d;setTimeout(()=>setView(false),1800);return;}
+  }
+  resize3D(); render3D(); drawShuttle(S.t);
+}
+
+function dirHint(tap,best){
+  const dx=tap[0]-best[0], dy=tap[1]-best[1], p=[];
+  if(dy>45)p.push(T.back); if(dy<-45)p.push(T.front);
+  if(dx>45)p.push(T.right); if(dx<-45)p.push(T.left);
+  if(!p.length)return '';const t=p.join(T.and);return t[0].toUpperCase()+t.slice(1)+'.';
+}
+
+function renderHeader(){
+  const r=document.getElementById('rating');
+  r.innerHTML=S.rating+(S.delta!=null&&S.phase==='done'?` <span class="${S.delta>=0?'delta-up':'delta-down'}" style="font-size:14px">${S.delta>=0?'+':''}${S.delta}</span>`:'');
+  document.getElementById('streak').textContent=S.streak;
+  document.getElementById('dots').innerHTML=PUZZLES.map((p,i)=>{const r=S.results[p.id];
+    return `<button class="dot ${i===S.pi?'cur':''} ${r!=null?'r-'+gradeOf(r):''}" data-i="${i}" aria-label="${T.puzzle} ${i+1}: ${p.title}">${i+1}</button>`}).join('');
+  const cur=document.querySelector('.dot.cur'); if(cur) cur.scrollIntoView({block:'nearest',inline:'nearest'});
+}
+
+function renderPanel(){
+  const p=P(), st=ST(), n=p.steps.length, a=S.answers[S.si];
+  document.getElementById('replay').hidden=S.phase==='done';
+  let h=`<div class="head"><h2>${p.title}</h2><span class="meta">${p.theme} · ${S.pi+1}/${PUZZLES.length} · ${T.level} ${p.rating}</span></div>`;
+  if(S.phase==='done'){
+    const score=S.answers.reduce((s,x)=>s+G[x.g].v,0)/n, g=gradeOf(score);
+    h+=`<div class="row" style="gap:12px"><span class="score">${Math.round(score*100)} %</span><span class="verdict" style="padding:0;background:none"><span class="badge g-${g}">${G[g].l}</span></span></div>
+    <div class="lesson">${p.lesson}</div>
+    <p class="small">${T.saved((S.delta>=0?'+':'')+S.delta,S.rating)}</p>
+    <div class="row stick"><button class="btn" data-act="next">${S.pi<PUZZLES.length-1?T.next:T.back1}</button><button class="btn ghost" data-act="retry">${T.retry}</button></div>`;
+    panel.innerHTML=h; return;
+  }
+  h+=`<p class="q">${n>1?`<span class="step">${T.step} ${S.si+1}/${n}</span>`:''}${st.q}</p>`;
+  if(st.type==='place'){
+    if(S.phase==='play'){
+      const ks=Object.keys(TG(st)), all=ks.every(k=>S.taps[k]);
+      if(ks.length>1) h+=`<div class="pick" role="group" aria-label="${T.who}">`+ks.map(k=>`<button class="chip ${S.active===k?'on':''}" data-who="${k}" aria-pressed="${S.active===k}"><i></i>${k==='Y'?T.chipY:T.chipP}${S.taps[k]?' ✓':''}</button>`).join('')+`</div>`;
+      h+=`<p class="hint">${S.t<1?T.watch:all?(ks.length>1?T.moveName:T.adjust):(S.active==='Y'?T.placeY:T.placeP)}</p>
+      <div class="row stick"><button class="btn" data-act="lock" ${all?'':'disabled'}>${ks.length>1?T.lockN:T.lock1}</button></div>`;
+    } else {
+      const TT=TG(st), why=a.g==='good'?st.why.good+' '+st.why.best:st.why.best;
+      const per=Object.keys(TT).map(k=>`<div class="per"><span class="g g-${a.per[k]}">${G[a.per[k]].l}</span><b>${NAME[k]}</b><span>${dirHint(S.taps[k],TT[k].best)||T.exact}</span></div>`).join('');
+      h+=`<div class="verdict"><span class="badge g-${a.g}">${G[a.g].l}</span>${per}<p>${why}</p><p class="small">${T.zones}</p></div>
+      <div class="row stick"><button class="btn" data-act="cont">${S.si<n-1?T.nextStep:T.result}</button></div>`;
+    }
+  } else {
+    let verdict='';
+    if(a){
+      const vi=S.view!=null?S.view:a.i, o=st.options[vi];
+      verdict=`<div class="verdict"><span class="badge g-${o.g}">${LET[vi]} · ${G[o.g].l}</span><p>${o.why}</p>${vi===a.i?`<p class="small">${T.others}</p>`:''}</div>`;
+    }
+    h+=verdict+`<div class="opts">`+st.options.map((o,i)=>{
+      const sel=a&&a.i===i, v=S.view===i;
+      return `<button class="opt ${sel?'sel':''} ${v&&!sel?'view':''}" data-opt="${i}" ${S.t<1&&!a?'disabled':''}><span class="k" style="${a?'background:'+MAT[o.g]+';color:#16201C':''}">${LET[i]}</span><span class="lbl">${o.t}${a?`<span class="g g-${o.g}">${G[o.g].l}</span>`:''}</span></button>`;}).join('')+`</div>`;
+    if(a){
+      h+=`<div class="row stick"><button class="btn" data-act="cont">${S.si<n-1?T.nextStep:T.result}</button></div>`;
+    }
+  }
+  panel.innerHTML=h;
+}
+function render(){renderHeader();renderSVG();renderPanel();}
+
+function startPuzzle(i){S.pi=i;S.si=0;S.answers=[];S.taps={};S.active=Object.keys(TG(PUZZLES[i].steps[0]))[0];S.view=null;S.phase='play';S.delta=null;S.t=0;render();panel.scrollTop=0;play();}
+function nextStep(){S.si++;S.taps={};S.active=Object.keys(TG(PUZZLES[S.pi].steps[S.si]))[0];S.view=null;S.phase='play';S.t=0;render();panel.scrollTop=0;play();}
+function finish(){
+  const p=P(), score=S.answers.reduce((s,x)=>s+G[x.g].v,0)/p.steps.length;
+  const E=1/(1+Math.pow(10,(p.rating-S.rating)/400));
+  S.delta=Math.round(32*(score-E)); S.rating+=S.delta;
+  S.streak=score>=.6?S.streak+1:0;
+  S.results[p.id]=Math.max(S.results[p.id]??0,score);
+  store.set('rating',S.rating);store.set('streak',S.streak);store.set('results',S.results);
+  S.phase='done'; render(); panel.scrollTop=0;
+}
+
+function placeAt(qx,qy){
+  const st=ST(); if(st.type!=='place'||S.phase!=='play'||S.t<1) return;
+  if(qx<-30||qx>640||qy<640||qy>1380) return;
+  S.taps[S.active]=[Math.round(Math.max(20,Math.min(590,qx))),Math.round(Math.max(700,Math.min(1320,qy)))];
+  const nxt=Object.keys(TG(st)).find(k=>!S.taps[k]); if(nxt) S.active=nxt;
+  renderSVG(); renderPanel();
+}
+svg.addEventListener('pointerdown',e=>{
+  const pt=svg.createSVGPoint(); pt.x=e.clientX; pt.y=e.clientY;
+  const q=pt.matrixTransform(svg.getScreenCTM().inverse());
+  placeAt(q.x,q.y);
+});
+document.getElementById('replay').addEventListener('click',()=>{play();renderPanel();});
+panel.addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  const st=ST();
+  if(b.dataset.opt!=null){
+    const i=+b.dataset.opt;
+    if(!S.answers[S.si]){S.answers[S.si]={i,g:st.options[i].g};S.phase='answered';S.view=null;}
+    else S.view=i;
+    renderSVG(); renderPanel(); panel.scrollTop=0; return;
+  }
+  if(b.dataset.who){S.active=b.dataset.who;renderSVG();renderPanel();return;}
+  const act=b.dataset.act;
+  if(act==='lock'){
+    const T=TG(st), per={}; let sum=0;
+    for(const [k,t] of Object.entries(T)){const tp=S.taps[k]; if(!tp) return;
+      const d=Math.hypot(tp[0]-t.best[0],tp[1]-t.best[1]);
+      per[k]=d<=t.rBest?'best':d<=t.rGood?'good':d<=t.rGood*1.8?'inacc':'mistake'; sum+=G[per[k]].v;}
+    S.answers[S.si]={g:gradeOf(sum/Object.keys(T).length),per}; S.phase='answered'; renderSVG(); renderPanel(); panel.scrollTop=0;
+  }
+  if(act==='cont'){ if(S.si<P().steps.length-1) nextStep(); else finish(); }
+  if(act==='next') startPuzzle((S.pi+1)%PUZZLES.length);
+  if(act==='retry') startPuzzle(S.pi);
+});
+document.getElementById('dots').addEventListener('click',e=>{const b=e.target.closest('.dot');if(b)startPuzzle(+b.dataset.i);});
+
+document.getElementById('lang').addEventListener('click',()=>{applyLang(LANG==='de'?'en':'de',true);render();});
+document.querySelector('.seg').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setView(b.dataset.v==='1');});
+startPuzzle(S.pi);
+if(V3.on) setView(true);
+</script>
+</body>
+</html>
