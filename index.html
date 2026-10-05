@@ -63,7 +63,7 @@ body{height:100%;background:var(--bg);color:var(--ink);font:15px/1.45 var(--f-bo
 .legend .keys{display:flex;gap:10px;flex-wrap:wrap}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px;vertical-align:-1px}
 .replay{font:600 13px var(--f-body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 10px;cursor:pointer;flex:none}
-#svg{flex:1 1 0;min-height:0;width:100%;height:100%;display:block;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+#svg{flex:1 1 0;min-height:0;width:100%;height:100%;display:block;touch-action:none;user-select:none;-webkit-user-select:none}
 .panel{flex:none;max-height:42%;overflow-y:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:8px;min-width:0}
 @media (min-width:760px){
   .main{flex-direction:row}
@@ -136,7 +136,10 @@ h2{font:700 22px/1.05 var(--f-display);margin:0;text-wrap:balance}
 .prow:focus-visible{outline:3px solid var(--good);outline-offset:2px}
 .g-new{background:var(--muted)}
 .playbar{display:flex;align-items:center;gap:8px;flex:none;min-width:0}
-.playbar .dots{flex:1;min-width:0}
+.playbar .dots{flex:1;min-width:0;gap:4px}
+.playbar .dot{width:26px;height:26px;font-size:13px}
+.playbar{gap:6px}
+.playbar .backbtn{min-width:36px;padding:4px 0;font-size:17px;line-height:1.2}
 .backbtn{flex:none;font:600 14px var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:4px 12px;cursor:pointer}
 .backbtn:focus-visible{outline:3px solid var(--good);outline-offset:2px}
 .pmode{font:600 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
@@ -158,13 +161,62 @@ h2{font:700 22px/1.05 var(--f-display);margin:0;text-wrap:balance}
 .ochip{width:34px;height:34px;border-radius:50%;border:2px solid transparent;font:700 15px var(--f-display);color:#16201C;cursor:pointer;padding:0}
 .ochip.on{border-color:var(--ink)}
 .ochip:focus-visible{outline:3px solid var(--good);outline-offset:2px}
+.home.center{justify-content:center}
+.hero-big{padding:28px 22px;gap:16px}
+.hero-big h1{font-size:40px}
+.btn.big{align-self:stretch;font-size:19px;padding:16px 24px;border-radius:12px}
+.linkrow{align-self:center;background:none;border:0;color:var(--ink);font:600 15px var(--f-body);text-decoration:underline;text-underline-offset:3px;padding:12px;cursor:pointer}
+.linkrow:focus-visible{outline:3px solid var(--good);outline-offset:2px}
+details.lessons summary{font:700 20px/1.1 var(--f-display);cursor:pointer}
+details.lessons[open] summary{margin-bottom:6px}
+.term{display:inline;background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;text-decoration:underline dotted;text-decoration-thickness:1.5px;text-underline-offset:3px;cursor:help}
+.term:focus-visible{outline:2px solid var(--good);outline-offset:1px}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.4);display:flex;align-items:flex-end;justify-content:center;z-index:60}
+.sheet-card{background:var(--surface);color:var(--ink);width:100%;max-width:560px;border-radius:16px 16px 0 0;padding:20px 18px calc(18px + env(safe-area-inset-bottom,0px));max-height:75%;overflow-y:auto;display:flex;flex-direction:column;gap:12px}
+.sheet-card h3{margin:0;font:700 24px/1.1 var(--f-display)}
+.sheet-card p{margin:0}
+.sheet-card .plabel{margin-top:6px}
+.sheet-card .btn{align-self:stretch}
+.gl-list{display:flex;flex-direction:column;gap:10px;font-size:14px}
+.gl-item b{display:block;font-size:15px}
+.helpbtn{margin-left:auto;font-weight:700;min-width:32px}
+.setbtn{min-width:32px;font-size:16px}
+.links{display:flex;justify-content:center;gap:4px;flex-wrap:wrap}
+.bestbox{border-top:1px solid var(--line);padding-top:8px;margin-top:4px;display:flex;flex-direction:column;gap:5px}
+.clist{display:flex;flex-direction:column;gap:8px}
+.ccard{display:flex;flex-direction:column;gap:8px;text-align:left;background:var(--bg);border:0;border-radius:12px;padding:12px 14px;cursor:pointer;color:var(--ink);font:inherit}
+.ccard b{font:700 19px/1.1 var(--f-display)}
+.ccard:focus-visible{outline:3px solid var(--good);outline-offset:2px}
+.pbar{display:block;height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.pbar i{display:block;height:100%;background:var(--accent)}
+.mini{display:inline-flex;gap:4px;margin-top:4px}
+.mini span{width:12px;height:12px;border-radius:3px;background:var(--line)}
+.mini .r-best{background:var(--best)} .mini .r-good{background:var(--good)} .mini .r-inacc{background:var(--inacc)} .mini .r-mistake{background:var(--mistake)}
+.legend .lh{font-style:italic;font-size:11px}
+.legend .keys{gap:4px 9px}
+.codebox{font:700 40px/1 var(--f-display);letter-spacing:.12em;text-align:center;padding:14px;border-radius:12px;background:var(--bg);font-variant-numeric:tabular-nums;user-select:all;-webkit-user-select:all}
+.linkline{word-break:break-all;user-select:all;-webkit-user-select:all}
+.sharebox.dark{background:var(--bg);color:var(--ink);border-color:var(--line)}
+.codeform{display:flex;flex-direction:column;gap:6px}
+#codein{flex:1;min-width:0;font:700 18px var(--f-display);letter-spacing:.12em;text-transform:uppercase;padding:9px 12px;border-radius:9px;border:2px solid var(--line);background:var(--surface);color:var(--ink)}
+#codein:focus-visible{outline:3px solid var(--good);outline-offset:1px}
+.ebrow{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.sharelink{flex:none;background:none;border:0;padding:0 0 0 4px;font:600 12px/1.35 var(--f-body);color:var(--muted);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.sharelink:focus-visible{outline:2px solid var(--good)}
+.ebacts{display:flex;gap:10px;flex:none}
+.repc{width:100%;font:15px/1.4 var(--f-body);border-radius:9px;border:2px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 10px;resize:vertical}
+.repc:focus-visible{outline:3px solid var(--good);outline-offset:1px}
+a.btn{text-decoration:none;display:inline-flex;align-items:center}
+.tok.ideal circle{fill:var(--court-line);stroke:var(--mat-edge);stroke-width:4}
+.tok.ideal text{fill:#16201C}
+.corr-line{stroke:var(--court-line);stroke-width:4;stroke-dasharray:6 8;stroke-linecap:round;opacity:.9}
 /* svg */
 .mat{fill:var(--mat)} .cl{stroke:var(--court-line);stroke-width:5;fill:none}
 .net{stroke:var(--court-line);stroke-width:9}
 .myhalf{fill:var(--court-line);opacity:0} .myhalf.on{opacity:.07}
 .tok circle{stroke:var(--mat-edge);stroke-width:4}
 .tok.y circle{fill:var(--you)} .tok.o circle{fill:var(--opp)}
-.tok text{font:700 30px var(--f-display);fill:#1A1A1A} .tok.o text{fill:#FFFFFF}
+.tok text{font:700 50px var(--f-display);fill:#1A1A1A} .tok.o text{fill:#FFFFFF}
 .tok.faded{opacity:.35} .tok.faded circle{stroke-dasharray:7 6}
 .tok.ghost circle{fill:none;stroke:var(--court-line);stroke-width:4;stroke-dasharray:8 6} .tok.ghost text{fill:var(--court-line)}
 .zone-good{fill:none;stroke:var(--court-line);stroke-width:3;stroke-dasharray:10 8;opacity:.8}
@@ -190,18 +242,18 @@ h2{font:700 22px/1.05 var(--f-display);margin:0;text-wrap:balance}
   <header class="top">
     <div class="brand"><small>Badminton</small>Daily Coach</div>
     <div class="stats">
-      <button class="lang" id="lang" type="button">EN</button>
+      <button class="lang" id="lang" type="button" hidden>EN</button>
       <div class="stat"><b id="rating">1200</b><small id="l-rating">Wertung</small></div>
       <div class="stat"><b id="streak">0</b><small id="l-streak">Serie</small></div>
     </div>
   </header>
   <section class="home" id="home"></section>
-  <div class="playbar" id="playbar" hidden><button class="backbtn" id="backbtn" type="button">←</button><nav class="dots" id="dots" aria-label="Rätsel"></nav><span class="pmode" id="pmode"></span></div>
+  <div class="playbar" id="playbar" hidden><button class="backbtn" id="backbtn" type="button">←</button><nav class="dots" id="dots" aria-label="Rätsel"></nav><span class="pmode" id="pmode"></span><button class="replay helpbtn" id="helpbtn" type="button" aria-label="Begriffe">?</button><button class="replay setbtn" id="setbtn" type="button" aria-label="Einstellungen">⚙</button></div>
   <main class="main" id="main" hidden>
     <section class="board">
       <div class="legend">
-        <div class="keys"><span><i style="background:var(--you)"></i><span id="l-you">Du · P Partner</span></span><span><i style="background:var(--opp)"></i><span id="l-opp">A, B Gegner</span></span></div>
-        <div class="ctrls"><div class="seg" role="group" aria-label="Ansicht"><button type="button" data-v="0" aria-pressed="true">2D</button><button type="button" data-v="1" aria-pressed="false">3D</button></div><button class="replay" id="replay" type="button" aria-label="Ballflug nochmal ansehen">↻</button></div>
+        <div class="keys"><span><i style="background:var(--you)"></i><span id="l-you">Du · P Partner</span></span><span><i style="background:var(--opp)"></i><span id="l-opp">A, B Gegner</span></span><span class="lh" id="l-hand"></span></div>
+        <div class="ctrls"><button class="replay" id="replay" type="button" aria-label="Ballflug nochmal ansehen" hidden>↻</button></div>
       </div>
       <svg id="svg" viewBox="-48 -56 1030 1446" role="img" aria-label="Badmintonfeld von oben, daneben die Flughöhe des Balls von der Seite"></svg>
       <div id="three" hidden><div class="load3" id="load3">3D wird geladen …</div><div class="hint3" id="l-drag">Ziehen zum Drehen</div></div>
@@ -209,6 +261,7 @@ h2{font:700 22px/1.05 var(--f-display);margin:0;text-wrap:balance}
     <section class="panel" id="panel" aria-live="polite"></section>
   </main>
   <div class="toast" id="toast" role="status" hidden></div>
+  <div class="sheet" id="sheet" hidden><div class="sheet-card" role="dialog" aria-modal="true"><div id="sheet-body"></div><button class="btn" id="sheet-close" type="button">OK</button></div></div>
 </div>
 
 <script>
@@ -650,6 +703,420 @@ const store = {
   get(k,d){if(k in MEM)return JSON.parse(MEM[k]);try{const v=localStorage.getItem('cs_'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},
   set(k,v){MEM[k]=JSON.stringify(v);try{localStorage.setItem('cs_'+k,MEM[k])}catch(e){}}
 };
+// ======================= TRAININGS-KATEGORIEN (aus Coaching-Regeln erzeugt) =======================
+const CATS=[
+ {k:'serve',de:'Aufschlag & Return',en:'Serve & return',sets:[['Wo stehst du?','Where do you stand?'],['Return auf kurzen Aufschlag','Returning a short serve'],['Welcher Aufschlag?','Which serve?'],['Return auf den Flick','Returning a flick'],['Nach dem Return','After the return']]},
+ {k:'back',de:'Angriff aus dem Hinterfeld',en:'Attacking from the back',sets:[['Ausgeglichene Abwehr','Balanced defence'],['Die offene Lücke','The open gap'],['Tief im Hinterfeld','Deep in the back court'],['Gegner stehen tief','Opponents stand deep'],['Gegner vorne-hinten','Opponents front and back']]},
+ {k:'mid',de:'Angriff aus dem Mittelfeld',en:'Attacking from the mid-court',sets:[['Hoher Ball, Abwehr ausgeglichen','High ball, balanced defence'],['Die offene Lücke','The open gap'],['Gegner vorne-hinten','Opponents front and back'],['Halbhoher Ball','Half-high shuttle'],['Gegner stehen tief','Opponents stand deep']]},
+ {k:'net',de:'Netzspiel',en:'Net play',sets:[['Über der Netzkante','Above the tape'],['Unter der Netzkante, Gegner hinten','Below the tape, opponents back'],['Der Netzspieler wartet','The net player is waiting'],['Netzspieler auf der anderen Seite','Net player on the other side'],['Über der Netzkante, Netzspieler nah','Above the tape, net player close']]},
+ {k:'def',de:'Verteidigung gegen den Smash',en:'Defending the smash',sets:[['Smash aus dem Hinterfeld','Smash from the back'],['Smash aus dem Mittelfeld','Smash from the mid-court'],['Langsamer Halbsmash','Slow half smash'],['Netzspieler in der Mitte','Net player in the middle'],['Zu spät dran','Too late']]},
+ {k:'lift',de:'Stellung nach dem Lift',en:'Positioning after a lift',sets:[['Lift ganz nach hinten','Lift to the very back'],['Lift tief','Deep lift'],['Lift ins hintere Mittelfeld','Lift to the rear mid-court'],['Lift zu kurz','Lift too short'],['Lift viel zu kurz','Lift far too short']]},
+ {k:'att',de:'Stellung im Angriff',en:'Positioning in attack',sets:[['Du smashst gerade','You smash straight'],['Du smashst cross','You smash cross-court'],['Partner smasht gerade','Partner smashes straight'],['Partner smasht cross','Partner smashes cross-court'],['Smash in die Mitte','Smash to the middle']]},
+ {k:'rot',de:'Rotation',en:'Rotation',sets:[['Du bekommst den kurzen Lift','You get the short lift'],['Partner bekommt den kurzen Lift','Partner gets the short lift'],['Lift über den Vorderspieler','Lift over the front player'],['Vom Angriff in die Verteidigung','From attack to defence'],['Nach deinem Clear','After your clear']]},
+ {k:'press',de:'Unter Druck',en:'Under pressure',sets:[['Hinten links zu spät','Late at the back left'],['Hinten rechts zu spät','Late at the back right'],['Vorne tief am Netz','Low at the net'],['Weit außen im Mittelfeld','Stretched wide in the mid-court'],['Spät im Mittelfeld','Late in the mid-court']]},
+ {k:'drive',de:'Mittelfeld & Drive',en:'Mid-court & drives',sets:[['Gegner stehen tief','Opponents stand deep'],['Gegner vorne-hinten','Opponents front and back'],['Gegner im Mittelfeld','Opponents in the mid-court'],['Ball unter Netzhöhe','Shuttle below net height'],['Ball auf Kopfhöhe','Shuttle at head height']]}
+];
+const GEN=[], GEN_EN={};
+const cl=(v,a,b)=>Math.max(a,Math.min(b,v)), mir=x=>610-x;
+const XS=[140,225,305,385,470];
+function sideW(x){return Math.abs(x-305)<50?['in der Mitte','in the middle']:x<305?['links','on the left']:['rechts','on the right'];}
+function sideA(x){return Math.abs(x-305)<50?['Mitte','middle']:x<305?['links','left']:['rechts','right'];}
+function rateOf(s,n){return 900+s*100+n*10;}
+function mkShot(c,s,n,o){const id=`t-${CATS[c].k}-${s+1}-${n+1}`;
+  GEN.push({id,disc:'t',cat:c,set:s,theme:CATS[c].de,title:o.title[0],rating:rateOf(s,n),lesson:o.lesson[0],
+    steps:[{type:'shot',players:o.players,shuttle:o.shuttle,q:o.q[0],options:o.opts.map(x=>{const r={t:x[0],d:x[2],g:x[3],why:x[4]};if(x[6])r.k=x[6];return r;})}]});
+  GEN_EN[id]={theme:CATS[c].en,title:o.title[1],lesson:o.lesson[1],steps:[{q:o.q[1],opts:o.opts.map(x=>[x[1],x[5]])}]};}
+function mkPlace(c,s,n,o){const id=`t-${CATS[c].k}-${s+1}-${n+1}`, st={type:'place',players:o.players,shuttle:o.shuttle,q:o.q[0],why:{best:o.why[0],good:o.good[0]}};
+  if(o.bh) st.bhY=true;
+  if(o.targets) st.targets=Object.fromEntries(Object.entries(o.targets).map(([k,v])=>[k,{best:v,rBest:o.rb||70,rGood:o.rg||130}]));
+  else {st.who=o.who;st.best=o.best;st.rBest=o.rb||70;st.rGood=o.rg||130;}
+  GEN.push({id,disc:'t',cat:c,set:s,theme:CATS[c].de,title:o.title[0],rating:rateOf(s,n),lesson:o.lesson[0],steps:[st]});
+  GEN_EN[id]={theme:CATS[c].en,title:o.title[1],lesson:o.lesson[1],steps:[{q:o.q[1],why:{best:o.why[1],good:o.good[1]}}]};}
+// ---- 0: Aufschlag & Return ----
+(function(){const C=0;
+ // Satz 1: Wo stehst du?
+ const s1=[
+  {t:['Return von rechts','Receiving on the right'],pl:{Y:[440,1150],P:[190,1120],A:[278,442],B:[290,250]},sh:[284,452],best:[370,935],
+   q:['A schlägt vom T auf. Du nimmst in deinem rechten Aufschlagfeld an. Tippe, wo du stehst.','A serves from the T. You receive in your right service court. Tap where you stand.'],
+   w:['Nah an der vorderen Aufschlaglinie, nahe der Mittellinie. So greifst du den kurzen Aufschlag früh an und erreichst trotzdem den Flick.','Close to the short service line, near the centre line. You attack the short serve early and still reach a flick.'],
+   l:['Im Doppel nimmst du den Aufschlag vorne an.','In doubles, receive close to the front.']},
+  {t:['Return von links','Receiving on the left'],pl:{Y:[170,1150],P:[420,1120],A:[332,442],B:[320,250]},sh:[326,452],best:[240,935],
+   q:['A schlägt vom T auf. Du nimmst in deinem linken Aufschlagfeld an. Tippe, wo du stehst.','A serves from the T. You receive in your left service court. Tap where you stand.'],
+   w:['Nah an der vorderen Aufschlaglinie, nahe der Mittellinie. Von hier greifst du kurze Aufschläge früh an.','Close to the short service line, near the centre line. From here you attack short serves early.'],
+   l:['Auch im linken Feld nimmst du vorne an der Mittellinie an.','In the left court too, receive at the front near the centre line.']},
+  {t:['Partner schlägt rechts auf','Partner serves from the right'],pl:{Y:[470,1185],P:[330,895],A:[235,440],B:[300,200]},sh:[326,885],best:[300,1070],
+   q:['Dein Partner schlägt kurz von rechts auf. Tippe, wo du stehst.','Your partner serves short from the right. Tap where you stand.'],
+   w:['Mittig hinter dem Aufschläger, auf halber Tiefe. Dein Partner deckt das Netz, du Push und Flick nach hinten.','In the centre behind the server, at mid depth. Your partner covers the net, you cover pushes and flicks to the back.'],
+   l:['Der Partner des Aufschlägers steht mittig dahinter.','The server’s partner stands in the centre behind.']},
+  {t:['Partner schlägt links auf','Partner serves from the left'],pl:{Y:[140,1185],P:[280,895],A:[375,440],B:[310,200]},sh:[284,885],best:[310,1070],
+   q:['Dein Partner schlägt kurz von links auf. Tippe, wo du stehst.','Your partner serves short from the left. Tap where you stand.'],
+   w:['Mittig hinter dem Aufschläger, auf halber Tiefe, damit beide hinteren Ecken gleich weit weg sind.','In the centre behind the server, at mid depth, so both back corners are equally far.'],
+   l:['Hinter dem Aufschläger stehst du in der Mitte, nicht hinter einer Seite.','Behind the server, stand in the centre, not behind one side.']},
+  {t:['Nach deinem kurzen Aufschlag','After your short serve'],pl:{Y:[330,895],P:[300,1100],A:[240,455],B:[300,250]},sh:null,best:[312,850],rb:50,rg:95,
+   q:['Du hast kurz von rechts aufgeschlagen. Tippe, wo du auf den Return wartest.','You have served short from the right. Tap where you wait for the return.'],
+   w:['Direkt am T, einen halben Schritt nach vorne, Schläger hoch. So erreichst du Netzdrop und Push zuerst.','Right at the T, half a step forward, racket up. That way you reach net shots and pushes first.'],
+   l:['Nach dem kurzen Aufschlag bleibst du vorne am T.','After a short serve, stay at the front at the T.']}];
+ s1.forEach((v,n)=>mkPlace(C,0,n,{title:v.t,lesson:v.l,players:v.pl,shuttle:v.sh?{from:[...v.sh,105],to:[...v.sh,105],peak:105}:{from:[326,885,110],to:[255,465,140],peak:175},q:v.q,who:'Y',best:v.best,rb:v.rb||65,rg:v.rg||120,bh:n<4,why:v.w,good:['Fast. Schau genau, wie nah an Linie und Mitte.','Almost. Check how close to the line and the centre.']}));
+ // Satz 2: Return auf kurzen Aufschlag
+ const s2=[['R',168],['L',168],['R',135],['L',135],['M',168]];
+ s2.forEach(([sd,h],n)=>{const m=sd==='L'?mir:(x=>x), cx=sd==='M'?320:m(360), above=h>155;
+  const pl={Y:[sd==='M'?325:m(365),840],P:[m(200),1110],A:[m(285),500],B:[m(300),250]};
+  const opts=above?[
+    ['Flacher Push ins seitliche Mittelfeld','Flat push into the side mid-court',[m(455),340],'best','Über der Netzkante spielst du flach nach unten. Seitlich ins Mittelfeld, vorbei am Aufschläger und vor seinem Partner, ist die Lücke.','Above the tape you play flat and down. The side mid-court, past the server and in front of his partner, is the gap.'],
+    ['Enger Netzdrop','Tight net shot',[cx-20,630],'good','Sicher, aber du verschenkst die Chance, sofort Druck zu machen.','Safe, but you waste the chance to put pressure on at once.'],
+    ['Langsamer Push auf den Aufschläger','Slow push at the server',[m(285),545],'inacc','Der Aufschläger steht am Netz und fängt einen langsamen Push leicht ab.','The server is at the net and easily intercepts a slow push.'],
+    ['Hoher Lift nach hinten','High lift to the back',[305,90],'mistake','Den Return auf einen kurzen Aufschlag liftest du nicht, du schenkst den Angriff her.','Do not lift the return of a short serve; you hand over the attack.']]:[
+    ['Flacher Push an die Seite des Mittelfelds','Flat push to the side mid-court',[m(470),400],'best','Der Aufschlag war eng. Ein flacher Push seitlich ins Mittelfeld trifft die Lücke zwischen Aufschläger und Partner.','The serve was tight. A flat push to the side mid-court finds the gap between server and partner.'],
+    ['Enger Netzdrop','Tight net shot',[cx,630],'good','Gut, wenn er wirklich eng ist. Der Aufschläger steht aber direkt am Netz.','Good if it is really tight. But the server is right at the net.'],
+    ['Hoher Lift in die Ecke','High lift to the corner',[m(470),90],'inacc','Sicher, aber ihr müsst sofort verteidigen.','Safe, but you have to defend straight away.'],
+    ['Halbhoher Lift','Half-high lift',[305,330],'mistake','Zu kurz: Der Partner des Aufschlägers smasht ihn aus dem Mittelfeld.','Too short: the server’s partner smashes it from the mid-court.']];
+  mkShot(C,1,n,{title:above?['Kurzer Aufschlag zu hoch','Short serve too high']:['Enger kurzer Aufschlag','Tight short serve'],
+   lesson:above?['Über der Netzkante: flach nach unten in die seitliche Lücke.','Above the tape: flat and down into the side gap.']:['Gegen den engen Aufschlag: flach in die seitliche Lücke, nicht kurz liften.','Against a tight serve: flat into the side gap, never a short lift.'],
+   players:pl,shuttle:{from:[m(280),450,110],to:[cx,800,h],peak:Math.max(h+15,175)},
+   q:above?['Der kurze Aufschlag steigt zu hoch. Du triffst ihn über der Netzkante.','The short serve rises too high. You meet it above the tape.']:['Der kurze Aufschlag ist eng. Du triffst ihn knapp unter der Netzkante.','The short serve is tight. You meet it just below the tape.'],
+   opts});});
+ // Satz 3: Welcher Aufschlag?
+ const s3=[['close','R'],['deep','R'],['std','L'],['close','L'],['deep','L']];
+ s3.forEach(([kind,sd],n)=>{const m=sd==='L'?mir:(x=>x);
+  const ay={close:455,deep:395,std:430}[kind];
+  const pl={Y:[m(330),895],P:[m(300),1120],A:[m(240),ay],B:[m(300),250]};
+  const F=['Flick-Aufschlag über A','Flick serve over A',[m(220),95],null,'',"",'high'], S=['Kurzer Aufschlag zum T','Short serve to the T',[m(295),462],null,'','','net'],
+        W=['Kurzer Aufschlag nach außen','Short serve wide',[m(55),462],null,'','','net'], H=['Hoher Aufschlag ins Mittelfeld','High serve to the mid-court',[m(230),290],'mistake','Zu kurz und zu hoch: A smasht ihn sofort.','Too short and too high: A smashes it straight away.','half'];
+  let o;
+  if(kind==='close'){F[3]='best';F[4]='A steht ganz vorne und lehnt sich nach vorne. Ein Flick über ihn erwischt ihn auf dem falschen Fuß.';F[5]='A stands right at the front, leaning forward. A flick over him catches him on the wrong foot.';
+    S[3]='good';S[4]='Nie falsch, muss gegen so einen aggressiven Rückschläger aber perfekt sein.';S[5]='Never wrong, but against such an aggressive receiver it has to be perfect.';
+    W[3]='inacc';W[4]='Öffnet A einen Winkel und ist leichter anzugreifen.';W[5]='Opens an angle for A and is easier to attack.'; o=[F,S,W,H];}
+  else if(kind==='deep'){S[3]='best';S[4]='A steht weit hinten. Ein kurzer Aufschlag zum T zwingt ihn nach vorne und von unten zu spielen.';S[5]='A stands far back. A short serve to the T forces him forward to play from below.';
+    W[3]='good';W[4]='Auch kurz und damit gut, aber außen öffnet sich ein Winkel.';W[5]='Also short and therefore good, but wide opens an angle.';
+    F[3]='inacc';F[4]='A steht schon hinten und wartet genau darauf.';F[5]='A is already back and waiting for exactly that.'; o=[S,W,F,H];}
+  else {S[3]='best';S[4]='Gegen einen normal stehenden Rückschläger ist der kurze Aufschlag zum T der Standard: kürzester Weg, wenig Winkel.';S[5]='Against a receiver in a normal position, the short serve to the T is standard: shortest path, little angle.';
+    F[3]='good';F[4]='Gut als Überraschung, aber nicht als Standard.';F[5]='Good as a surprise, but not as your standard serve.';
+    W[3]='inacc';W[4]='Öffnet A einen Winkel und ist leichter anzugreifen.';W[5]='Opens an angle for A and is easier to attack.'; o=[S,F,W,H];}
+  const desc={close:['steht ganz vorne und lehnt sich weit nach vorne','stands right at the front and leans far forward'],deep:['steht weit hinten in seinem Aufschlagfeld','stands far back in his service court'],std:['steht normal, nahe der Aufschlaglinie','stands normally, close to the service line']}[kind];
+  mkShot(C,2,n,{title:{close:['Rückschläger ganz vorne','Receiver right at the front'],deep:['Rückschläger weit hinten','Receiver far back'],std:['Normaler Rückschläger','Receiver in a normal position']}[kind],
+   lesson:{close:['Steht der Rückschläger ganz vorne, überrascht ihn der Flick.','If the receiver stands right at the front, the flick surprises him.'],deep:['Steht der Rückschläger weit hinten, schlägst du kurz auf.','If the receiver stands far back, serve short.'],std:['Der kurze Aufschlag zum T ist im Doppel der Standard.','The short serve to the T is the standard in doubles.']}[kind],
+   players:pl,shuttle:{from:[m(326),885,110],to:[m(326),885,110],peak:110},q:[`Du schlägst ${sd==='L'?'links':'rechts'} auf. Der Rückschläger A ${desc[0]}. Welcher Aufschlag?`,`You serve from the ${sd==='L'?'left':'right'}. The receiver A ${desc[1]}. Which serve?`],opts:o});});
+ // Satz 4: Return auf den Flick
+ const s4=[['in','R'],['in','L'],['late','R'],['late','L'],['in','M']];
+ s4.forEach(([k,sd],n)=>{const m=sd==='L'?mir:(x=>x), cx=sd==='M'?330:m(420), late=k==='late';
+  const pl={Y:[cx,late?1290:1225],P:[m(190),1060],A:[m(240),470],B:[m(400),300]};
+  const opts=late?[
+    ['Hoher Clear in die Mitte','High clear to the middle',[305,80],'best','Du bist spät, der Ball ist hinter dir. Ein hoher Clear in die Mitte gibt dir Zeit und den Gegnern wenig Winkel.','You are late and the shuttle is behind you. A high clear to the middle buys time and gives little angle.'],
+    ['Schneller Drop gerade','Fast drop straight',[cx,580],'good','Möglich, aber aus dieser Lage wird er leicht zu hoch.','Possible, but from here it easily ends up too high.'],
+    ['Smash','Smash',[305,330],'inacc','Hinter dir hat der Smash keine Kraft und keinen Winkel.','Behind you, the smash has no power and no angle.','smash'],
+    ['Halbhoher Clear','Half-high clear',[305,300],'mistake','Zu kurz: Die Gegner smashen sofort.','Too short: your opponents smash straight away.','half']]:[
+    ['Steiler Smash in die Mitte','Steep smash to the middle',[315,330],'best','Bist du rechtzeitig dran, ist der Flick nur ein hoher Ball. Ein steiler Smash in die Mitte bestraft ihn.','If you are there in time, a flick is just a high shuttle. A steep smash to the middle punishes it.'],
+    ['Schneller Drop gerade','Fast drop straight',[cx,575],'good','Hält den Angriff, gut wenn du nicht ganz in Position bist.','Keeps the attack; good if you are not quite in position.'],
+    ['Clear nach hinten','Clear to the back',[305,90],'inacc','Sicher, aber du gibst den Vorteil her.','Safe, but you give away the advantage.'],
+    ['Langsamer Cross-Drop','Slow cross-court drop',[mir(cx),590],'mistake','Langsam und lange unterwegs: A steht noch vorne und killt ihn.','Slow and long in the air: A is still at the front and kills it.']];
+  mkShot(C,3,n,{title:late?['Zu spät beim Flick','Late to the flick']:['Flick rechtzeitig erreicht','Flick reached in time'],
+   lesson:late?['Bist du beim Flick zu spät, spielst du hoch und tief.','If you are late to the flick, play high and deep.']:['Erreichst du den Flick rechtzeitig, greifst du ihn an.','If you reach the flick in time, attack it.'],
+   players:pl,shuttle:{from:[m(280),450,110],to:[cx,late?1300:1240,late?190:260],peak:600},
+   q:late?['A spielt einen Flick-Aufschlag über dich. Du kommst spät, der Ball ist schon hinter dir.','A flicks the serve over you. You are late and the shuttle is already behind you.']:['A spielt einen Flick-Aufschlag über dich. Du kommst rechtzeitig nach hinten.','A flicks the serve over you. You get back in time.'],opts});});
+ // Satz 5: Nach dem Return
+ const s5=[['push','R'],['push','L'],['lift','R'],['lift','L'],['net','R']];
+ s5.forEach(([k,sd],n)=>{const m=sd==='L'?mir:(x=>x);
+  const pl={P:[m(365),840],Y:[m(190),1110],A:[m(285),500],B:[m(300),250]};
+  if(k==='lift') mkPlace(C,4,n,{title:['Partner liftet den Return','Partner lifts the return'],lesson:['Nach einem Lift verteidigt ihr nebeneinander.','After a lift, you defend side by side.'],
+    players:pl,shuttle:{from:[m(365),800,100],to:[305,110,250],peak:620},
+    q:['Dein Partner liftet den Return hoch in die Mitte des Hinterfelds. Stellt euch beide auf.','Your partner lifts the return high into the middle of the back court. Place both of you.'],
+    targets:{P:[m(450),1005],Y:[m(160),1005]},why:['Nach dem Lift verteidigt ihr nebeneinander. Der Ball ist in der Mitte, also teilt ihr das Feld gleichmäßig: Dein Partner geht auf seiner Seite zurück, du auf deiner.','After the lift you defend side by side. The shuttle is in the middle, so split the court evenly: your partner drops back on his side, you on yours.'],
+    good:['Richtige Idee. Steht symmetrisch, jeder in der Mitte seiner Hälfte.','Right idea. Stand symmetrically, each in the middle of your half.']});
+  else mkPlace(C,4,n,{title:k==='push'?['Partner pusht den Return','Partner pushes the return']:['Partner spielt Netzdrop','Partner plays a net shot'],
+    lesson:['Bleibt dein Partner nach dem Return vorne, deckst du hinten die Mitte.','If your partner stays at the front after the return, you cover the middle at the back.'],
+    players:pl,shuttle:{from:[m(365),800,165],to:k==='push'?[m(455),340,120]:[m(330),620,150],peak:k==='push'?175:180},
+    q:k==='push'?['Dein Partner pusht den Return flach ins Mittelfeld und bleibt vorne. Tippe, wo du stehst.','Your partner pushes the return flat into the mid-court and stays at the front. Tap where you stand.']:['Dein Partner spielt den Return als engen Netzdrop und bleibt vorne. Tippe, wo du stehst.','Your partner returns with a tight net shot and stays at the front. Tap where you stand.'],
+    who:'Y',bh:true,best:[k==='net'?305:m(300),k==='net'?1090:1110],why:['Dein Partner bleibt vorne, also spielt ihr vorne-hinten. Du deckst hinten die Mitte, damit du jeden Lift erreichst.','Your partner stays at the front, so you play front and back. You cover the middle at the back so you reach every lift.'],
+    good:['Fast. Geh genauer in die Mitte des Hinterfelds.','Almost. Move more to the middle of the back court.']});});
+})();
+// ---- 1: Angriff aus dem Hinterfeld & 2: aus dem Mittelfeld ----
+function attackSet(C,s,n,x,kind,zone){
+  const mid=zone==='mid', yy=mid?1000:(kind==='deep'?1285:1215), h=mid?(kind==='half'?200:285):(kind==='deep'?240:270);
+  // Hinterfeld: Partner steht vorne vor dir, leicht zur Mitte, um Cross-Antworten abzufangen
+  const P=mid?[cl(mir(x),150,460),1180]:[Math.round(x+(305-x)*0.35),870];
+  let A=[180,320],B=[430,320];
+  if(kind==='gap'){ if(n%2===0){A=[200,330];B=[560,330];} else {A=[50,330];B=[410,330];} }
+  if(!mid&&(kind==='normal'||kind==='deep'||kind==='deepdef')){const dy=kind==='deepdef'?180:330;
+    // Gegner verteidigen richtig: gerader Verteidiger in Linie mit dem Ball, der andere nahe der Mitte
+    if(Math.abs(x-305)<50){A=[160,dy];B=[450,dy];} else if(x<305){A=[cl(x+15,150,250),dy];B=[335,dy-10];} else {A=[275,dy-10];B=[cl(x-15,360,460),dy];}}
+  else if(kind==='deepdef'){A=[180,180];B=[430,180];}
+  const gapX=Math.round((A[0]+B[0])/2);
+  if(kind==='fb'){A=[330,545];B=[305,250];}
+  const pl={Y:[x,yy],P,A,B}, sw=sideW(x);
+  const strA=x<305?A:B, strN=x<305?'A':'B';
+  let opts,title,lesson,q;
+  const wherePos=mid?['ins Mittelfeld','to your mid-court']:['ins Hinterfeld','to your back court'];
+  q=[`Der Gegner liftet ${wherePos[0]} zu dir, ${sw[0]}. `,`The opponent lifts ${wherePos[1]}, ${sw[1]}. `];
+  if(kind==='normal'&&!mid&&Math.abs(x-305)>=50){const sx=cl(x,70,540);title=['Smash aus der Ecke','Smash from the corner'];lesson=['Aus der hinteren Ecke ist der gerade Smash am besten.','From the back corner, the straight smash is best.'];
+    q[0]+='Der Ball ist hoch, die Gegner verteidigen nebeneinander, dein Partner steht vorne.';q[1]+='The shuttle is high, they defend side by side and your partner is at the front.';
+    opts=[['Gerader Smash die Linie entlang','Straight smash down the line',[sx,300],'best','Aus der Ecke ist der gerade Smash der kürzeste Weg und kommt am schnellsten an. Die gerade Antwort deckt dein Partner vorne ab.','From the corner, the straight smash is the shortest path and arrives fastest. Your partner at the front covers the straight reply.'],
+      ['Smash in die Mitte','Smash to the middle',[gapX,300],'good','Auch gut, die Mitte ist schwer zu verteidigen. Aus der Ecke ist der Weg aber länger als gerade.','Also good, the middle is hard to defend. From the corner, though, the path is longer than straight.'],
+      ['Cross-Smash an die Seitenlinie','Cross-court smash to the sideline',[x<305?560:50,260],'inacc','Der längste Weg: Der Verteidiger hat mehr Zeit, und ein gerader Block läuft weit weg von deinem Partner.','The longest path: the defender has more time, and a straight block runs far away from your partner.'],
+      ['Clear nach hinten','Clear to the back',[305,60],'mistake','Du hattest einen hohen Ball und gibst den Angriff her.','You had a high shuttle and give away the attack.']];}
+  else if(kind==='normal'){title=['Smash gegen ausgeglichene Abwehr','Smash against a balanced defence'];lesson=['Gegen eine ausgeglichene Abwehr smashst du in die Mitte oder auf den Körper.','Against a balanced defence, smash to the middle or at the body.'];
+    q[0]+='Der Ball ist hoch, die Gegner verteidigen nebeneinander.';q[1]+='The shuttle is high and they defend side by side.';
+    opts=[['Smash in die Mitte zwischen beide','Smash to the middle between them',[305,300],'best','Die Mitte ist im Doppel am schwersten zu verteidigen: Beide wollen hin, oder keiner. Der Return kommt mittig zurück.','The middle is the hardest spot to defend in doubles: both go for it, or neither. The return comes back central.'],
+      [`Smash auf den Körper von ${strN}`,`Smash at ${strN}’s body`,[strA[0]+5,strA[1]+5],'good','Körpersmashes sind schwer gut zurückzuspielen. Nur etwas leichter zu blocken als die Mitte.','Body smashes are hard to return well. Just slightly easier to block than the middle.'],
+      ['Cross-Smash an die Seitenlinie','Cross-court smash to the sideline',[x<305?560:50,260],'inacc','Längerer Weg, mehr Zeit für den Verteidiger und ein offener Block für die Gegner.','A longer path, more time for the defender and an open block for your opponents.'],
+      ['Clear nach hinten','Clear to the back',[305,60],'mistake','Du hattest einen hohen Ball und gibst den Angriff her.','You had a high shuttle and give away the attack.']];}
+  else if(kind==='gap'){const wide=A[0]<100?A:B, wn=A[0]<100?'A':'B', other=A[0]<100?B:A, on=A[0]<100?'B':'A', gx=Math.round((wide[0]+other[0])/2);
+    title=['Die offene Lücke','The open gap'];lesson=['Schau vor dem Smash: Triff die offene Lücke, nicht den Spieler.','Look before you smash: hit the open gap, not the player.'];
+    q[0]+=`${wn} steht weit außen an der Seitenlinie.`;q[1]+=`${wn} stands far out near the sideline.`;
+    opts=[['Smash in die Lücke','Smash into the gap',[gx,290],'best',`${wn} steht zu weit außen, die Mitte ist offen. Ein Smash in die Lücke ist für beide schwer zu erreichen.`,`${wn} is too far out and the middle is open. A smash into the gap is hard for either to reach.`],
+      [`Smash auf den Körper von ${on}`,`Smash at ${on}’s body`,[other[0]+5,other[1]+5],'good',`Stark, aber ${on} steht bereit. Die offene Lücke ist besser.`,`Strong, but ${on} is ready. The open gap is better.`],
+      ['Drop ins Vorderfeld','Drop to the forecourt',[305,585],'inacc','Bei so einem hohen Ball verschenkst du Druck.','With such a high shuttle you give away pressure.'],
+      [`Smash an die Seitenlinie von ${wn}`,`Smash to ${wn}’s sideline`,[wide[0]<100?45:565,300],'mistake',`Genau dort steht ${wn}.`,`That is exactly where ${wn} stands.`]];}
+  else if(kind==='deep'){title=['Tief im Hinterfeld','Deep in the back court'];lesson=['Ist der Ball sehr tief, hält ein schneller Drop den Angriff besser als ein schwacher Smash.','When the shuttle is very deep, a fast drop keeps the attack better than a weak smash.'];
+    q[0]=`Der Gegner liftet sehr tief zu dir ${sw[0]}. Du kommst hin, aber der Ball ist leicht hinter dir.`;q[1]=`The opponent lifts very deep to you, ${sw[1]}. You get there, but the shuttle is slightly behind you.`;
+    opts=[['Schneller, steiler Drop gerade','Fast, steep drop straight',[cl(x,90,520),580],'best','Von so tief kommt ein Smash langsam und flach an. Ein schneller Drop hält euch im Angriff und zieht die Gegner nach vorne.','From this deep a smash arrives slow and flat. A fast drop keeps you attacking and pulls them forward.'],
+      ['Smash in die Mitte','Smash to the middle',[gapX,320],'good','Möglich, wenn du hinten stark bist, aber der Weg ist lang.','Possible if you are strong at the back, but it is a long way.'],
+      ['Clear nach hinten','Clear to the back',[305,60],'inacc','Neutral und sicher, aber ihr verliert den Angriff.','Neutral and safe, but you lose the attack.'],
+      ['Langsamer Cross-Drop','Slow cross-court drop',[cl(mir(x),120,490),590],'mistake','Lang und langsam quer über das Feld: Ein Gegner ist früh da und killt ihn.','Long and slow across the court: an opponent gets there early and kills it.']];}
+  else if(kind==='deepdef'){title=['Gegner stehen tief','Opponents stand deep'];lesson=['Stehen beide Gegner tief, zwingt ein Drop sie nach vorne.','If both opponents stand deep, a drop forces them forward.'];
+    q[0]+='Beide Gegner stehen sehr tief in der Verteidigung.';q[1]+='Both opponents stand very deep in defence.';
+    opts=[['Steiler Drop in die Mitte vorne','Steep drop to the middle front',[305,590],'best','Beide stehen weit hinten. Ein steiler Drop zwingt sie nach vorne und zu einem Schlag von unten.','Both are far back. A steep drop forces them forward and to hit from below.'],
+      ['Smash in die Mitte','Smash to the middle',[305,200],'good','Nicht falsch, aber auf diese Distanz haben sie viel Zeit.','Not wrong, but at this distance they have lots of time.'],
+      ['Cross-Smash an die Seitenlinie','Cross-court smash to the sideline',[x<305?560:50,200],'inacc','Sehr lang und mit viel Zeit für den Verteidiger.','Very long and with lots of time for the defender.'],
+      ['Clear nach hinten','Clear to the back',[305,50],'mistake','Genau dorthin, wo beide schon stehen.','Right where both already stand.']];
+    if(mid){opts[0]=['Steiler Drop in die Mitte vorne','Steep drop to the middle front',[305,590],'good','Auch gut: Er zwingt beide nach vorne. Aus dem Mittelfeld ist der Smash aber noch stärker.','Also good: it forces both forward. From the mid-court, though, the smash is even stronger.'];
+      opts[1]=['Steiler Smash auf die Füße in der Mitte','Steep smash at their feet in the middle',[305,215],'best','Aus dem Mittelfeld ist der Weg kurz. Ein steiler Smash auf die Füße ist für tief stehende Verteidiger kaum zu heben.','From the mid-court the path is short. A steep smash at the feet is very hard to lift for deep defenders.'];
+      lesson=['Aus dem Mittelfeld smashst du steil, auch wenn die Gegner tief stehen.','From the mid-court, smash steeply even if your opponents stand deep.'];}}
+  else if(kind==='fb'){title=['Gegner vorne-hinten','Opponents front and back'];lesson=['Gegen vorne-hinten smashst du seitlich, weg vom Netzspieler.','Against front and back, smash to the side, away from the net player.'];
+    q[0]+='Die Gegner stehen vorne-hinten: A am Netz, B hinten.';q[1]+='Your opponents play front and back: A at the net, B at the back.';
+    opts=[['Smash seitlich ins Mittelfeld','Smash to the side mid-court',[x<305?95:515,370],'best','Gegen vorne-hinten ist die Seite des Mittelfelds offen: vorbei an A, vor B.','Against front and back the side mid-court is open: past A, in front of B.'],
+      ['Smash auf den Körper von B','Smash at B’s body',[305,255],'good','B muss von hinten verteidigen, aber er steht genau dort.','B has to defend from the back, but he is right there.'],
+      ['Clear nach hinten','Clear to the back',[305,60],'inacc','Du gibst den Angriff her.','You give away the attack.'],
+      ['Drop ins Vorderfeld','Drop to the forecourt',[320,600],'mistake','Direkt zu A, der am Netz wartet.','Straight to A, who is waiting at the net.']];}
+  else if(kind==='half'){title=['Halbhoher Ball im Mittelfeld','Half-high shuttle in the mid-court'];lesson=['Einen halbhohen Ball im Mittelfeld greifst du flach nach unten an.','Attack a half-high shuttle in the mid-court flat and down.'];
+    q[0]=`Ein halbhoher Ball kommt zu dir ins Mittelfeld ${sw[0]}, etwa auf Kopfhöhe. Die Gegner stehen nebeneinander.`;q[1]=`A half-high shuttle comes to you in the mid-court, ${sw[1]}, at about head height. They stand side by side.`;
+    opts=[['Halbsmash in die Mitte','Half smash to the middle',[305,300],'best','Auf Kopfhöhe kannst du nach unten schlagen. Kontrolliert in die Mitte bringt den meisten Druck.','At head height you can hit down. Controlled into the middle gives the most pressure.','smash'],
+      ['Flacher Drive gerade','Flat drive straight',[cl(x,80,530),310],'good','Hält Druck, aber geht nicht nach unten.','Keeps pressure, but does not go down.'],
+      ['Clear nach hinten','Clear to the back',[305,60],'inacc','Du verschenkst einen angreifbaren Ball.','You waste an attackable shuttle.'],
+      ['Halbhoher Lift','Half-high lift',[305,330],'mistake','Zu kurz: Die Gegner smashen.','Too short: your opponents smash.','half']];}
+  mkShot(C,s,n,{title,lesson,players:pl,shuttle:{from:[mir(x),330,70],to:[x,yy,h],peak:mid?(kind==='half'?230:520):600},q,opts});
+}
+const XSB=[85,150,305,460,525];
+['normal','gap','deep','deepdef','fb'].forEach((k,s)=>XSB.forEach((x,n)=>attackSet(1,s,n,x,k,'back')));
+['normal','gap','fb','half','deepdef'].forEach((k,s)=>XS.forEach((x,n)=>attackSet(2,s,n,x,k,'mid')));
+// ---- 3: Netzspiel ----
+['above','below','npsame','npopp','aboveclose'].forEach((kind,s)=>XS.forEach((x,n)=>{const C=3, sw=sideW(x);
+  const h=(kind==='above'||kind==='aboveclose')?172:95;
+  let A=[180,330],B=[430,330];
+  if(kind==='npsame'||kind==='aboveclose'){A=[x,558];B=[305,300];}
+  if(kind==='npopp'){A=[Math.abs(x-305)<50?450:mir(x),558];B=[305,300];}
+  const pl={Y:[x,780],P:[cl(mir(x),180,430),1110],A,B}; let opts,title,lesson,q;
+  const shFrom=kind==='npopp'||kind==='npsame'||kind==='aboveclose'?[A[0],590,90]:[305,500,110];
+  if(kind==='above'){title=['Über der Netzkante','Above the tape'];lesson=['Über der Netzkante schlägst du nach unten.','Above the tape, hit down.'];
+    q=[`Der Ball kommt knapp über die Netzkante zu dir ${sw[0]}. Beide Gegner stehen hinten.`,`The shuttle comes to you just above the tape, ${sw[1]}. Both opponents are back.`];
+    opts=[['Push nach unten in die Mitte','Push down into the middle',[305,400],'best','Über der Netzkante kannst du nach unten spielen. Zwischen beide gezielt, erzwingt der Push einen schwachen Lift.','Above the tape you can hit down. Aimed between them, the push forces a weak lift.'],
+      ['Enger Netzdrop','Tight net shot',[x,625],'good','Nicht falsch, aber du verschenkst die Chance, nach unten zu schlagen.','Not wrong, but you waste the chance to hit down.'],
+      ['Cross-Netzdrop','Cross-court net shot',[cl(mir(x),110,500),625],'inacc','Langer Weg entlang des Netzes, riskanter als nach unten zu schlagen.','A long path along the net, riskier than hitting down.'],
+      ['Lift nach hinten','Lift to the back',[305,90],'mistake','Du hattest den Ball über der Netzkante und machst daraus Verteidigung.','You had it above the tape and turn it into defence.']];}
+  else if(kind==='below'){title=['Unter der Netzkante','Below the tape'];lesson=['Unter der Netzkante und beide Gegner hinten: enger Netzdrop.','Below the tape with both opponents back: tight net shot.'];
+    q=[`Du erreichst den Ball ${sw[0]} unter der Netzkante. Beide Gegner stehen hinten.`,`You reach the shuttle below the tape, ${sw[1]}. Both opponents are back.`];
+    opts=[['Enger Netzdrop','Tight net shot',[x,625],'best','Beide stehen hinten. Ein enger Netzdrop zwingt einen nach vorne und zum Lift.','Both are back. A tight net shot forces one forward and into a lift.'],
+      ['Hoher Lift in die Ecke','High lift to the corner',[x<305?470:140,90],'good','Sicher, aber ihr müsst dann verteidigen.','Safe, but then you have to defend.'],
+      ['Push ins Mittelfeld','Push into the mid-court',[305,400],'inacc','Unter der Netzkante steigt der Push und landet bei den Gegnern.','Below the tape the push rises and lands with your opponents.'],
+      ['Halbhoher Lift','Half-high lift',[305,330],'mistake','Zu kurz: Die Gegner smashen aus dem Mittelfeld.','Too short: they smash from the mid-court.','half']];}
+  else if(kind==='npsame'){title=['Der Netzspieler wartet','The net player is waiting'];lesson=['Wartet der Netzspieler direkt vor dir, liftest du hoch und tief.','If the net player waits right in front of you, lift high and deep.'];
+    q=[`Du erreichst den Ball ${sw[0]} tief unter der Netzkante. A wartet direkt vor dir am Netz.`,`You reach the shuttle far below the tape, ${sw[1]}. A waits right in front of you at the net.`];
+    opts=[['Hoher Lift in die Rückhandecke','High lift to the backhand corner',[470,90],'best','A wartet auf deinen Netzdrop. Ein hoher, tiefer Lift in die Rückhandecke von B ist sicher und macht seinen Angriff schwer.','A is waiting for your net shot. A high, deep lift into B’s backhand corner is safe and makes his attack harder.'],
+      ['Hoher Lift in die andere Ecke','High lift to the other corner',[140,90],'good','Auch sicher, aber auf der Vorhandseite von B.','Also safe, but on B’s forehand side.'],
+      ['Cross-Netzdrop','Cross-court net shot',[cl(mir(x),110,500),625],'inacc','Langer Weg entlang des Netzes, A hat Zeit hinüberzugehen.','A long path along the net; A has time to move across.'],
+      ['Gerader Netzdrop','Straight net shot',[x,625],'mistake','Direkt in den Schläger von A.','Straight into A’s racket.']];}
+  else if(kind==='npopp'){title=['Netzspieler auf der anderen Seite','Net player on the other side'];lesson=['Steht der Netzspieler auf der anderen Seite, spielst du den engen Netzdrop gerade.','If the net player is on the other side, play the tight net shot straight.'];
+    q=[`Du erreichst den Ball ${sw[0]} unter der Netzkante. A steht am Netz, aber auf der anderen Seite.`,`You reach the shuttle below the tape, ${sw[1]}. A is at the net, but on the other side.`];
+    opts=[['Enger gerader Netzdrop','Tight straight net shot',[x,625],'best','A steht auf der anderen Seite. Ein enger gerader Netzdrop ist für ihn weit weg und zwingt zum Lift.','A is on the other side. A tight straight net shot is far from him and forces a lift.'],
+      ['Hoher Lift in die Ecke','High lift to the corner',[470,90],'good','Sicher, aber ihr gebt den Angriff her.','Safe, but you give away the attack.'],
+      ['Cross-Netzdrop','Cross-court net shot',[A[0],625],'inacc','Geht genau zu A.','Goes straight to A.'],
+      ['Halbhoher Lift','Half-high lift',[305,330],'mistake','Zu kurz: B smasht aus dem Mittelfeld.','Too short: B smashes from the mid-court.','half']];}
+  else {const px=Math.abs(x-305)<50?470:cl(mir(x),90,520);title=['Über der Netzkante, Netzspieler nah','Above the tape, net player close'];lesson=['Über der Netzkante und der Netzspieler steht nah: nach unten an ihm vorbei.','Above the tape with the net player close: down and past him.'];
+    q=[`Der Ball kommt knapp über die Netzkante zu dir ${sw[0]}. A steht direkt vor dir am Netz.`,`The shuttle comes to you just above the tape, ${sw[1]}. A is right in front of you at the net.`];
+    opts=[['Push nach unten an A vorbei','Push down past A',[px,400],'best','Über der Netzkante spielst du nach unten, und zwar weg von A ins Mittelfeld. B muss von unten spielen.','Above the tape you hit down, away from A into the mid-court. B has to hit from below.'],
+      ['Push in die Mitte','Push to the middle',[305,400],'good','Auch nach unten, aber näher an A.','Also down, but closer to A.'],
+      ['Lift nach hinten','Lift to the back',[305,90],'inacc','Du verschenkst den Angriff.','You give away the attack.'],
+      ['Netzdrop direkt vor A','Net shot right in front of A',[x,625],'mistake','A steht genau dort und spielt ihn nach unten zurück.','A is right there and plays it straight back down.']];}
+  mkShot(C,s,n,{title,lesson,players:pl,shuttle:{from:shFrom,to:[x,745,h],peak:h+40},q,opts});}));
+
+// ---- 4: Verteidigung gegen den Smash ----
+['back','mid','half','center','late'].forEach((kind,s)=>XS.forEach((xa,n)=>{const C=4;
+  const ya=kind==='mid'?300:140, bx=kind==='center'?305:cl(305+(xa-305)*0.45,200,410);
+  const Y=[440,1010], late=kind==='late';
+  const pl={Y:late?[440,1100]:Y,P:[170,1010],A:[xa,ya],B:[bx,540]};
+  const far=bx<=305?[470,590]:[140,590], near=bx<=305?[140,590]:[470,590];
+  const lbl=t=>t[0]>305?['gerade','straight']:['cross','cross-court'];
+  const sa=sideA(xa); let opts,title,lesson,q,h=100,cy=1020;
+  if(kind==='half'){h=150;title=['Konter auf den Halbsmash','Countering the half smash'];lesson=['Einen langsamen, flachen Halbsmash konterst du mit einem Drive.','Counter a slow, flat half smash with a drive.'];
+    q=[`A spielt von hinten ${sa[0]} einen langsamen, flachen Halbsmash. Der Ball kommt auf Schulterhöhe vor dir an.`,`A plays a slow, flat half smash from the back ${sa[1]}. It arrives at shoulder height in front of you.`];
+    opts=[['Konter-Drive gerade','Counter drive straight',[480,330],'best','Ein langsamer, flacher Halbsmash ist eine Einladung. Ein schneller Drive gerade nimmt ihnen den Angriff ab.','A slow, flat half smash is an invitation. A fast straight drive takes the attack away from them.'],
+      [`Block ${lbl(far)[0]} ans Netz`,`${lbl(far)[1]==='straight'?'Straight':'Cross-court'} block to the net`,far,'good','Sicher und weg vom Netzspieler, aber du hättest mehr Druck machen können.','Safe and away from the net player, but you could have put on more pressure.'],
+      ['Tiefer Lift','Deep lift',[cl(mir(xa),110,500),90],'inacc','Du gibst den Angriff zurück, obwohl der Ball angreifbar war.','You hand back the attack although the shuttle was attackable.'],
+      ['Block zum Netzspieler','Block towards the net player',near,'mistake','B am Netz wartet genau dort.','B is waiting right there at the net.']];}
+  else if(late){h=50;cy=1110;title=['Zu spät gegen den Smash','Too late against the smash'];lesson=['Bist du zu spät, liftest du hoch und tief in die Mitte.','If you are too late, lift high and deep to the middle.'];
+    q=[`A smasht von hinten ${sa[0]}. Du kommst spät, der Ball ist schon tief neben dir.`,`A smashes from the back ${sa[1]}. You are late and the shuttle is already low beside you.`];
+    opts=[['Hoher Lift in die Mitte hinten','High lift to the middle back',[305,80],'best','Spät und tief kannst du nicht kontrolliert blocken. Ein hoher Lift in die Mitte gibt euch Zeit und dem Smasher wenig Winkel.','Late and low you cannot block with control. A high lift to the middle buys time and gives the smasher little angle.'],
+      ['Hoher gerader Lift','High straight lift',[470,80],'good','Auch sicher, gibt aber mehr Winkel.','Also safe, but gives more angle.'],
+      [`Block ${lbl(far)[0]}`,`${lbl(far)[1]==='straight'?'Straight':'Cross-court'} block`,far,'inacc','Aus dieser Lage wird der Block leicht zu hoch.','From this position the block easily floats too high.'],
+      ['Flacher Drive','Flat drive',[470,330],'mistake','Von so tief steigt der Drive und wird angegriffen.','From this low the drive rises and gets attacked.']];}
+  else {title=kind==='mid'?['Smash aus dem Mittelfeld','Smash from the mid-court']:kind==='center'?['Netzspieler in der Mitte','Net player in the middle']:['Smash aus dem Hinterfeld','Smash from the back'];
+    lesson=['Gegen den Smash blockst du weg vom Smasher und weg vom Netzspieler.','Against a smash, block away from the smasher and away from the net player.'];
+    q=[`A smasht ${kind==='mid'?'aus dem Mittelfeld':'von hinten'} ${sa[0]} auf deine Seite. B steht am Netz${kind==='center'?' in der Mitte':''}.`,`A smashes ${kind==='mid'?'from the mid-court':'from the back'} ${sa[1]} to your side. B is at the net${kind==='center'?' in the middle':''}.`];
+    const fx=kind==='center'?(xa<305?[470,590]:[140,590]):far, nx=kind==='center'?(xa<305?[140,590]:[470,590]):near;
+    opts=[[`Block ${lbl(fx)[0]} ans Netz`,`${lbl(fx)[1]==='straight'?'Straight':'Cross-court'} block to the net`,fx,'best','Der Block geht weg vom Smasher und weg vom Netzspieler. Beide müssen weit laufen.','The block goes away from the smasher and away from the net player. Both have far to run.'],
+      ['Tiefer Lift weg vom Smasher','Deep lift away from the smasher',[cl(mir(xa),110,500),90],'good','Sicher und lässt den Smasher laufen, aber ihr bleibt in der Verteidigung.','Safe and makes the smasher run, but you stay on defence.'],
+      ['Flacher Drive gerade','Flat straight drive',[480,330],'inacc','Fliegt nah am Netzspieler vorbei und ist gegen einen harten Smash schwer zu kontrollieren.','Passes close to the net player and is hard to control against a hard smash.'],
+      [`Block ${lbl(nx)[0]} zum Netzspieler`,`${lbl(nx)[1]==='straight'?'Straight':'Cross-court'} block to the net player`,nx,'mistake','Direkt in den Schläger von B.','Straight into B’s racket.']];
+    if(kind==='mid'){lesson=['Gegen einen Smash aus dem Mittelfeld blockst du kurz und weg vom Netzspieler.','Against a smash from the mid-court, block short and away from the net player.'];}}
+  mkShot(C,s,n,{title,lesson,players:pl,shuttle:{from:[xa,ya,260],to:[late?445:445,cy,h],peak:260},q,opts});}));
+// ---- 5: Stellung nach dem Lift ----
+function defTargets(xS,yS){const yD=Math.round(1000+Math.max(0,yS-150)*0.45);
+  if(Math.abs(xS-305)<50) return {P:[160,yD],Y:[450,yD],mid:true,yD};
+  if(xS<305) return {P:[cl(xS+15,150,250),yD],Y:[335,yD-10],yD};
+  return {Y:[cl(xS-15,360,460),yD],P:[275,yD-10],yD};}
+function liftWhy(xS,yS,t,lifter){const close=yS>=240;
+  let de,en;
+  if(t.mid){de='Der Smash kommt aus der Mitte, also sind beide Seiten gleich wahrscheinlich: Ihr teilt das Feld symmetrisch, nebeneinander.';en='The smash comes from the middle, so both sides are equally likely: split the court symmetrically, side by side.';}
+  else {const str=t.Y[0]>305&&xS>305?['Du','You']:['Dein Partner','Your partner'], crs=str[0]==='Du'?['dein Partner','your partner']:['du','you'];
+    de=`Nebeneinander, und das Paar verschiebt sich zur Seite des Balls. ${str[0]} ${str[0]==='Du'?'stehst':'steht'} in Linie mit dem Ball und ${str[0]==='Du'?'deckst':'deckt'} den geraden Smash, ${crs[0]} ${crs[0]==='du'?'stehst':'steht'} nah an der Mittellinie für den Cross-Smash und die Mitte.`;
+    en=`Side by side, with the pair shifting toward the shuttle. ${str[1]} ${str[1]==='You'?'stand':'stands'} in line with the shuttle for the straight smash; ${crs[1]} ${crs[1]==='you'?'stand':'stands'} near the centre line for the cross smash and the middle.`;}
+  if(close){de+=' Der Smasher steht nah, deshalb verteidigt ihr tiefer als sonst.';en+=' The smasher is close, so you defend deeper than usual.';}
+  return [de,en];}
+[110,170,240,320,400].forEach((yS,s)=>XS.forEach((xS,n)=>{const C=5, t=defTargets(xS,yS), youLift=n%2===1;
+  const pl=youLift?{Y:[380,820],P:[230,1150],A:[300,520],B:[xS,yS+40]}:{Y:[330,1130],P:[230,830],A:[300,520],B:[xS,yS+40]};
+  const from=youLift?[380,790,50]:[230,800,50], sw=sideW(xS);
+  const depth=yS<200?['ganz nach hinten','to the very back']:yS<300?['ins hintere Mittelfeld','to the rear mid-court']:['nur bis ins Mittelfeld','only to the mid-court'];
+  mkPlace(C,s,n,{title:[`Lift ${sideA(xS)[0]}, ${yS<200?'tief':yS<300?'halbtief':'zu kurz'}`,`Lift ${sideA(xS)[1]}, ${yS<200?'deep':yS<300?'half-deep':'too short'}`],
+   lesson:yS>=240?['Je näher der Smasher, desto tiefer verteidigt ihr, aber immer nebeneinander.','The closer the smasher, the deeper you defend, but always side by side.']:['Nach dem Lift: nebeneinander, gerader Verteidiger in Linie mit dem Ball, der andere nah an der Mitte.','After a lift: side by side, the straight defender in line with the shuttle, the other near the middle.'],
+   players:pl,shuttle:{from,to:[xS,yS,250],peak:yS>300?460:620},
+   q:[`${youLift?'Du liftest':'Dein Partner liftet'} ${depth[0]}, ${sw[0]}. B wird smashen. Stellt euch beide zur Verteidigung auf.`,`${youLift?'You lift':'Your partner lifts'} ${depth[1]}, ${sw[1]}. B will smash. Place both of you for the defence.`],
+   targets:{Y:t.Y,P:t.P},why:liftWhy(xS,yS,t),good:['Richtige Idee. Prüf Aufteilung und Tiefe noch einmal.','Right idea. Check the split and the depth again.']});}));
+
+// ---- 6: Stellung im Angriff ----
+[['Y','straight'],['Y','cross'],['P','straight'],['P','cross'],['P','middle']].forEach(([who,dir],s)=>XS.forEach((xs,n)=>{const C=6;
+  const xt=dir==='middle'?305:dir==='straight'?cl(xs,90,520):(Math.abs(xs-305)<50?470:cl(mir(xs),90,520));
+  const front=[Math.round(cl(305+(xt-305)*0.4,200,410)),860], back=[Math.round(cl(xs*0.6+305*0.4,150,460)),1110];
+  const pl=who==='Y'?{Y:[xs,1190],P:[420,1000],A:[180,330],B:[430,330]}:{P:[xs,1190],Y:[300,980],A:[180,330],B:[430,330]};
+  const targets=who==='Y'?{Y:back,P:front}:{P:back,Y:front};
+  const dw={straight:['gerade','straight'],cross:['cross','cross-court'],middle:['in die Mitte','to the middle']}[dir], sa=sideA(xs);
+  mkPlace(C,s,n,{title:[`${who==='Y'?'Dein':'Partner-'}Smash ${dw[0]} von ${sa[0]}`,`${who==='Y'?'Your':'Partner’s'} smash ${dw[1]} from the ${sa[1]}`],
+   lesson:['Im Angriff spielt ihr vorne-hinten: Der Vorderspieler verschiebt sich zur Seite, auf die gesmasht wurde.','In attack you play front and back: the front player shifts to the side the smash went to.'],
+   players:pl,shuttle:{from:[xs,1190,270],to:[xt,330,95],peak:270},
+   q:[`${who==='Y'?'Du smashst':'Dein Partner smasht'} ${dw[0]} aus dem Hinterfeld ${sideW(xs)[0]}. Stellt euch beide für den nächsten Schlag auf.`,`${who==='Y'?'You smash':'Your partner smashes'} ${dw[1]} from the back court, ${sideW(xs)[1]}. Place both of you for the next shot.`],
+   targets,bh:who==='Y',why:[`Vorne-hinten. Der Vorderspieler geht zum T, ${dir==='middle'?'mittig, weil der Smash in die Mitte ging':'verschoben zu der Seite, auf die der Smash ging'}: Dort kommen Block und Drive meist zurück. Der Smasher rückt einen Schritt nach und bleibt auf seiner Seite.`,`Front and back. The front player moves to the T, ${dir==='middle'?'central, because the smash went to the middle':'shifted toward the side the smash went to'}: that is where blocks and drives usually come back. The smasher follows a step forward and stays on his side.`],
+   good:['Vorne-hinten stimmt. Prüf die Verschiebung zur Seite des Smashs.','Front and back is right. Check the shift toward the side of the smash.']});}));
+// ---- 7: Rotation ----
+(function(){const C=7;
+ // Satz 1: du bekommst den kurzen Lift -> Partner nach vorne
+ [330,380,430,480,530].forEach((xl,n)=>{const front=[Math.round(cl(305+(xl-305)*0.4,200,410)),860];
+  mkPlace(C,0,n,{title:['Du bekommst den kurzen Lift','You get the short lift'],lesson:['Kurzer Lift für euch: sofort von nebeneinander zu vorne-hinten wechseln.','A short lift for you: switch straight from side by side to front and back.'],
+   players:{Y:[430,1010],P:[180,1010],A:[190,330],B:[420,520]},shuttle:{from:[420,540,90],to:[xl,1000,275],peak:520},
+   q:['Ihr verteidigt nebeneinander. Der Gegner liftet kurz auf deine Seite, du wirst gerade smashen. Tippe, wo dein Partner hingehen sollte.','You defend side by side. The opponent lifts short to your side and you will smash straight. Tap where your partner should go.'],
+   who:'P',best:front,why:['Jetzt wechselt ihr zu vorne-hinten: Du smashst, dein Partner geht nach vorne zum T, leicht zur Seite deines Smashs.','Now you switch to front and back: you smash, your partner moves forward to the T, slightly toward the side of your smash.'],
+   good:['Vorne stimmt. Verschieb dich etwas mehr zur Seite des Smashs.','Front is right. Shift a little more toward the side of the smash.']});});
+ // Satz 2: Partner bekommt den kurzen Lift -> du nach vorne
+ [80,130,180,230,280].forEach((xl,n)=>{const front=[Math.round(cl(305+(xl-305)*0.4,200,410)),860];
+  mkPlace(C,1,n,{title:['Partner bekommt den kurzen Lift','Partner gets the short lift'],lesson:['Smasht dein Partner, gehst du nach vorne zum T.','When your partner smashes, you move forward to the T.'],
+   players:{Y:[430,1010],P:[180,1010],A:[420,330],B:[190,520]},shuttle:{from:[190,540,90],to:[xl,1000,275],peak:520},
+   q:['Ihr verteidigt nebeneinander. Der Gegner liftet kurz auf die Seite deines Partners, er wird gerade smashen. Tippe, wo du hingehen solltest.','You defend side by side. The opponent lifts short to your partner’s side and he will smash straight. Tap where you should go.'],
+   who:'Y',best:front,why:['Ihr wechselt zu vorne-hinten: Dein Partner smasht, du gehst nach vorne zum T, leicht zur Seite seines Smashs.','You switch to front and back: your partner smashes, you move forward to the T, slightly toward the side of his smash.'],
+   good:['Vorne stimmt. Verschieb dich etwas mehr zur Seite des Smashs.','Front is right. Shift a little more toward the side of the smash.']});});
+ // Satz 3: Lift über den Vorderspieler -> vorne bleiben
+ XS.forEach((xS,n)=>{const best=[Math.round(cl(305+(xS-305)*0.3,230,380)),860];
+  mkPlace(C,2,n,{title:['Lift über den Vorderspieler','Lift over the front player'],lesson:['Der Vorderspieler bleibt vorne. Alles dahinter gehört dem Hinterspieler.','The front player stays in front. Everything behind belongs to the back player.'],
+   players:{Y:[300,800],P:[cl(mir(xS),200,410),1130],A:[300,560],B:[440,320]},shuttle:{from:[300,580,80],to:[cl(xS,80,530),1250,230],peak:560},
+   q:[`A liftet hoch über dich nach hinten ${sideW(xS)[0]}. Dein Partner läuft hin. Tippe, wo du stehen solltest.`,`A lifts high over you to the back, ${sideW(xS)[1]}. Your partner runs to it. Tap where you should be.`],
+   who:'Y',best,why:['Bleib vorne nahe dem T, leicht zur Seite des Balls verschoben. Dein Partner greift von hinten an, du übernimmst alles Kurze.','Stay in front near the T, slightly toward the shuttle side. Your partner attacks from the back, you take everything short.'],
+   good:['Richtige Zone. Verschieb dich leicht zur Seite, von der dein Partner schlägt.','Right zone. Shift slightly toward the side your partner hits from.']});});
+ // Satz 4: vom Angriff in die Verteidigung
+ XS.forEach((xS,n)=>{const t=defTargets(xS,140);
+  mkPlace(C,3,n,{title:['Vom Angriff in die Verteidigung','From attack to defence'],lesson:['Muss dein Team liften, wechselt ihr sofort zu nebeneinander.','When your team has to lift, switch straight to side by side.'],
+   players:{P:[300,800],Y:[300,1130],A:[300,560],B:[xS,180]},shuttle:{from:[300,780,50],to:[xS,140,250],peak:620},
+   q:[`Ihr greift vorne-hinten an, aber dein Partner vorne muss nach hinten ${sideW(xS)[0]} liften. Stellt euch beide auf.`,`You attack front and back, but your partner at the front has to lift to the back, ${sideW(xS)[1]}. Place both of you.`],
+   targets:{Y:t.Y,P:t.P},why:liftWhy(xS,140,t),good:['Richtige Idee: nebeneinander. Prüf die Aufteilung.','Right idea: side by side. Check the split.']});});
+ // Satz 5: nach deinem Clear
+ XS.forEach((xS,n)=>{const t=defTargets(xS,110);
+  mkPlace(C,4,n,{title:['Nach deinem Clear','After your clear'],lesson:['Nach einem Clear greift der Gegner an: ihr verteidigt nebeneinander.','After a clear your opponent attacks: you defend side by side.'],
+   players:{Y:[300,1220],P:[300,860],A:[300,520],B:[xS,150]},shuttle:{from:[300,1220,250],to:[xS,110,250],peak:680},
+   q:[`Du spielst aus dem Hinterfeld einen Clear nach hinten ${sideW(xS)[0]}. Stellt euch beide auf.`,`You play a clear from the back court to the back, ${sideW(xS)[1]}. Place both of you.`],
+   targets:{Y:t.Y,P:t.P},why:liftWhy(xS,110,t),good:['Richtige Idee: nebeneinander. Prüf die Aufteilung.','Right idea: side by side. Check the split.']});});
+})();
+
+// ---- 8: Unter Druck ----
+['backL','backR','front','wide','midlate'].forEach((kind,s)=>[0,1,2,3,4].forEach(n=>{const C=8;
+  const ax=[230,300,380,450,330][n];
+  let Y,cy,h,opts,title,lesson,q,from;
+  if(kind==='backL'||kind==='backR'){const x=kind==='backL'?90+n*8:520-n*8; Y=[x,1265]; cy=1295; h=[140,120,150,130,160][n]; from=[ax,560,110];
+    title=kind==='backL'?['Hinten links zu spät','Late at the back left']:['Hinten rechts zu spät','Late at the back right'];
+    lesson=['Bist du hinten zu spät, spielst du hoch und tief in die Mitte.','If you are late at the back, play high and deep to the middle.'];
+    q=[`A drückt dich nach hinten ${kind==='backL'?'links':'rechts'}. Du kommst spät, der Ball ist schon tief.`,`A pushes you to the back ${kind==='backL'?'left':'right'}. You are late and the shuttle is already low.`];
+    opts=[['Hoher, tiefer Clear in die Mitte','High, deep clear to the middle',[305,70],'best','Du bist spät und aus dem Gleichgewicht. Hoch und tief in die Mitte gibt euch Zeit und dem Gegner wenig Winkel.','You are late and off balance. High and deep to the middle buys time and gives little angle.'],
+      ['Hoher gerader Clear','High straight clear',[x<305?100:510,70],'good','Auch sicher, aber kommt er zu kurz, wird er gerade zurückgesmasht.','Also safe, but if it is short it gets smashed straight back.'],
+      ['Drop','Drop',[cl(x,110,500),580],'inacc','Aus dieser Lage wird der Drop oft zu hoch, und A am Netz wartet.','From here the drop often floats too high, and A is waiting at the net.'],
+      ['Smash','Smash',[305,320],'mistake','Tief und spät hat der Smash weder Kraft noch Winkel.','Low and late, the smash has no power and no angle.','smash']];}
+  else if(kind==='front'){const x=[120,160,450,490,140][n]; Y=[x,790]; cy=760; h=50; const A=[x,558]; from=[A[0],590,90];
+    title=['Tief am Netz, Netzspieler wartet','Low at the net, net player waiting'];lesson=['Tief am Netz und der Netzspieler wartet: Lift hoch und tief.','Low at the net with the net player waiting: lift high and deep.'];
+    q=[`A spielt einen engen Netzdrop ${x<305?'links':'rechts'} vorne und bleibt direkt am Netz. Du erreichst den Ball ganz tief.`,`A plays a tight net shot to the front ${x<305?'left':'right'} and stays right at the net. You reach it very low.`];
+    opts=[['Hoher Lift in die Rückhandecke','High lift to the backhand corner',[470,85],'best','Tief am Netz mit A direkt vor dir ist nur ein hoher, tiefer Lift sicher.','Low at the net with A right in front of you, only a high, deep lift is safe.'],
+      ['Hoher Lift in die andere Ecke','High lift to the other corner',[140,85],'good','Auch sicher, aber auf der Vorhandseite des Hinterspielers.','Also safe, but on the back player’s forehand side.'],
+      ['Cross-Netzdrop','Cross-court net shot',[mir(x),625],'inacc','Langer Weg am Netz entlang, A erreicht ihn.','A long path along the net; A gets to it.'],
+      ['Gerader Netzdrop','Straight net shot',[x,625],'mistake','Direkt in den Schläger von A.','Straight into A’s racket.']];
+    mkShot(C,s,n,{title,lesson,players:{Y,P:[cl(mir(x),180,430),1100],A,B:[305,300]},shuttle:{from,to:[x,cy,h],peak:170},q,opts});return;}
+  else if(kind==='wide'){const x=n%2?560:50; Y=[x,1020]; cy=1030; h=80; from=[ax,200,250];
+    title=['Weit außen im Mittelfeld','Stretched wide in the mid-court'];lesson=['Bist du weit außen gestreckt, liftest du hoch in die Mitte.','When you are stretched wide, lift high to the middle.'];
+    q=[`Ein Smash geht weit ${x<305?'links':'rechts'} an dir vorbei. Du erreichst ihn gestreckt und tief.`,`A smash goes wide to your ${x<305?'left':'right'}. You reach it stretched and low.`];
+    opts=[['Hoher Lift in die Mitte hinten','High lift to the middle back',[305,80],'best','Gestreckt hast du keine Kontrolle für feine Schläge. Hoch in die Mitte gibt Zeit, zurück in Position zu kommen.','Stretched, you have no control for fine shots. High to the middle buys time to get back.'],
+      ['Gerader Block ans Netz','Straight block to the net',[x<305?120:490,600],'good','Möglich, wenn er knapp wird. Gestreckt ist er aber schwer zu kontrollieren.','Possible if it is tight. But stretched it is hard to control.'],
+      ['Cross-Drive','Cross-court drive',[mir(x),340],'inacc','Von so tief steigt der Drive und kreuzt das ganze Feld.','From this low the drive rises and crosses the whole court.'],
+      ['Kurzer Lift','Short lift',[305,330],'mistake','Zu kurz: Die Gegner smashen noch einmal.','Too short: your opponents smash again.','half']];}
+  else {const x=[200,260,330,390,440][n]; Y=[x,1080]; cy=1095; h=60; from=[mir(x),350,140];
+    title=['Spät im Mittelfeld','Late in the mid-court'];lesson=['Spät und tief im Mittelfeld: hoch liften statt flach zu kontern.','Late and low in the mid-court: lift high instead of countering flat.'];
+    q=['Ein schneller Drive kommt flach auf dich zu. Du triffst ihn spät und tief neben dir.','A fast drive comes flat at you. You meet it late and low beside you.'];
+    opts=[['Hoher Lift in die Mitte hinten','High lift to the middle back',[305,80],'best','Spät und tief kannst du nicht flach kontern. Ein hoher Lift bringt euch zurück in die Verteidigung.','Late and low you cannot counter flat. A high lift gets you back into defence.'],
+      ['Block ans Netz','Block to the net',[x<305?150:460,600],'good','Möglich, aber spät getroffen wird er leicht zu hoch.','Possible, but hit late it easily floats too high.'],
+      ['Flacher Drive','Flat drive',[x,330],'inacc','Spät getroffen steigt der Drive und wird angegriffen.','Hit late, the drive rises and gets attacked.'],
+      ['Halbhoher Lift','Half-high lift',[305,330],'mistake','Zu kurz: Die Gegner smashen.','Too short: your opponents smash.','half']];}
+  const P=kind==='wide'?[cl(mir(Y[0]),200,410),1010]:[cl(mir(Y[0]),180,430),kind==='midlate'?1000:850];
+  mkShot(C,s,n,{title,lesson,players:{Y,P,A:[ax,kind==='wide'?200:560],B:[305,kind==='wide'?520:300]},shuttle:{from,to:[Y[0],cy,h],peak:Math.max(h+40,from[2]+60)},q,opts});}));
+
+// ---- 9: Mittelfeld & Drive ----
+['sbsdeep','fb','sbsmid','low','head'].forEach((kind,s)=>XS.forEach((x,n)=>{const C=9, sw=sideW(x);
+  let A=[180,320],B=[430,320],h=130,opts,title,lesson,q;
+  if(kind==='fb'){A=[300,545];B=[300,250];} if(kind==='sbsmid'){A=[190,420];B=[420,420];}
+  if(kind==='low') h=90; if(kind==='head') h=190;
+  if(kind==='sbsdeep'){title=['Drive-Duell, Gegner tief','Drive battle, opponents deep'];lesson=['Stehen beide Gegner tief, spielst du kurz ins Vorderfeld.','If both opponents stand deep, play short to the forecourt.'];
+    q=[`Ein flacher Drive kommt auf Brusthöhe zu dir ${sw[0]}. Beide Gegner stehen hinten im Mittelfeld.`,`A flat drive comes to you at chest height, ${sw[1]}. Both opponents stand back in the mid-court.`];
+    opts=[['Weicher Push ins Vorderfeld','Soft push to the forecourt',[305,565],'best','Beide stehen tief. Ein kurzer, flacher Push vor sie zwingt einen zum Lift.','Both are deep. A short, flat push in front of them forces a lift.'],
+      ['Flacher Drive gerade','Flat drive straight',[cl(x,80,530),320],'good','Hält den Ballwechsel ausgeglichen, gewinnt aber noch nicht den Angriff.','Keeps the rally even, but does not win the attack yet.'],
+      ['Hoher Lift','High lift',[305,90],'inacc','Du schenkst ihnen einen Smash.','You give them a smash.'],
+      ['Halbhoher Lift ins Mittelfeld','Half-high lift to the mid-court',[305,330],'mistake','Zu kurz und zu langsam: Sie smashen aus kurzer Distanz.','Too short and too slow: they smash from close range.','half']];}
+  else if(kind==='fb'){title=['Mittelfeld gegen vorne-hinten','Mid-court against front and back'];lesson=['Gegen vorne-hinten zielst du auf die Seite des Mittelfelds.','Against front and back, aim for the side mid-court.'];
+    q=[`Der Ball kommt auf Schulterhöhe ins Mittelfeld ${sw[0]}. Die Gegner stehen vorne-hinten.`,`The shuttle comes at shoulder height to the mid-court, ${sw[1]}. Your opponents play front and back.`];
+    opts=[['Push seitlich ins Mittelfeld','Push to the side mid-court',[x<305?80:530,390],'best','Gegen vorne-hinten ist die Seite des Mittelfelds offen: vorbei am Netzspieler, vor dem Hinterspieler.','Against front and back the side mid-court is open: past the net player, in front of the back player.'],
+      ['Flacher Drive gerade','Flat drive straight',[cl(x,80,530),240],'good','Schnell, aber B hinten steht dafür bereit.','Fast, but B at the back is ready for it.'],
+      ['Clear nach hinten','Clear to the back',[305,90],'inacc','Sicher, aber ihr gebt den Angriff her.','Safe, but you give away the attack.'],
+      ['Netzdrop','Net shot',[330,620],'mistake','Genau dorthin, wo A am Netz wartet.','Right where A is waiting at the net.']];}
+  else if(kind==='sbsmid'){title=['Gegner im Mittelfeld','Opponents in the mid-court'];lesson=['Stehen die Gegner nebeneinander im Mittelfeld, ist die Mitte die Lücke.','If your opponents stand side by side in the mid-court, the middle is the gap.'];
+    q=[`Ein flacher Ball kommt zu dir ${sw[0]}. Die Gegner stehen nebeneinander im Mittelfeld.`,`A flat shuttle comes to you, ${sw[1]}. Your opponents stand side by side in the mid-court.`];
+    opts=[['Flacher Drive in die Mitte','Flat drive to the middle',[305,380],'best','Zwischen beide gespielt, wissen sie nicht, wer nimmt. Der Ball kommt meist schwach zurück.','Played between them, they do not know who takes it. It usually comes back weak.'],
+      ['Push ins Vorderfeld','Push to the forecourt',[305,575],'good','Auch gut, aber sie stehen schon recht weit vorne.','Also good, but they already stand fairly far forward.'],
+      ['Hoher Lift','High lift',[305,90],'inacc','Du gibst ihnen den Angriff.','You give them the attack.'],
+      ['Halbhoher Lift','Half-high lift',[305,330],'mistake','Zu kurz: Sie greifen sofort an.','Too short: they attack straight away.','half']];}
+  else if(kind==='low'){title=['Ball unter Netzhöhe','Shuttle below net height'];lesson=['Ist der Ball unter Netzhöhe, spielst du flach und kurz statt nach oben.','When the shuttle is below net height, play flat and short instead of upward.'];
+    q=[`Der Ball kommt unter Netzhöhe zu dir ins Mittelfeld ${sw[0]}. Die Gegner stehen nebeneinander.`,`The shuttle comes below net height to your mid-court, ${sw[1]}. Your opponents stand side by side.`];
+    opts=[['Flacher Push ins Vorderfeld','Flat push to the forecourt',[305,570],'best','Unter Netzhöhe kannst du nicht nach unten schlagen. Kurz und flach ins Vorderfeld zwingt die Gegner, von unten zu spielen.','Below net height you cannot hit down. Short and flat to the forecourt forces them to hit from below.'],
+      ['Hoher, tiefer Lift','High, deep lift',[305,80],'good','Sicher, aber ihr verteidigt danach.','Safe, but you defend afterwards.'],
+      ['Drive nach oben','Drive upward',[cl(x,80,530),330],'inacc','Von unten steigt der Drive und wird angegriffen.','From below the drive rises and gets attacked.'],
+      ['Halbhoher Lift','Half-high lift',[305,330],'mistake','Zu kurz: Die Gegner smashen.','Too short: your opponents smash.','half']];}
+  else {const str=x<305?A:B;title=['Ball auf Kopfhöhe','Shuttle at head height'];lesson=['Auf Kopfhöhe schlägst du flach nach unten.','At head height, hit flat and down.'];
+    q=[`Der Ball kommt auf Kopfhöhe zu dir ins Mittelfeld ${sw[0]}. Die Gegner stehen nebeneinander.`,`The shuttle comes at head height to your mid-court, ${sw[1]}. Your opponents stand side by side.`];
+    opts=[['Steiler Drive in die Mitte','Steep drive to the middle',[305,330],'best','Auf Kopfhöhe kannst du nach unten spielen. In die Mitte gespielt, ist es für beide schwer.','At head height you can hit down. Into the middle it is hard for both.'],
+      ['Halbsmash auf den Körper','Half smash at the body',[str[0]+5,str[1]+5],'good','Druckvoll, aber der Verteidiger steht genau dort.','Strong pressure, but the defender is right there.','smash'],
+      ['Push ins Vorderfeld','Push to the forecourt',[305,575],'inacc','Du nimmst Tempo raus, obwohl du angreifen könntest.','You take pace off although you could attack.'],
+      ['Lift','Lift',[305,90],'mistake','Du gibst einen angreifbaren Ball her.','You give away an attackable shuttle.']];}
+  mkShot(C,s,n,{title,lesson,players:{Y:[x,1000],P:[cl(mir(x),170,440),1000],A,B},shuttle:{from:[mir(x),A[1],h],to:[x,1000,h],peak:h+30},q,opts});}));
+
+PUZ_DE.push(...GEN);
+['receive-stance','serve-base','smash-front'].forEach(id=>{const z=PUZ_DE.find(p=>p.id===id);if(z)z.steps[0].bhY=true;});
 // ---------- Niveau-Varianten: wo sich die richtige Antwort je nach Niveau unterscheidet ----------
 (function(){const by=id=>PUZ_DE.find(p=>p.id===id);
  const rs=by('receive-stance');
@@ -682,7 +1149,9 @@ const store = {
  ss.lvLesson={adv:{de:'Auf hohem Niveau ist auch im Einzel der kurze Aufschlag Standard, der lange dient als Abwechslung.',en:'At a high level, the short serve is standard in singles too; the long serve is a variation.'}};
 })();
 
-let PREFS=store.get('prefs',null)||{discs:['d'],level:'int',set:false};
+// Vorerst fest: Doppel, allgemein beste Antworten. Einzel, Mixed und Niveaus bleiben im Code für später.
+const _pp=store.get('prefs3',null)||{};
+let PREFS={discs:['d'],level:_pp.level||'int',hand:_pp.hand||'R',stats:_pp.stats!==false,set:true};
 const TOL={beg:1.25,int:1,adv:.8};
 const PUZ_EN_TEXT = {
  's-base':{theme:'Singles',title:'Back to the centre',
@@ -926,7 +1395,7 @@ const I18N={
  de:{rating:'Wertung',streak:'Serie',puzzles:'Rätsel',legYou:'Du · P Partner',legOpp:'A, B Gegner',view:'Ansicht',replay:'Ballflug nochmal ansehen',
   svg:'Badmintonfeld von oben, daneben die Flughöhe des Balls von der Seite',load3:'3D wird geladen …',no3d:'3D ist auf diesem Gerät nicht verfügbar.',drag:'Ziehen zum Drehen',
   opp:'GEGNER',mine:'DEINE SEITE',height:'FLUGHÖHE (SEITE)',net:'Netz',dec:',',
-  back:'zu weit hinten',front:'zu nah am Netz',right:'zu weit rechts',left:'zu weit links',and:' und ',
+  dirBack:'zu weit hinten',front:'zu nah am Netz',right:'zu weit rechts',left:'zu weit links',and:' und ',
   puzzle:'Rätsel',level:'Stufe',saved:(d,r)=>`Wertung ${d} → ${r}. Dein Ergebnis wird auf diesem Gerät gespeichert.`,
   next:'Nächstes Rätsel',back1:'Zurück zu Rätsel 1',retry:'Nochmal versuchen',step:'Schritt',who:'Wen platzieren',chipY:'Du',chipP:'Partner (P)',
   watch:'Schau dem Ball zu …',moveName:'Tippe auf einen Namen, um diesen Spieler zu verschieben, dann bestätigen.',adjust:'Tippe erneut zum Korrigieren, dann bestätigen.',
@@ -945,11 +1414,11 @@ const I18N={
   whatPlay:'Was spielst du?',discS:'Einzel',discD:'Doppel',discM:'Mixed',soon:'bald',yourLevel:'Dein Niveau',
   lvl:{beg:'Einsteiger',int:'Fortgeschritten',adv:'Erfahren'},
   lvlD:{beg:'Du lernst die Grundschläge und spielst noch nicht lange.',int:'Du spielst regelmäßig und kennst die Grundaufstellungen.',adv:'Du spielst Mannschaft oder Turniere und willst Feinheiten lernen.'},
-  letsgo:'Los geht’s',save:'Speichern',cancel:'Abbrechen',change:'ändern',legYouS:'Du',legOppS:'A Gegner',pickOne:'Wähle mindestens eine Spielweise.',tapY:'Tippe aufs Feld, wo du stehen solltest.',tapP:'Tippe aufs Feld, wo dein Partner stehen sollte.',otherOpts:'Optionen:'},
+  letsgo:'Los geht’s',save:'Speichern',cancel:'Abbrechen',change:'ändern',legYouS:'Du',legOppS:'A Gegner',pickOne:'Wähle mindestens eine Spielweise.',heroTitle:'5 Rätsel. 3 Minuten.',settingsT:'Einstellungen',planT:'Plan der nächsten 20 Tage',planSub:(u,a)=>`${u} verschiedene Rätsel an ${a/5} Tagen, keines doppelt. Tippe auf ein Rätsel, um es vorab anzusehen.`,planLink:'Vorschau: Rätsel der nächsten 20 Tage',today:'heute',statsQ:'Anonyme Nutzungsstatistik',on:'An',off:'Aus',statsNote:'Wir zählen anonym, ohne Cookies und ohne persönliche Daten, wie oft Aufgaben gelöst werden (GoatCounter). Das hilft, unklare oder falsche Aufgaben zu finden.',repShort:'Melden',repTitle:'Aufgabe melden',repReason:'Was stimmt nicht?',repR:{answer:'Beste Antwort falsch',pos:'Spieler falsch aufgestellt',why:'Erklärung unklar',text:'Text oder Übersetzung',other:'Etwas anderes'},repComment:'Kommentar',repPh:'Was sollte anders sein?',repHow:'Deine Meldung geht als Eintrag auf GitHub an das Entwicklerteam. Ohne GitHub-Konto kannst du den Text kopieren und im Chat schicken.',repGh:'Auf GitHub melden',repCopy:'Text kopieren',repCopied:'Meldung kopiert. Jetzt im Chat einfügen.',repThanks:'Danke für deine Meldung!',repAnswer:'Antwort',shareTask:'Aufgabe teilen',shareTaskSub:'Mit diesem Code oder Link öffnen andere genau diese Aufgabe.',codeHint:'Andere geben den Code in der App unter Training › Code eingeben ein.',shareBtn:'Teilen',shareMsg:(t,c)=>`Kannst du diese Badminton-Aufgabe lösen? „${t}“ · Code ${c}`,codeLabel:'Code eingeben',openCode:'Öffnen',codeNotFound:'Diesen Code gibt es nicht.',sharedMode:'Geteilte Aufgabe',toOverview:'Zur Übersicht',langQ:'Sprache',pendNote:'Gilt ab dem nächsten Rätsel, damit deine Bewertung gleich bleibt.',handQ:'Deine Schlaghand',handR:'Rechtshänder',handL:'Linkshänder',othersRight:'Andere: Rechtshänder',allRight:'Alle Rechtshänder',settingsNote:'Partner und Gegner sind in allen Rätseln Rechtshänder. Unterhalb von „Erfahren“ verschieben sich manche Positionen leicht zu deiner Rückhandseite, damit mehr Bälle auf deine Vorhand kommen.',legYouL:'Du (Linkshänder) · P',legYouSL:'Du (Linkshänder)',training:'Training',trainSub:'10 Themen mit je 5 Sätzen à 5 Aufgaben. Training zählt nicht für die Tagesserie.',setN:n=>`Satz ${n}`,nextTask:'Nächste Aufgabe',finishSet:'Satz abschließen',setDone:p=>`Satz geschafft: ${p} %`,poolLink:'Alle Tagesrätsel',glossary:'Begriffe erklärt',glossarySub:'Unterstrichene Wörter in den Rätseln kannst du antippen.',allTerms:'Alle Begriffe ansehen',heroSub:'Der Ballwechsel friert ein. Du entscheidest, wo ihr steht und was du spielst.',practiceLink:'Training',tapY:'Tippe aufs Feld, wo du stehen solltest.',dragY:'Ziehe „Du“ an die richtige Stelle oder tippe aufs Feld.',dragP:'Ziehe „P“ an die richtige Stelle oder tippe aufs Feld.',dragBoth:'Ziehe „Du“ und „P“ an die richtigen Stellen.',tapP:'Tippe aufs Feld, wo dein Partner stehen sollte.',otherOpts:'Optionen:'},
  en:{rating:'Rating',streak:'Streak',puzzles:'Puzzles',legYou:'You · P partner',legOpp:'A, B opponents',view:'View',replay:'Replay the shuttle',
   svg:'Badminton court from above, with the shuttle height seen from the side',load3:'Loading 3D …',no3d:'3D is not available on this device.',drag:'Drag to rotate',
   opp:'OPPONENTS',mine:'YOUR SIDE',height:'HEIGHT (SIDE VIEW)',net:'net',dec:'.',
-  back:'too far back',front:'too close to the net',right:'too far right',left:'too far left',and:' and ',
+  dirBack:'too far back',front:'too close to the net',right:'too far right',left:'too far left',and:' and ',
   puzzle:'Puzzle',level:'Level',saved:(d,r)=>`Rating ${d} → ${r}. Your result is saved on this device.`,
   next:'Next puzzle',back1:'Back to puzzle 1',retry:'Try again',step:'Step',who:'Who to place',chipY:'You',chipP:'Partner (P)',
   watch:'Watch the shuttle …',moveName:'Tap a name to move that player, then lock it in.',adjust:'Tap again to adjust, then lock it in.',
@@ -968,20 +1437,31 @@ const I18N={
   whatPlay:'What do you play?',discS:'Singles',discD:'Doubles',discM:'Mixed',soon:'soon',yourLevel:'Your level',
   lvl:{beg:'Beginner',int:'Intermediate',adv:'Advanced'},
   lvlD:{beg:'You are learning the basic shots and are fairly new to the game.',int:'You play regularly and know the basic formations.',adv:'You play league or tournaments and want to learn the finer points.'},
-  letsgo:'Let’s go',save:'Save',cancel:'Cancel',change:'change',legYouS:'You',legOppS:'A opponent',pickOne:'Pick at least one discipline.',tapY:'Tap the court where you should stand.',tapP:'Tap where your partner should stand.',otherOpts:'Options:'}
+  letsgo:'Let’s go',save:'Save',cancel:'Cancel',change:'change',legYouS:'You',legOppS:'A opponent',pickOne:'Pick at least one discipline.',heroTitle:'5 puzzles. 3 minutes.',settingsT:'Settings',planT:'Plan for the next 20 days',planSub:(u,a)=>`${u} different puzzles over ${a/5} days, none repeated. Tap a puzzle to preview it.`,planLink:'Preview: puzzles for the next 20 days',today:'today',statsQ:'Anonymous usage statistics',on:'On',off:'Off',statsNote:'We count anonymously, without cookies or personal data, how often tasks are solved (GoatCounter). This helps us find unclear or wrong tasks.',repShort:'Report',repTitle:'Report this task',repReason:'What’s wrong?',repR:{answer:'Best answer is wrong',pos:'Players placed wrongly',why:'Explanation unclear',text:'Text or translation',other:'Something else'},repComment:'Comment',repPh:'What should be different?',repHow:'Your report goes to the developers as a GitHub issue. Without a GitHub account, copy the text and send it in the chat.',repGh:'Report on GitHub',repCopy:'Copy text',repCopied:'Report copied. Paste it into the chat.',repThanks:'Thanks for your report!',repAnswer:'Answer',shareTask:'Share this task',shareTaskSub:'With this code or link, others open exactly this task.',codeHint:'Others enter the code in the app under Practice › Enter code.',shareBtn:'Share',shareMsg:(t,c)=>`Can you solve this badminton task? “${t}” · Code ${c}`,codeLabel:'Enter code',openCode:'Open',codeNotFound:'That code does not exist.',sharedMode:'Shared task',toOverview:'Back to home',langQ:'Language',pendNote:'Applies from the next puzzle so your grade stays the same.',handQ:'Your racket hand',handR:'Right-handed',handL:'Left-handed',othersRight:'Others: right-handed',allRight:'All right-handed',settingsNote:'Your partner and opponents are right-handed in every puzzle. Below “Advanced”, some positions shift slightly toward your backhand side so more shuttles come to your forehand.',legYouL:'You (left-handed) · P',legYouSL:'You (left-handed)',training:'Practice',trainSub:'10 topics, each with 5 sets of 5 tasks. Practice does not count toward your daily streak.',setN:n=>`Set ${n}`,nextTask:'Next task',finishSet:'Finish set',setDone:p=>`Set done: ${p} %`,poolLink:'All daily puzzles',glossary:'Terms explained',glossarySub:'You can tap underlined words in the puzzles.',allTerms:'See all terms',heroSub:'The rally freezes. You decide where you stand and what you play.',practiceLink:'Practice',tapY:'Tap the court where you should stand.',dragY:'Drag “You” to the right spot or tap the court.',dragP:'Drag “P” to the right spot or tap the court.',dragBoth:'Drag “You” and “P” to the right spots.',tapP:'Tap where your partner should stand.',otherOpts:'Options:'}
 };
+Object.assign(PUZ_EN_TEXT,GEN_EN);
 PUZ_DE.forEach(p=>p.steps.forEach(s=>(s.options||[]).forEach(o=>{o.k=kindOf(o);})));
 const PUZ_EN=JSON.parse(JSON.stringify(PUZ_DE));
 PUZ_EN.forEach(p=>{const e=PUZ_EN_TEXT[p.id];if(!e)return;p.theme=e.theme;p.title=e.title;p.lesson=e.lesson;
   p.steps.forEach((s,i)=>{const es=e.steps[i];if(!es)return;s.q=es.q;if(es.why)s.why=es.why;if(es.opts)s.options.forEach((o,j)=>{o.t=es.opts[j][0];o.why=es.opts[j][1];});});});
 let LANG, T, PUZZLES;
+function handText(t){if(!t)return t;const sw=w=>({Vorhand:'Rückhand',Rückhand:'Vorhand',forehand:'backhand',backhand:'forehand',Forehand:'Backhand',Backhand:'Forehand'})[w]||w;
+  return t.replace(/(\bdein(?:e|er|em|en)?\s+(?:(?:hintere|vordere|hinteren|vorderen)\s+)?)(Vorhand|Rückhand)/g,(m,a,b)=>a+sw(b))
+    .replace(/(^|[^A-Za-zÄÖÜäöüß])(Rückhand|Vorhand)-(Drop|Smash)/g,(m,a,b,c)=>a+sw(b)+'-'+c)
+    .replace(/(\byour\s+(?:(?:back|front)\s+)?)(forehand|backhand)/gi,(m,a,b)=>a+sw(b))
+    .replace(/\b(Backhand|Forehand) (drop|smash)/g,(m,b,c)=>sw(b)+' '+c);}
 function buildPuzzles(){const lvl=PREFS.level, tol=TOL[lvl]||1;
   const arr=JSON.parse(JSON.stringify(LANG==='de'?PUZ_DE:PUZ_EN));
-  arr.forEach((p,pi)=>{const base=PUZ_DE[pi]; if(base.lvLesson&&base.lvLesson[lvl]) p.lesson=base.lvLesson[lvl][LANG];
+  arr.forEach((p,pi)=>{const base=PUZ_DE[pi]; if(base.lvLesson&&base.lvLesson[lvl]) p.lesson=base.lvLesson[lvl][LANG]; if(PREFS.hand==='L'){p.lesson=handText(p.lesson);p.title=handText(p.title);}
     p.steps.forEach((s,si)=>{const o=base.steps[si].lv&&base.steps[si].lv[lvl];
       if(o){ if(o.best) s.best=o.best; if(o.targets) for(const k in o.targets) s.targets[k].best=o.targets[k];
         if(o.why) s.why=o.why[LANG];
         if(o.g) s.options.forEach((op,j)=>{op.g=o.g[j]; const w=o.whys&&o.whys[LANG][j]; if(w) op.why=w;}); }
+      if(PREFS.hand==='L'){s.q=handText(s.q); if(s.why) s.why={best:handText(s.why.best),good:handText(s.why.good)}; if(s.options) s.options.forEach(op=>{op.t=handText(op.t);op.why=handText(op.why);});}
+      if(s.bhY&&lvl!=='adv'){const d=lvl==='beg'?30:20, sg=PREFS.hand==='L'?1:-1;
+        if(s.targets&&s.targets.Y) s.targets.Y.best=[s.targets.Y.best[0]+sg*d,s.targets.Y.best[1]]; else if(s.who==='Y') s.best=[s.best[0]+sg*d,s.best[1]];
+        if(s.why) s.why={...s.why,best:s.why.best+(LANG==='de'?` Als ${PREFS.hand==='L'?'Linkshänder':'Rechtshänder'} stehst du dabei leicht zur Rückhandseite, damit mehr Bälle auf deine Vorhand kommen.`:` As a ${PREFS.hand==='L'?'left':'right'}-hander, stand slightly toward your backhand side so more shuttles come to your forehand.`)};}
+      if(s.options){let hh=0;for(const ch of p.id+si)hh=(hh*31+ch.charCodeAt(0))%100000;s.options=seeded(s.options,hh+3);}
       if(s.type==='place'){ if(s.targets) Object.values(s.targets).forEach(t=>{t.rBest*=tol;t.rGood*=tol;}); else {s.rBest*=tol;s.rGood*=tol;} }
     });});
   return arr;}
@@ -991,12 +1471,13 @@ function detectLang(){const st=store.get('lang',null);if(st==='de'||st==='en')re
 function applyLang(l,save){
   LANG=l; T=I18N[l]; PUZZLES=buildPuzzles(); if(save)store.set('lang',l);
   document.documentElement.lang=l;
-  ['best','good','inacc','mistake'].forEach((k,i)=>G[k].l=T.grades[i]);
+  const GSYM={best:'✓',good:'○',inacc:'!',mistake:'✗'};
+  ['best','good','inacc','mistake'].forEach((k,i)=>G[k].l=GSYM[k]+' '+T.grades[i]);
   NAME.Y=T.you; LABEL.Y=T.you;
   const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
-  set('l-rating',T.rating);set('l-streak',T.streak);set('l-you',T.legYou);set('l-opp',T.legOpp);set('load3',T.load3);set('l-drag',T.drag);
+  set('l-rating',T.rating);{const hb=document.getElementById('helpbtn');if(hb){hb.setAttribute('aria-label',T.glossary);hb.title=T.glossary;}const sb=document.getElementById('setbtn');if(sb){sb.setAttribute('aria-label',T.settingsT);sb.title=T.settingsT;}}set('l-streak',T.streak);set('l-you',T.legYou);set('l-opp',T.legOpp);set('load3',T.load3);set('l-drag',T.drag);
   document.getElementById('dots').setAttribute('aria-label',T.puzzles);
-  document.querySelector('.seg').setAttribute('aria-label',T.view);
+  
   updPlayBtn();
   document.getElementById('svg').setAttribute('aria-label',T.svg);
   const lb=document.getElementById('lang');lb.textContent=T.langBtn;lb.setAttribute('aria-label',T.langAria);lb.title=T.langAria;
@@ -1017,7 +1498,7 @@ function shPos(sh,t){const [x0,y0,h0]=sh.from,[x1,y1,h1]=sh.to;
   const bump=Math.max(0,sh.peak-Math.max(h0,h1))*4*t*(1-t);
   return [x0+(x1-x0)*t, y0+(y1-y0)*t, h0+(h1-h0)*t+bump];}
 function trail(sh,side){let d='';for(let i=0;i<=30;i++){const [x,y,h]=shPos(sh,i/30);d+=(i?'L':'M')+(side?(SX+h*HS).toFixed(1):x.toFixed(1))+' '+y.toFixed(1);}return d;}
-function tok(x,y,k,cls){return `<g class="tok ${cls}" transform="translate(${x} ${y})"><circle r="30"/><text y="10" text-anchor="middle">${LABEL[k]}</text></g>`;}
+function tok(x,y,k,cls){return `<g class="tok ${cls}" transform="translate(${x} ${y})"><circle r="42"/><text y="17" text-anchor="middle">${LABEL[k]}</text></g>`;}
 function gradeOf(s){return s>=.85?'best':s>=.6?'good':s>=.3?'inacc':'mistake';}
 
 function court(){
@@ -1060,27 +1541,30 @@ function renderSVG(){
     st.options.forEach((o,i)=>{
       const [tx,ty]=o.d, L=Math.hypot(tx-cx,ty-cy), ex=tx-(tx-cx)/L*34, ey=ty-(ty-cy)/L*34;
       const k=answered?o.g:'n', col=answered?MAT[o.g]:'var(--m-neutral)';
-      const sel=answered&&S.answers[S.si]&&S.answers[S.si].i===i;
-      s+=`<line x1="${cx}" y1="${cy}" x2="${ex}" y2="${ey}" class="arrow ${answered?'':'n'}" style="stroke:${col};${answered&&!sel&&S.view!==i?'opacity:.45':''}" marker-end="url(#ah-${k})"/>`;
-      s+=`<g class="tgt" transform="translate(${tx} ${ty})"><circle r="${sel?26:22}" style="fill:${col}"/><text y="9" text-anchor="middle">${LET[i]}</text></g>`;
+      const a0=S.answers[S.si], hi=answered&&a0?(S.view!=null?S.view:a0.i):-1, on=i===hi;
+      s+=`<line x1="${cx}" y1="${cy}" x2="${ex}" y2="${ey}" class="arrow ${answered?'':'n'}" style="stroke:${col};${answered?(on?'stroke-width:10;':'opacity:.28;'):''}" marker-end="url(#ah-${k})"/>`;
+      s+=`<g class="tgt${on?' on':''}" transform="translate(${tx} ${ty})" style="${answered&&!on?'opacity:.45':''}"><circle r="${on?30:22}" style="fill:${col}"/><text y="${on?11:9}" text-anchor="middle">${LET[i]}</text></g>`;
     });
   }
   if(st.type==='place'&&answered){
     for(const [k,t] of Object.entries(TG(st))){
-      s+=`<circle cx="${t.best[0]}" cy="${t.best[1]}" r="${t.rGood}" class="zone-good"/><circle cx="${t.best[0]}" cy="${t.best[1]}" r="${t.rBest}" class="zone-best"/>`;
-      s+=tok(t.best[0],t.best[1],k,'ghost');}
+      s+=`<circle cx="${t.best[0]}" cy="${t.best[1]}" r="${t.rGood}" class="zone-good"/><circle cx="${t.best[0]}" cy="${t.best[1]}" r="${t.rBest}" class="zone-best"/>`;}
   }
+  s+=`<ellipse id="sh-shadow" rx="13" ry="8" fill="rgba(0,0,0,.35)"/><g id="sh-top"><circle r="12" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="3"/><circle r="5" fill="#1A1A1A"/></g>`;
   for(const [k,v] of Object.entries(st.players)){
     const cls=(k==='Y'||k==='P')?'y':'o';
     if(st.type==='place'&&TG(st)[k]){
       s+=tok(v[0],v[1],k,cls+' faded');
       const tp=S.taps[k];
       if(tp) s+=tok(tp[0],tp[1],k,cls);
-      if(S.phase==='play'&&S.active===k&&Object.keys(TG(st)).length>1){const c=tp||v;s+=`<circle cx="${c[0]}" cy="${c[1]}" r="42" class="ring"/>`;}
+      if(S.phase==='play'&&S.active===k&&Object.keys(TG(st)).length>1){const c=tp||v;s+=`<circle cx="${c[0]}" cy="${c[1]}" r="56" class="ring"/>`;}
     } else s+=tok(v[0],v[1],k,cls);
   }
-  if(st.type==='shot') s+=`<circle cx="${st.players.Y[0]}" cy="${st.players.Y[1]}" r="40" class="ring"/>`;
-  s+=`<ellipse id="sh-shadow" rx="13" ry="8" fill="rgba(0,0,0,.35)"/><g id="sh-top"><circle r="12" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="3"/><circle r="5" fill="#1A1A1A"/></g>`;
+  if(st.type==='shot') s+=`<circle cx="${st.players.Y[0]}" cy="${st.players.Y[1]}" r="56" class="ring"/>`;
+  if(st.type==='place'&&answered){const e=1-Math.pow(1-(S.corr==null?1:S.corr),3);
+    for(const [k,t] of Object.entries(TG(st))){const f=S.taps[k]||t.best, x=f[0]+(t.best[0]-f[0])*e, y=f[1]+(t.best[1]-f[1])*e;
+      if(Math.hypot(t.best[0]-f[0],t.best[1]-f[1])>20) s+=`<line x1="${f[0]}" y1="${f[1]}" x2="${x}" y2="${y}" class="corr-line"/>`;
+      s+=tok(Math.round(x),Math.round(y),k,'ideal');}}
   svg.innerHTML=s;
   if(V3.on&&R3) render3D();
   drawShuttle(S.t);
@@ -1107,12 +1591,14 @@ function play(){
     if(!S.paused) rafId=requestAnimationFrame(f);};
   rafId=requestAnimationFrame(f);
 }
+let corrRaf=0;
+function startCorr(){cancelAnimationFrame(corrRaf);S.corr=1;renderSVG();} // Animation entfernt: Ideal-Position erscheint sofort
 function pause(){cancelAnimationFrame(rafId);S.paused=true;S.ready=true;S.t=1;drawShuttle(1);updPlayBtn();renderPanel();}
 function updPlayBtn(){let paused=false;try{paused=S.paused;}catch(e){}const b=document.getElementById('replay');if(!b||!T)return;b.textContent=paused?'▶':'❚❚';b.setAttribute('aria-label',paused?T.resume:T.pause);b.title=paused?T.resume:T.pause;}
 
 
 // ---------- 3D-Ansicht (eigene Canvas-Darstellung, keine externe Bibliothek) ----------
-const V3={on:store.get('view3d',false)};
+const V3={on:false}; // 3D-Ansicht ist ausgeblendet, nur 2D
 let R3=null;
 const box3=document.getElementById('three');
 const MATC={best:'#8FF5C3',good:'#A6CCFF',inacc:'#FFD166',mistake:'#FF8E93'};
@@ -1285,7 +1771,7 @@ function setView(on){
 
 function dirHint(tap,best){
   const dx=tap[0]-best[0], dy=tap[1]-best[1], p=[];
-  if(dy>45)p.push(T.back); if(dy<-45)p.push(T.front);
+  if(dy>45)p.push(T.dirBack); if(dy<-45)p.push(T.front);
   if(dx>45)p.push(T.right); if(dx<-45)p.push(T.left);
   if(!p.length)return '';const t=p.join(T.and);return t[0].toUpperCase()+t.slice(1)+'.';
 }
@@ -1299,12 +1785,39 @@ function seeded(a,seed){a=a.slice();let x=seed;const r=()=>{x=(x*1664525+1013904
   for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 const LVL_MIX={beg:[3,2,0],int:[2,2,1],adv:[1,2,2]};
 function tierOf(p){return p.rating<=1050?0:p.rating<1250?1:2;}
-function prefKey(){return PREFS.discs.slice().sort().join('')+'-'+PREFS.level;}
-function dailyIds(d){
+function prefKey(){return PREFS.discs.slice().sort().join('')+'-p2';} // -p2: Tagesplan-Version, erzwingt neues heutiges Set
+// ---------- Fester Tagesplan: ab 6. Oktober 2026 jeden Tag 5 neue Rätsel ohne Wiederholung ----------
+const PLAN_START=4; // dayIndex 4 = Tag 5 = 5. Oktober 2026 (heute ebenfalls aus dem Plan)
+let PLAN=null;
+function buildPlan(){
+  const pool=PUZ_DE.filter(p=>(p.disc||'d')==='d'||p.disc==='t');
+  const catOf=p=>p.disc==='t'?'c'+p.cat:'d'+p.theme;
+  // handgeschriebene Rätsel zuerst, danach die Trainingsaufgaben, jeweils gemischt
+  const tiers=[0,1,2].map(t=>[...seeded(pool.filter(p=>tierOf(p)===t&&p.disc!=='t'),97+t),...seeded(pool.filter(p=>tierOf(p)===t&&p.disc==='t'),197+t)]);
+  const used=new Set(), days=[];
+  for(let d=0;d<300;d++){const out=[],cats=new Set();
+    for(const [t,n] of [[0,2],[1,2],[2,1]]) for(let j=0;j<n;j++){
+      let pick=tiers[t].find(p=>!used.has(p.id)&&!cats.has(catOf(p)))||tiers[t].find(p=>!used.has(p.id));
+      if(!pick) for(const tt of [1,0,2]){pick=tiers[tt].find(p=>!used.has(p.id)&&!cats.has(catOf(p)))||tiers[tt].find(p=>!used.has(p.id));if(pick)break;}
+      if(!pick) return days;
+      used.add(pick.id);cats.add(catOf(pick));out.push(pick);}
+    days.push(out.sort((a,b)=>a.rating-b.rating).map(p=>p.id));}
+  return days;}
+function planFor(d){if(!PLAN)PLAN=buildPlan();const k=d-PLAN_START;return k>=0&&k<PLAN.length?PLAN[k]:null;}
+function renderPlan(){const d0=dayIndex(), rows=[];
+  for(let d=d0+1;d<=d0+20;d++){const ids=planFor(d)||dailyIds(d);
+    const dt=new Date(LAUNCH.getFullYear(),LAUNCH.getMonth(),LAUNCH.getDate()+d);
+    let ds='';try{ds=dt.toLocaleDateString(LANG==='de'?'de-DE':'en-GB',{weekday:'short',day:'numeric',month:'short'});}catch(e){}
+    rows.push(`<section class="card"><h3>${T.day} ${d+1} · ${ds}</h3><div class="plist">`+ids.map(id=>{const i=PUZZLES.findIndex(p=>p.id===id),p=PUZZLES[i],r=S.results[id];
+      return `<button class="prow" data-plan="${i}"><span class="pt">${p.title}<small>${p.theme} · ${T.level} ${p.rating} · Code ${ID2CODE[id]}</small></span>${r!=null?`<span class="g g-${gradeOf(r)}">${G[gradeOf(r)].l}</span>`:''}</button>`;}).join('')+`</div></section>`);}
+  const all=rows.length*5, uniq=new Set();for(let d=d0+1;d<=d0+20;d++)(planFor(d)||dailyIds(d)).forEach(id=>uniq.add(id));
+  homeEl.innerHTML=`<div class="row"><button class="backbtn" data-act="tohome">← ${T.back}</button></div><section class="card"><h3>${T.planT}</h3><p class="small">${T.planSub(uniq.size,all)}</p></section>`+rows.join('');}
+
+function dailyIds(d){const pl=planFor(d);if(pl)return pl;
   const pool=PUZ_DE.filter(p=>PREFS.discs.includes(p.disc||'d'));
   let seed=7;for(const c of PREFS.discs.slice().sort().join(''))seed=(seed*31+c.charCodeAt(0))%100000;
   const tiers=[0,1,2].map(t=>seeded(pool.filter(p=>tierOf(p)===t).map(p=>p.id),seed+11+t));
-  const want=LVL_MIX[PREFS.level]||LVL_MIX.int, order=[[0,1,2],[1,0,2],[2,1,0]], out=[];
+  const want=LVL_MIX.int, order=[[0,1,2],[1,0,2],[2,1,0]], out=[];
   want.forEach((n,t)=>{for(let j=0;j<n;j++){for(const tt of order[t]){const L=tiers[tt].filter(id=>!out.includes(id));if(L.length){out.push(L[(d*Math.max(n,1)+j)%L.length]);break;}}}});
   const rt=id=>PUZ_DE.find(p=>p.id===id).rating;
   return out.sort((a,b)=>rt(a)-rt(b));}
@@ -1314,20 +1827,20 @@ function streakNow(){const k=store.get('streakDays',{n:0,last:null});return (k.l
 function bumpStreak(){const k=store.get('streakDays',{n:0,last:null}),t=todayStr();if(k.last===t)return;
   k.n=(k.last===yesterdayStr()?k.n:0)+1;k.last=t;store.set('streakDays',k);}
 function untilMidnight(){const n=new Date(),m=new Date(n.getFullYear(),n.getMonth(),n.getDate()+1),mins=Math.max(1,Math.ceil((m-n)/6e4));return T.hm(Math.floor(mins/60),mins%60);}
-const PRACT=PUZ_DE.map((p,i)=>i).sort((a,b)=>PUZ_DE[a].rating-PUZ_DE[b].rating||a-b);
+const PRACT=PUZ_DE.map((p,i)=>i).filter(i=>(PUZ_DE[i].disc||'d')==='d').sort((a,b)=>PUZ_DE[a].rating-PUZ_DE[b].rating||a-b);
 S.mode='daily'; S.screen='home'; S.pf='all';
 const homeEl=document.getElementById('home');
 function showScreen(play){S.screen=play?'play':'home';homeEl.hidden=play;document.getElementById('playbar').hidden=!play;document.getElementById('main').hidden=!play;}
-function showHome(){cancelAnimationFrame(rafId);S.t=1;S.ready=true;S.delta=null;showScreen(false);renderHeader();renderHome();homeEl.scrollTop=0;}
-function openPuzzle(i,mode){S.mode=mode;showScreen(true);startPuzzle(i);setView(V3.on);}
-function openDaily(){const dd=getDaily(),id=dd.ids.find(x=>dd.res[x]==null);if(!id){showHome();return;}openPuzzle(PUZZLES.findIndex(p=>p.id===id),'daily');}
+function showHome(){applyPending();cancelAnimationFrame(rafId);S.t=1;S.ready=true;S.delta=null;showScreen(false);renderHeader();renderHome();homeEl.scrollTop=0;}
+function openPuzzle(i,mode){S.mode=mode;document.querySelectorAll('.stat').forEach(e=>{e.hidden=false;});showScreen(true);startPuzzle(i);setView(V3.on);}
+function openDaily(){S.sub=null;{const d0=getDaily();if(!d0.ids.some(id=>d0.res[id]!=null))track('daily/start','Daily set started');}const dd=getDaily(),id=dd.ids.find(x=>dd.res[x]==null);if(!id){showHome();return;}openPuzzle(PUZZLES.findIndex(p=>p.id===id),'daily');}
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>{t.hidden=true;},2600);}
 function shareText(){const dd=getDaily(),em={best:'🟩',good:'🟦',inacc:'🟨',mistake:'🟥'};
   const avg=Math.round(dd.ids.reduce((s,id)=>s+(dd.res[id]||0),0)/dd.ids.length*100);
-  let txt=`Badminton Daily Coach · ${T.day} ${dd.day} · ${discNames()} · ${T.lvl[PREFS.level]}\n${dd.ids.map(id=>em[gradeOf(dd.res[id]||0)]).join('')} ${avg} %\n🔥 ${T.streakDays(streakNow())}`;
+  let txt=`Badminton Daily Coach · ${T.day} ${dd.day}\n${dd.ids.map(id=>em[gradeOf(dd.res[id]||0)]).join('')} ${avg} %\n🔥 ${T.streakDays(streakNow())}`;
   if(/^https?:$/.test(location.protocol)&&!/claude|anthropic/.test(location.host))txt+='\n'+location.origin+location.pathname;
   return txt;}
-function shareDaily(){const txt=shareText();
+function shareDaily(){track('share/daily');const txt=shareText();
   let top=true;try{top=window.self===window.top;}catch(e){top=false;}
   if(top&&navigator.share){navigator.share({text:txt}).catch(()=>{});return;}
   const fallback=()=>{const b=document.getElementById('sharebox');if(b){b.innerHTML=`<textarea class="sharebox" readonly aria-label="${T.share}">${txt}</textarea>`;const ta=b.firstChild;ta.focus();ta.select();}};
@@ -1341,93 +1854,256 @@ function prefsCard(first){const tp=S.tmp;
   `</div><div class="plabel">${T.yourLevel}</div><div class="levels" role="group" aria-label="${T.yourLevel}">`+
   ['beg','int','adv'].map(k=>`<button class="lvl ${tp.level===k?'on':''}" data-lvl="${k}" aria-pressed="${tp.level===k}">${T.lvl[k]}<span>${T.lvlD[k]}</span></button>`).join('')+
   `</div>${tp.discs.length?'':`<p class="small">${T.pickOne}</p>`}<div class="row"><button class="btn" data-act="saveprefs" ${tp.discs.length?'':'disabled'}>${first?T.letsgo:T.save}</button>${first?'':`<button class="btn ghost" data-act="cancelprefs">${T.cancel}</button>`}</div></section>`;}
+// ---------- Training: Kategorien und Sätze ----------
+function catIds(c,s){return GEN.filter(p=>p.cat===c&&(s==null||p.set===s)).map(p=>p.id);}
+function miniSq(ids){return `<span class="mini">`+ids.map(id=>{const r=S.results[id];return `<span class="${r==null?'':'r-'+gradeOf(r)}"></span>`;}).join('')+`</span>`;}
+function renderTraining(){
+  homeEl.innerHTML=`<div class="row"><button class="backbtn" data-act="tohome">← ${T.back}</button></div>
+  <section class="card"><h3>${T.training}</h3><p class="small">${T.trainSub}</p><div class="codeform"><label class="plabel" for="codein">${T.codeLabel}</label><div class="row" style="flex-wrap:nowrap"><input id="codein" maxlength="5" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="K7Q2X"><button class="btn ghost" data-act="opencode" type="button">${T.openCode}</button></div></div><div class="clist">`+
+  CATS.map((c,i)=>{const ids=catIds(i), done=ids.filter(id=>S.results[id]!=null).length;
+    return `<button class="ccard" data-cat="${i}"><span class="row" style="justify-content:space-between"><b>${c[LANG]}</b><span class="small">${done}/${ids.length}</span></span><span class="pbar"><i style="width:${Math.round(done/ids.length*100)}%"></i></span></button>`;}).join('')+
+  `</div></section><button class="linkrow" data-act="pool">${T.poolLink} →</button>`;}
+function renderCat(){const c=CATS[S.cat];
+  homeEl.innerHTML=`<div class="row"><button class="backbtn" data-act="totrain">← ${T.training}</button></div>
+  <section class="card"><h3>${c[LANG]}</h3><div class="plist">`+
+  c.sets.map((nm,s)=>{const ids=catIds(S.cat,s), done=ids.filter(id=>S.results[id]!=null).length;
+    return `<button class="prow" data-set="${s}"><span class="pt">${T.setN(s+1)} · ${nm[LANG==='de'?0:1]}<small>${miniSq(ids)}</small></span><span class="g ${done===ids.length?'g-best':'g-new'}">${done?done+'/5':T.newTag}</span></button>`;}).join('')+`</div></section>`;}
+function openSet(c,s){track(`train/${CATS[c].k}/set${s+1}`,'Training set opened');const ids=catIds(c,s);S.set={c,s,ids};S.sres={};S.sub='cat';S.cat=c;
+  openPuzzle(PUZZLES.findIndex(p=>p.id===ids[0]),'set');}
+function nextInSet(){const id=S.set.ids.find(x=>S.sres[x]==null);if(!id){setDone();return;}startPuzzle(PUZZLES.findIndex(p=>p.id===id));}
+function setDone(){track(`train/${CATS[S.set.c].k}/set${S.set.s+1}/done`,'Training set finished');const ids=S.set.ids, avg=Math.round(ids.reduce((a,id)=>a+(S.sres[id]||0),0)/ids.length*100);showHome();toast(T.setDone(avg));}
+
 function renderHome(){
-  if(!PREFS.set){if(!S.tmp)S.tmp=JSON.parse(JSON.stringify(PREFS));
-    homeEl.innerHTML=`<div class="hero"><div class="eyebrow">Badminton Daily Coach</div><h1>${T.welcome}</h1><p>${T.intro}</p></div>`+prefsCard(true);return;}
-  const dd=getDaily(), done=dd.ids.filter(id=>dd.res[id]!=null).length, fin=done===dd.ids.length;
+  document.querySelectorAll('.stat').forEach(e=>{e.hidden=!S.sub;});
+  homeEl.classList.toggle('center',!S.sub);
+  if(S.sub==='plan'){renderPlan();return;} if(S.sub==='train'){renderTraining();return;} if(S.sub==='cat'){renderCat();return;} if(S.sub==='pool'){renderPractice();return;}
+  const dd=getDaily(), done=dd.ids.filter(id=>dd.res[id]!=null).length, fin=done===dd.ids.length, sk=streakNow();
   let date='';try{date=new Date().toLocaleDateString(LANG==='de'?'de-DE':'en-GB',{weekday:'long',day:'numeric',month:'long'});}catch(e){}
   const sq=dd.ids.map(id=>{const r=dd.res[id];return `<span class="sq ${r==null?'':'r-'+gradeOf(r)}"></span>`;}).join('');
-  let h=`<div class="hero"><div class="eyebrow">${T.day} ${dd.day}${date?' · '+date:''}</div><h1>${fin?T.doneTitle:T.todaySet}</h1><p class="prefline">${discNames()} · ${T.lvl[PREFS.level]} · <button class="linkbtn" data-act="editprefs">${T.change}</button></p><div class="sqs" role="img" aria-label="${done}/5">${sq}</div>`;
-  if(!fin) h+=`<p>${done?T.progress(done):T.intro}</p><button class="btn light" data-act="dstart">${done?T.cont(done):T.start}</button><p class="cd">${T.minutes}</p>`;
+  let h=`<div class="hero hero-big"><div class="eyebrow">${T.day} ${dd.day}${date?' · '+date:''}</div>
+    <h1>${fin?T.doneTitle:T.heroTitle}</h1><div class="sqs" role="img" aria-label="${done}/5">${sq}</div>`;
+  if(!fin) h+=`<p>${done?T.progress(done):T.heroSub}</p><button class="btn light big" data-act="dstart">${done?T.cont(done):T.start}</button>${sk?`<p class="cd">${T.streakDays(sk)}</p>`:''}`;
   else{const avg=Math.round(dd.ids.reduce((s,id)=>s+dd.res[id],0)/dd.ids.length*100);
-    h+=`<div class="row" style="gap:14px"><span class="bigscore">${avg} %</span><span>${T.streakDays(streakNow())}</span></div>
-    <button class="btn light" data-act="share">${T.share}</button><div id="sharebox"></div><p class="cd" id="cd" data-live="1">${T.newIn(untilMidnight())}</p>`;}
+    h+=`<div class="row" style="gap:14px"><span class="bigscore">${avg} %</span><span>${T.streakDays(sk)}</span></div>
+    <button class="btn light big" data-act="share">${T.share}</button><div id="sharebox"></div><p class="cd" id="cd" data-live="1">${T.newIn(untilMidnight())}</p>`;}
   h+=`</div>`;
-  if(S.editPrefs) h=prefsCard(false)+h;
-  if(fin) h+=`<section class="card"><h3>${T.lessons}</h3>`+dd.ids.map(id=>{const p=PUZZLES.find(x=>x.id===id);
-    return `<div class="lrow"><span class="sq r-${gradeOf(dd.res[id])}"></span><div><b>${p.title}</b>${p.lesson}</div></div>`;}).join('')+`</section>`;
+  if(fin) h+=`<details class="card lessons"><summary>${T.lessons}</summary>`+dd.ids.map(id=>{const p=PUZZLES.find(x=>x.id===id);
+    return `<div class="lrow"><span class="sq r-${gradeOf(dd.res[id])}"></span><div><b>${p.title}</b>${p.lesson}</div></div>`;}).join('')+`</details>`;
+  h+=`<div class="links"><button class="linkrow" data-act="practice">${T.practiceLink} →</button><button class="linkrow" data-act="glossary">${T.glossary}</button><button class="linkrow" data-act="settings">${T.settingsT}</button></div>`;
+  homeEl.innerHTML=h;
+}
+function renderPractice(){
   const list=PRACT.filter(i=>{if(!PREFS.discs.includes(PUZ_DE[i].disc||'d'))return false;const r=S.results[PUZZLES[i].id];return S.pf==='all'||(r!=null&&r<.6);});
-  h+=`<section class="card"><h3>${T.practice}</h3><p class="small">${T.practiceSub}</p>
+  homeEl.innerHTML=`<div class="row"><button class="backbtn" data-act="totrain">← ${T.training}</button></div>
+  <section class="card"><h3>${T.poolLink}</h3><p class="small">${T.practiceSub}</p>
     <div class="filters" role="group"><button class="chip ${S.pf==='all'?'on':''}" data-pf="all" aria-pressed="${S.pf==='all'}">${T.all}</button><button class="chip ${S.pf==='miss'?'on':''}" data-pf="miss" aria-pressed="${S.pf==='miss'}">${T.mistakesF}</button></div>
     <div class="plist">`+(list.length?list.map(i=>{const p=PUZZLES[i], r=S.results[p.id], g=r==null?null:gradeOf(r);
       return `<button class="prow" data-pid="${i}"><span class="pt">${p.title}<small>${p.theme} · ${T.level} ${p.rating}</small></span><span class="g ${g?'g-'+g:'g-new'}">${g?G[g].l:T.newTag}</span></button>`;}).join(''):`<p class="small">${T.noMistakes}</p>`)+`</div></section>`;
-  homeEl.innerHTML=h;
 }
 
 function renderHeader(){
   const r=document.getElementById('rating');
-  r.innerHTML=S.rating+(S.delta!=null&&S.phase==='done'?` <span class="${S.delta>=0?'delta-up':'delta-down'}" style="font-size:14px">${S.delta>=0?'+':''}${S.delta}</span>`:'');
+  r.innerHTML=S.rating+(S.delta!=null?` <span class="${S.delta>=0?'delta-up':'delta-down'}" style="font-size:14px">${S.delta>=0?'+':''}${S.delta}</span>`:'');
   document.getElementById('streak').textContent=streakNow();
-  document.getElementById('backbtn').textContent='← '+T.back;
+  {const bb=document.getElementById('backbtn');bb.textContent='←';bb.setAttribute('aria-label',T.back);bb.title=T.back;}
   const dots=document.getElementById('dots'), pm=document.getElementById('pmode');
   {const sg=(PUZ_DE[S.pi]||{}).disc==='s';const ly=document.getElementById('l-you'),lo=document.getElementById('l-opp');
-   if(ly)ly.textContent=sg?T.legYouS:T.legYou; if(lo)lo.textContent=sg?T.legOppS:T.legOpp;}
+   if(ly)ly.textContent=(sg?T.legYouS:T.legYou)+(PREFS.hand==='L'&&!sg?'':'' );if(ly&&PREFS.hand==='L')ly.textContent=sg?T.legYouSL:T.legYouL; if(lo)lo.textContent=sg?T.legOppS:T.legOpp;
+   const lh=document.getElementById('l-hand'); if(lh)lh.textContent=PREFS.hand==='L'?T.othersRight:T.allRight;}
   if(S.mode==='daily'){const dd=getDaily(), curId=PUZZLES[S.pi].id; pm.textContent=''; dots.hidden=false;
     dots.innerHTML=dd.ids.map((id,i)=>{const r=dd.res[id], cur=id===curId;
       return `<button class="dot ${cur?'cur':''} ${r!=null?'r-'+gradeOf(r):''}" data-id="${id}" ${r!=null&&!cur?'disabled':''} aria-label="${T.puzzle} ${i+1}">${i+1}</button>`}).join('');}
-  else {dots.hidden=true; dots.innerHTML=''; pm.textContent=T.practice;}
+  else if(S.mode==='set'&&S.set){const curId=PUZZLES[S.pi].id; pm.textContent=''; dots.hidden=false;
+    dots.innerHTML=S.set.ids.map((id,i)=>{const r=S.sres[id], cur=id===curId;
+      return `<button class="dot ${cur?'cur':''} ${r!=null?'r-'+gradeOf(r):''}" data-id="${id}" ${r!=null&&!cur?'disabled':''} aria-label="${T.puzzle} ${i+1}">${i+1}</button>`}).join('');}
+  else {dots.hidden=true; dots.innerHTML=''; pm.textContent=S.mode==='shared'?T.sharedMode:T.practice;}
 }
+
+// ---------- Begriffe: Glossar und antippbare Fachwörter ----------
+const GLOSSARY=[
+ {k:'clear',de:['Clear'],en:['clear'],t:{de:'Clear',en:'Clear'},d:{de:'Hoher, weiter Schlag von oben bis ins gegnerische Hinterfeld. Verschafft dir Zeit.',en:'A high, deep overhead shot to the opponent’s back court. Buys you time.'}},
+ {k:'lift',de:['Lift'],en:['lift'],t:{de:'Lift',en:'Lift'},d:{de:'Hoher Schlag von unten, meist aus dem Vorderfeld, bis ins gegnerische Hinterfeld. Ein Verteidigungsschlag.',en:'A high shot hit from below, usually from the forecourt, to the opponent’s back court. A defensive shot.'}},
+ {k:'smash',de:['Smash'],en:['smash'],t:{de:'Smash',en:'Smash'},d:{de:'Harter Schlag von oben steil nach unten. Der wichtigste Angriffsschlag.',en:'A hard overhead shot hit steeply down. The main attacking shot.'}},
+ {k:'half',de:['Halbsmash'],en:['half smash'],t:{de:'Halbsmash',en:'Half smash'},d:{de:'Ein Smash mit weniger Kraft, dafür kontrollierter und oft steiler.',en:'A smash with less power, but more control and often steeper.'}},
+ {k:'drop',de:['Drop'],en:['drop'],t:{de:'Drop',en:'Drop'},d:{de:'Langsamer Schlag von oben, der knapp hinter dem Netz herunterfällt.',en:'A slow overhead shot that falls just behind the net.'}},
+ {k:'net',de:['Netzdrop'],en:['net shot'],t:{de:'Netzdrop',en:'Net shot'},d:{de:'Kurzer Schlag am Netz, der knapp über die Netzkante geht und auf der anderen Seite herunterfällt.',en:'A short shot at the net that skims the tape and falls on the other side.'}},
+ {k:'drive',de:['Drive'],en:['drive'],t:{de:'Drive',en:'Drive'},d:{de:'Schneller, flacher Schlag etwa auf Netzhöhe, parallel zum Boden.',en:'A fast, flat shot at about net height, parallel to the floor.'}},
+ {k:'push',de:['Push'],en:['push'],t:{de:'Push',en:'Push'},d:{de:'Kurzer, flacher Schlag aus dem Vorderfeld ins gegnerische Mittelfeld.',en:'A short, flat shot from the forecourt into the opponent’s mid-court.'}},
+ {k:'block',de:['Block'],en:['block'],t:{de:'Block',en:'Block'},d:{de:'Kurzer Abwehrschlag gegen einen Smash, der knapp hinter das Netz fällt.',en:'A short defensive reply to a smash that drops just behind the net.'}},
+ {k:'kill',de:['Kill'],en:['kill'],t:{de:'Kill',en:'Kill'},d:{de:'Harter Schlag nach unten aus Netznähe, der den Ballwechsel beendet.',en:'A hard downward shot near the net that ends the rally.'}},
+ {k:'flick',de:['Flick'],en:['flick'],t:{de:'Flick',en:'Flick'},d:{de:'Aufschlag oder Schlag, der kurz aussieht, dann aber schnell hoch über den Gegner geht.',en:'A serve or shot that looks short but then goes quickly up and over the opponent.'}},
+ {k:'tee',de:['T'],en:['T'],x:true,t:{de:'T',en:'T'},d:{de:'Punkt, an dem vordere Aufschlaglinie und Mittellinie sich treffen. Im Doppel schlägt man meist von hier auf.',en:'The point where the short service line meets the centre line. In doubles you usually serve from here.'}},
+ {k:'tape',de:['Netzkante'],en:['tape'],t:{de:'Netzkante',en:'Tape'},d:{de:'Oberkante des Netzes (1,55 m). Ist der Ball darüber, kannst du nach unten schlagen, darunter nicht.',en:'The top edge of the net (1.55 m). Above it you can hit down, below it you cannot.'}},
+ {k:'fore',de:['Vorderfeld'],en:['forecourt'],t:{de:'Vorderfeld',en:'Forecourt'},d:{de:'Bereich zwischen Netz und vorderer Aufschlaglinie.',en:'The area between the net and the short service line.'}},
+ {k:'mid',de:['Mittelfeld'],en:['mid-court'],t:{de:'Mittelfeld',en:'Mid-court'},d:{de:'Mittlerer Bereich zwischen Vorderfeld und Hinterfeld.',en:'The middle area between forecourt and back court.'}},
+ {k:'back',de:['Hinterfeld'],en:['back court'],t:{de:'Hinterfeld',en:'Back court'},d:{de:'Hinterer Bereich des Feldes bis zur Grundlinie.',en:'The rear area of the court up to the baseline.'}},
+ {k:'fh',de:['Vorhand'],en:['forehand'],t:{de:'Vorhand',en:'Forehand'},d:{de:'Die Schlägerseite: für Rechtshänder rechts vom Körper.',en:'The racket side: for right-handers, to the right of the body.'}},
+ {k:'bh',de:['Rückhand'],en:['backhand'],t:{de:'Rückhand',en:'Backhand'},d:{de:'Die andere Seite: für Rechtshänder links vom Körper.',en:'The other side: for right-handers, to the left of the body.'}},
+ {k:'cross',de:['Cross'],en:['cross-court'],t:{de:'Cross',en:'Cross-court'},d:{de:'Diagonal über das Feld gespielt, statt gerade die Linie entlang.',en:'Played diagonally across the court instead of straight down the line.'}},
+ {k:'fb',de:['vorne-hinten'],en:['front and back'],t:{de:'Vorne-hinten',en:'Front and back'},d:{de:'Angriffsaufstellung im Doppel: ein Spieler vorne am Netz, einer hinten.',en:'The attacking formation in doubles: one player at the net, one at the back.'}},
+ {k:'sbs',de:['nebeneinander'],en:['side by side'],t:{de:'Nebeneinander',en:'Side by side'},d:{de:'Verteidigungsaufstellung im Doppel: beide auf halber Tiefe, jeder deckt eine Seite.',en:'The defensive formation in doubles: both at mid depth, each covering one side.'}},
+ {k:'rot',de:['Rotation'],en:['rotation'],t:{de:'Rotation',en:'Rotation'},d:{de:'Wechsel zwischen Angriff (vorne-hinten) und Verteidigung (nebeneinander) im Doppel.',en:'Switching between attack (front and back) and defence (side by side) in doubles.'}},
+ {k:'ssl',de:['Aufschlaglinie'],en:['short service line','service line'],t:{de:'Vordere Aufschlaglinie',en:'Short service line'},d:{de:'Linie 1,98 m vor dem Netz. Der Aufschlag muss dahinter landen.',en:'The line 1.98 m from the net. The serve has to land beyond it.'}},
+ {k:'base',de:['Grundlinie'],en:['baseline'],t:{de:'Grundlinie',en:'Baseline'},d:{de:'Die hintere Begrenzungslinie des Feldes.',en:'The back boundary line of the court.'}},
+ {k:'centre',de:['Mittellinie'],en:['centre line'],t:{de:'Mittellinie',en:'Centre line'},d:{de:'Linie, die die beiden Aufschlagfelder trennt.',en:'The line that separates the two service courts.'}},
+ {k:'frontp',de:['Vorderspieler','Netzspieler'],en:['front player','net player'],t:{de:'Vorderspieler',en:'Front player'},d:{de:'Der Spieler, der im Angriff vorne am Netz steht.',en:'The player at the net when your team attacks.'}},
+ {k:'backp',de:['Hinterspieler'],en:['back player'],t:{de:'Hinterspieler',en:'Back player'},d:{de:'Der Spieler, der im Angriff hinten steht und meist smasht.',en:'The player at the back when your team attacks, usually the one who smashes.'}},
+ {k:'recv',de:['Rückschläger'],en:['receiver'],t:{de:'Rückschläger',en:'Receiver'},d:{de:'Der Spieler, der den Aufschlag annimmt.',en:'The player who receives the serve.'}},
+ {k:'ret',de:['Return'],en:['return of'],x:true,t:{de:'Return',en:'Return'},d:{de:'Der erste Schlag nach dem Aufschlag.',en:'The first shot after the serve.'}},
+ {k:'counter',de:['Konter'],en:['counter'],t:{de:'Konter',en:'Counter'},d:{de:'Ein schneller Gegenangriff aus der Verteidigung heraus.',en:'A fast counter-attack out of defence.'}}
+];
+const GL_L='A-Za-zÄÖÜäöüß';
+const GLRX={};
+['de','en'].forEach(l=>{const alts=[];GLOSSARY.forEach(g=>g[l].forEach(v=>alts.push({v,x:g.x})));
+  alts.sort((a,b)=>b.v.length-a.v.length);
+  GLRX[l]=new RegExp('(^|[^'+GL_L+'])('+alts.map(a=>a.v.replace(/[.*+?^${}()|[\]\\-]/g,'\\$&')+(a.x?'(?!['+GL_L+'])':'['+GL_L+']*')).join('|')+')','gi');});
+function glKey(word){const w=word.toLowerCase();let best=null,len=0;
+  GLOSSARY.forEach(g=>g[LANG].forEach(v=>{if(w.startsWith(v.toLowerCase())&&v.length>len){best=g.k;len=v.length;}}));return best;}
+function linkify(txt){if(!txt)return txt;const seen=new Set();
+  return txt.replace(GLRX[LANG],(all,pre,word)=>{const k=glKey(word);if(!k||seen.has(k))return all;seen.add(k);
+    return pre+`<span role="button" tabindex="0" class="term" data-term="${k}">${word}</span>`;});}
+function openSheet(html){const sh=document.getElementById('sheet');document.getElementById('sheet-body').innerHTML=html;sh.hidden=false;const c=sh.querySelector('.sheet-card');c.scrollTop=0;try{document.getElementById('sheet-close').focus({preventScroll:true});}catch(e){}c.scrollTop=0;}
+function closeSheet(){document.getElementById('sheet').hidden=true;}
+function showTerm(k){const g=GLOSSARY.find(x=>x.k===k);if(!g)return;
+  openSheet(`<h3>${g.t[LANG]}</h3><p>${g.d[LANG]}</p><button class="linkbtn small" data-gl="all">${T.allTerms}</button>`);}
+function curPrefs(){return {...PREFS,...(S.pend||{})};}
+function showSettings(){const cp=curPrefs();
+  openSheet(`<h3>${T.settingsT}</h3><div class="plabel">${T.langQ}</div><div class="filters" role="group" aria-label="${T.langQ}">`+
+   [['de','Deutsch'],['en','English']].map(([k,l])=>`<button class="chip ${LANG===k?'on':''}" data-lang="${k}" aria-pressed="${LANG===k}" lang="${k}">${l}</button>`).join('')+
+   `</div><div class="plabel">${T.handQ}</div><div class="filters" role="group" aria-label="${T.handQ}">`+
+   [['R',T.handR],['L',T.handL]].map(([k,l])=>`<button class="chip ${cp.hand===k?'on':''}" data-hand="${k}" aria-pressed="${cp.hand===k}">${l}</button>`).join('')+
+   `</div><div class="plabel">${T.yourLevel}</div><div class="levels" role="group" aria-label="${T.yourLevel}">`+
+   ['beg','int','adv'].map(k=>`<button class="lvl ${cp.level===k?'on':''}" data-lvl="${k}" aria-pressed="${cp.level===k}">${T.lvl[k]}<span>${T.lvlD[k]}</span></button>`).join('')+
+   `</div>${S.pend?`<p class="small"><b>${T.pendNote}</b></p>`:''}<p class="small">${T.settingsNote}</p>`+
+   `<div class="plabel">${T.statsQ}</div><div class="filters" role="group" aria-label="${T.statsQ}"><button class="chip ${PREFS.stats?'on':''}" data-stats="1" aria-pressed="${PREFS.stats}">${T.on}</button><button class="chip ${PREFS.stats?'':'on'}" data-stats="0" aria-pressed="${!PREFS.stats}">${T.off}</button></div><p class="small">${T.statsNote}</p><button class="linkbtn small" data-plan-open="1" type="button">${T.planLink}</button>`);}
+function refreshView(){if(S.screen==='home'){renderHeader();renderHome();}else{renderSVG();renderPanel();renderHeader();}}
+function setPref(k,v){
+  track('settings/'+k+'-'+v);
+  if(k==='lang'){applyLang(v,true);showSettings();refreshView();return;}
+  const answered=S.screen==='play'&&S.answers.some(Boolean);
+  if(answered){S.pend={...(S.pend||{}),[k]:v}; if(S.pend[k]===PREFS[k]){delete S.pend[k]; if(!Object.keys(S.pend).length) S.pend=null;}}
+  else {PREFS[k]=v;PUZZLES=buildPuzzles();}
+  const cp=curPrefs(); store.set('prefs3',{level:cp.level,hand:cp.hand,stats:PREFS.stats});
+  showSettings(); refreshView();}
+function applyPending(){if(S.pend){Object.assign(PREFS,S.pend);S.pend=null;PUZZLES=buildPuzzles();}}
+function showGlossary(){track('glossary/open');const items=GLOSSARY.slice().sort((a,b)=>a.t[LANG].localeCompare(b.t[LANG],LANG));
+  openSheet(`<h3>${T.glossary}</h3><p class="small">${T.glossarySub}</p><div class="gl-list">`+items.map(g=>`<div class="gl-item"><b>${g.t[LANG]}</b>${g.d[LANG]}</div>`).join('')+`</div>`);}
+
+// ---------- Aufgaben-Codes und Teilen ----------
+const CODE_AB='ABCDEFGHJKLMNPQRSTUVWXYZ23456789', ID2CODE={}, CODE2IDX={};
+PUZ_DE.forEach((p,i)=>{let salt=0,code;
+  do{let h=2166136261;for(const ch of p.id+'#'+salt){h^=ch.charCodeAt(0);h=Math.imul(h,16777619)>>>0;}
+    code='';for(let k=0;k<5;k++){code+=CODE_AB[h%32];h=Math.floor(h/32)^(k*7919);} salt++;}while(CODE2IDX[code]!=null);
+  ID2CODE[p.id]=code;CODE2IDX[code]=i;});
+function taskLink(code){return (/^https?:$/.test(location.protocol)&&!/claude|anthropic/.test(location.host))?location.origin+location.pathname+'#'+code:'';}
+function showShareTask(){const p=P(),code=ID2CODE[p.id],link=taskLink(code);
+  openSheet(`<h3>${T.shareTask}</h3><p class="small">${T.shareTaskSub}</p><div class="codebox" aria-label="Code">${code}</div>`+
+    (link?`<p class="small linkline">${link}</p>`:`<p class="small">${T.codeHint}</p>`)+
+    `<button class="btn ghost" data-share="1" type="button">${T.shareBtn}</button><div id="sharebox2"></div>`);}
+function doShareTask(){track('share/task');const p=P(),code=ID2CODE[p.id],link=taskLink(code),txt=T.shareMsg(p.title,code)+(link?'\n'+link:'');
+  let top=true;try{top=window.self===window.top;}catch(e){top=false;}
+  if(top&&navigator.share){navigator.share({text:txt}).catch(()=>{});return;}
+  const fb=()=>{const b=document.getElementById('sharebox2');if(b){b.innerHTML=`<textarea class="sharebox dark" readonly aria-label="${T.shareBtn}">${txt}</textarea>`;const ta=b.firstChild;ta.focus();ta.select();}};
+  try{navigator.clipboard.writeText(txt).then(()=>toast(T.copied),fb);}catch(e){fb();}}
+function openCode(raw){const c=String(raw||'').toUpperCase().replace(/[^A-Z0-9]/g,'');const i=CODE2IDX[c];
+  if(i==null){toast(T.codeNotFound);return false;} track('code/open/'+c); closeSheet(); openPuzzle(i,'shared'); return true;}
+function checkHash(){let h='';try{h=decodeURIComponent(location.hash.slice(1));}catch(e){}
+  if(h.toLowerCase()==='plan'){S.sub='plan';showHome();try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}return;}
+  if(h&&CODE2IDX[h.toUpperCase()]!=null){openCode(h);try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}}
+
+// ---------- Aufgabe melden ----------
+const REPORT_REPO='https://github.com/laybunly/badminton-daily-coach/issues/new';
+const REP_REASONS=['answer','pos','why','text','other'];
+function reportText(){const p=P(), st=ST(), a=S.answers[S.si], code=ID2CODE[p.id];
+  const rs=[...S.rep.r].map(k=>T.repR[k]).join(', ')||'–';
+  let ans='–'; if(a){ if(a.i!=null&&st.options) ans=`${LET[a.i]} · ${st.options[a.i].t} (${G[a.g].l})`; else ans=G[a.g].l+(S.taps?' '+JSON.stringify(S.taps):''); }
+  return [`${T.repTitle}: ${code} · ${p.title}`,`${T.repReason}: ${rs}`,`${T.repComment}: ${S.rep.c||'–'}`,'',
+    `Code: ${code} · ID: ${p.id} · ${T.step} ${S.si+1}/${p.steps.length}`,`${T.repAnswer}: ${ans}`,
+    `${LANG.toUpperCase()} · ${PREFS.hand==='L'?'L':'R'} · ${PREFS.level} · ${new Date().toISOString().slice(0,10)}`].join('\n');}
+function reportHref(){const p=P();return REPORT_REPO+'?title='+encodeURIComponent(`[${ID2CODE[p.id]}] ${p.title}`)+'&body='+encodeURIComponent(reportText());}
+function showReport(){track('report/open');if(!S.rep||S.rep.id!==P().id)S.rep={id:P().id,r:new Set(),c:''};const p=P();
+  openSheet(`<h3>${T.repTitle}</h3><p class="small">${p.title} · Code ${ID2CODE[p.id]}</p>
+  <div class="plabel">${T.repReason}</div><div class="filters" role="group" aria-label="${T.repReason}">`+
+  REP_REASONS.map(k=>`<button class="chip ${S.rep.r.has(k)?'on':''}" data-rep="${k}" aria-pressed="${S.rep.r.has(k)}">${T.repR[k]}</button>`).join('')+
+  `</div><label class="plabel" for="repc">${T.repComment}</label><textarea id="repc" class="repc" rows="3" placeholder="${T.repPh}">${S.rep.c.replace(/</g,'&lt;')}</textarea>
+  <p class="small">${T.repHow}</p>
+  <div class="row"><a class="btn" id="repgh" href="${reportHref()}" target="_blank" rel="noopener">${T.repGh}</a><button class="btn ghost" data-repcopy="1" type="button">${T.repCopy}</button></div><div id="sharebox3"></div>`);
+  const ta=document.getElementById('repc'); ta.addEventListener('input',()=>{S.rep.c=ta.value;document.getElementById('repgh').href=reportHref();});}
+function copyReport(){track('report/copy');const txt=reportText();let top=true;try{top=window.self===window.top;}catch(e){top=false;}
+  const fb=()=>{const b=document.getElementById('sharebox3');if(b){b.innerHTML=`<textarea class="sharebox dark" readonly>${txt.replace(/</g,'&lt;')}</textarea>`;const t=b.firstChild;t.focus();t.select();}};
+  try{navigator.clipboard.writeText(txt).then(()=>toast(T.repCopied),fb);}catch(e){fb();}}
+
+// ---------- Anonyme Nutzungsstatistik (GoatCounter, ohne Cookies, nur auf der GitHub-Seite) ----------
+const GC_URL='https://badminton-daily-coach.goatcounter.com/count';
+const TQ=[]; let gcLoaded=false;
+function gcAllowed(){return PREFS.stats!==false&&/^https?:$/.test(location.protocol)&&!/claude|anthropic/.test(location.host);}
+function loadGC(){if(gcLoaded||!gcAllowed())return;gcLoaded=true;
+  const sc=document.createElement('script');sc.async=true;sc.src='https://gc.zgo.at/count.js';sc.setAttribute('data-goatcounter',GC_URL);
+  sc.onload=()=>{while(TQ.length){const e=TQ.shift();track(e[0],e[1]);}};document.head.appendChild(sc);}
+function track(path,title){if(!gcAllowed())return;
+  const gc=window.goatcounter; if(!gc||!gc.count){if(TQ.length<50)TQ.push([path,title]);return;}
+  try{gc.count({path:path,title:title||path,event:true});}catch(e){}}
 
 function renderPanel(){
   const p=P(), st=ST(), n=p.steps.length, a=S.answers[S.si];
-  const pos=S.mode==='daily'?(getDaily().ids.indexOf(p.id)+1)+'/5 · ':'';
-  let h=`<div class="eb">${pos}${p.title}${n>1&&S.phase!=='done'?` · ${T.step} ${S.si+1}/${n}`:''}</div>`;
+  const pos=S.mode==='shared'?`${T.sharedMode} · `:S.mode==='daily'?(getDaily().ids.indexOf(p.id)+1)+'/5 · ':S.mode==='set'&&S.set?`${CATS[S.set.c][LANG]} · ${S.set.ids.indexOf(p.id)+1}/5 · `:'';
+  let h=`<div class="ebrow"><div class="eb">${pos}${p.title}${n>1&&S.phase!=='done'?` · ${T.step} ${S.si+1}/${n}`:''}</div><span class="ebacts"><button class="sharelink" data-act="report" type="button" aria-label="${T.repTitle}">⚑ ${T.repShort}</button><button class="sharelink" data-act="sharetask" type="button" aria-label="${T.shareTask}">↗ ${T.shareBtn}</button></span></div>`;
   if(S.phase==='done'){
     const score=S.answers.reduce((s,x)=>s+G[x.g].v,0)/n, g=gradeOf(score);
     h+=`<div class="row" style="gap:12px"><span class="score">${Math.round(score*100)} %</span><span class="badge g-${g}">${G[g].l}</span></div>
-    <div class="lesson">${p.lesson}</div>
+    <div class="lesson">${linkify(p.lesson)}</div>
     <p class="small">${S.delta==null?T.noRating:T.saved((S.delta>=0?'+':'')+S.delta,S.rating)}</p>`;
     if(S.mode==='daily'){const dd=getDaily(), left=dd.ids.filter(id=>dd.res[id]==null).length;
       h+=`<div class="row stick">${left?`<button class="btn" data-act="dnext">${T.next}</button>`:`<button class="btn" data-act="home">${T.toSummary}</button>`}</div>`;}
     else h+=`<div class="row stick"><button class="btn" data-act="pnext">${T.practiceNext}</button><button class="btn ghost" data-act="retry">${T.retry}</button></div>`;
     panel.innerHTML=h; return;
   }
-  const next=`<div class="row stick"><button class="btn" data-act="cont">${S.si<n-1?T.nextStep:T.result}</button></div>`;
+  let next;
+  if(S.si<n-1) next=`<div class="row stick"><button class="btn" data-act="cont">${T.nextStep}</button></div>`;
+  else if(S.mode==='daily'){const dd=getDaily(), left=dd.ids.filter(id=>dd.res[id]==null).length;
+    next=`<div class="row stick">${left?`<button class="btn" data-act="dnext">${T.next}</button>`:`<button class="btn" data-act="home">${T.toSummary}</button>`}</div>`;}
+  else if(S.mode==='shared') next=`<div class="row stick"><button class="btn" data-act="home">${T.toOverview}</button></div>`;
+  else if(S.mode==='set'){const left=S.set.ids.filter(id=>S.sres[id]==null).length;
+    next=`<div class="row stick">${left?`<button class="btn" data-act="snext">${T.nextTask}</button>`:`<button class="btn" data-act="setdone">${T.finishSet}</button>`}</div>`;}
+  else next=`<div class="row stick" style="flex-wrap:nowrap"><button class="btn" data-act="pnext">${T.practiceNext}</button><button class="btn ghost" data-act="retry" aria-label="${T.retry}" title="${T.retry}">↻</button></div>`;
   if(st.type==='place'){
     if(S.phase==='play'){
       const ks=Object.keys(TG(st)), all=ks.every(k=>S.taps[k]);
-      h+=`<p class="q">${st.q}</p>`;
-      if(ks.length>1) h+=`<div class="pick" role="group" aria-label="${T.who}">`+ks.map(k=>`<button class="chip ${S.active===k?'on':''}" data-who="${k}" aria-pressed="${S.active===k}"><i></i>${k==='Y'?T.chipY:T.chipP}${S.taps[k]?' ✓':''}</button>`).join('')+`</div>`;
-      const hint=!S.ready?T.watch:(!all?(S.active==='Y'?T.tapY:T.tapP):'');
+      h+=`<p class="q">${linkify(st.q)}</p>`;
+      const hint=!S.ready?T.watch:(!all?(ks.length>1?T.dragBoth:(ks[0]==='Y'?T.dragY:T.dragP)):'');
       h+=`${hint?`<p class="hint">${hint}</p>`:''}<div class="row stick"><button class="btn" data-act="lock" ${all?'':'disabled'}>${ks.length>1?T.lockN:T.lock1}</button></div>`;
     } else {
       const TT=TG(st), why=a.g==='good'?st.why.good+' '+st.why.best:st.why.best;
       const per=Object.keys(TT).filter(k=>a.per[k]!=='best'||Object.keys(TT).length===1&&false).map(k=>`<div class="per"><span class="g g-${a.per[k]}">${G[a.per[k]].l}</span><b>${NAME[k]}</b><span>${dirHint(S.taps[k],TT[k].best)||T.exact}</span></div>`).join('');
-      h+=`<div class="verdict"><span class="badge g-${a.g}">${G[a.g].l}</span>${per}<p>${why}</p></div>`+next;
+      h+=`<div class="verdict"><span class="badge g-${a.g}">${G[a.g].l}</span>${per}<p>${linkify(why)}</p></div>`+next;
     }
   } else if(!a){
-    h+=`<p class="q">${st.q}</p><div class="opts">`+st.options.map((o,i)=>
+    h+=`<p class="q">${linkify(st.q)}</p><div class="opts">`+st.options.map((o,i)=>
       `<button class="opt" data-opt="${i}" ${!S.ready?'disabled':''}><span class="k">${LET[i]}</span><span class="lbl">${o.t}</span></button>`).join('')+`</div>`;
   } else {
     const vi=S.view!=null?S.view:a.i, o=st.options[vi];
     h+=`<div class="ochips"><span class="small">${T.otherOpts}</span>`+st.options.map((x,i)=>
       `<button class="ochip ${i===vi?'on':''}" data-opt="${i}" style="background:${MAT[x.g]}" aria-label="${LET[i]} · ${x.t} · ${G[x.g].l}" aria-pressed="${i===vi}">${LET[i]}</button>`).join('')+`</div>
-    <div class="verdict"><div class="row" style="gap:8px"><span class="badge g-${o.g}">${LET[vi]} · ${G[o.g].l}</span><b>${o.t}</b></div><p>${o.why}</p></div>`+next;
+    <div class="verdict"><div class="row" style="gap:8px"><span class="badge g-${o.g}">${LET[vi]} · ${G[o.g].l}</span><b>${o.t}</b></div><p>${linkify(o.why)}</p>`+
+    (vi===a.i&&o.g!=='best'?(()=>{const bi=st.options.findIndex(x=>x.g==='best'),bo=st.options[bi];
+      return `<div class="bestbox"><div class="row" style="gap:8px"><span class="badge g-best">${LET[bi]} · ${G.best.l}</span><b>${bo.t}</b></div><p>${linkify(bo.why)}</p></div>`;})():'')+`</div>`+next;
   }
   panel.innerHTML=h;
 }
 function render(){renderHeader();renderSVG();renderPanel();}
 
-function startPuzzle(i){S.pi=i;S.si=0;S.answers=[];S.taps={};S.active=Object.keys(TG(PUZZLES[i].steps[0]))[0];S.view=null;S.phase='play';S.delta=null;S.t=0;S.ready=false;render();panel.scrollTop=0;play();}
-function nextStep(){S.si++;S.taps={};S.active=Object.keys(TG(PUZZLES[S.pi].steps[S.si]))[0];S.view=null;S.phase='play';S.t=0;S.ready=false;render();panel.scrollTop=0;play();}
+function startPuzzle(i){applyPending();cancelAnimationFrame(corrRaf);S.corr=1;S.pi=i;S.si=0;S.answers=[];S.taps={};S.active=Object.keys(TG(PUZZLES[i].steps[0]))[0];S.view=null;S.phase='play';S.delta=null;S.t=0;S.ready=false;render();panel.scrollTop=0;play();}
+function nextStep(){cancelAnimationFrame(corrRaf);S.corr=1;S.si++;S.taps={};S.active=Object.keys(TG(PUZZLES[S.pi].steps[S.si]))[0];S.view=null;S.phase='play';S.t=0;S.ready=false;render();panel.scrollTop=0;play();}
 function finish(){
   const p=P(), score=S.answers.reduce((s,x)=>s+G[x.g].v,0)/p.steps.length;
   const first=S.results[p.id]==null;
   if(S.mode==='daily'||first){const E=1/(1+Math.pow(10,(p.rating-S.rating)/400)); S.delta=Math.round(32*(score-E)); S.rating+=S.delta;} else S.delta=null;
   S.results[p.id]=Math.max(S.results[p.id]??0,score);
-  if(S.mode==='daily'){const dd=getDaily(); if(dd.res[p.id]==null){dd.res[p.id]=score; store.set('daily',dd);} if(dd.ids.every(id=>dd.res[id]!=null)) bumpStreak();}
+  track(`task/${ID2CODE[p.id]}/${gradeOf(score)}`,`${p.id} · ${S.mode}`);
+  if(S.mode==='set'&&S.sres) S.sres[p.id]=score;
+  if(S.mode==='daily'){const dd=getDaily(); if(dd.res[p.id]==null){dd.res[p.id]=score; store.set('daily',dd);} if(dd.ids.every(id=>dd.res[id]!=null)){bumpStreak();track('daily/finish','Daily set finished');}}
   store.set('rating',S.rating);store.set('results',S.results);
-  S.phase='done'; render(); panel.scrollTop=0;
+  renderHeader();
 }
 
 function placeAt(qx,qy){
@@ -1437,18 +2113,40 @@ function placeAt(qx,qy){
   const nxt=Object.keys(TG(st)).find(k=>!S.taps[k]); if(nxt) S.active=nxt;
   renderSVG(); renderPanel();
 }
+// Spieler ziehen oder aufs Feld tippen
+let drag=null;
+function svgPt(e){const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;return pt.matrixTransform(svg.getScreenCTM().inverse());}
+function canPlace(){const st=ST();return st.type==='place'&&S.phase==='play'&&S.ready;}
 svg.addEventListener('pointerdown',e=>{
-  const pt=svg.createSVGPoint(); pt.x=e.clientX; pt.y=e.clientY;
-  const q=pt.matrixTransform(svg.getScreenCTM().inverse());
-  placeAt(q.x,q.y);
+  if(!canPlace())return; const q=svgPt(e), st=ST(); let hit=null, bd=80;
+  for(const k of Object.keys(TG(st))){const p=S.taps[k]||st.players[k], d=Math.hypot(p[0]-q.x,p[1]-q.y); if(d<bd){bd=d;hit=k;}}
+  drag={k:hit,x0:e.clientX,y0:e.clientY,moved:false,off:e.pointerType==='mouse'?0:75};
+  if(hit){try{svg.setPointerCapture(e.pointerId);}catch(_){}}
+  e.preventDefault();
 });
+svg.addEventListener('pointermove',e=>{
+  if(!drag||!drag.k)return;
+  if(!drag.moved&&Math.hypot(e.clientX-drag.x0,e.clientY-drag.y0)<6)return;
+  drag.moved=true; S.active=drag.k; const q=svgPt(e);
+  S.taps[drag.k]=[Math.round(Math.max(20,Math.min(590,q.x))),Math.round(Math.max(700,Math.min(1320,q.y-drag.off)))];
+  renderSVG();
+});
+svg.addEventListener('pointerup',e=>{
+  if(!drag)return; const d=drag; drag=null;
+  if(d.k&&d.moved){const nxt=Object.keys(TG(ST())).find(k=>!S.taps[k]); if(nxt)S.active=nxt; renderSVG(); renderPanel(); return;}
+  if(d.k&&Object.keys(TG(ST())).length>1){S.active=d.k; renderSVG(); renderPanel(); return;}
+  if(Math.hypot(e.clientX-d.x0,e.clientY-d.y0)<12){const q=svgPt(e); placeAt(q.x,q.y);}
+});
+svg.addEventListener('pointercancel',()=>{drag=null;});
 document.getElementById('replay').addEventListener('click',()=>{if(S.paused)play();else pause();});
+panel.addEventListener('keydown',e=>{const t=e.target.closest&&e.target.closest('.term');if(t&&(e.key==='Enter'||e.key===' ')){e.preventDefault();showTerm(t.dataset.term);}});
 panel.addEventListener('click',e=>{
+  const tm=e.target.closest('.term'); if(tm){showTerm(tm.dataset.term);return;}
   const b=e.target.closest('button'); if(!b) return;
   const st=ST();
   if(b.dataset.opt!=null){
     const i=+b.dataset.opt;
-    if(!S.answers[S.si]){S.answers[S.si]={i,g:st.options[i].g};S.phase='answered';S.view=null;}
+    if(!S.answers[S.si]){S.answers[S.si]={i,g:st.options[i].g};S.phase='answered';S.view=null;if(S.si===P().steps.length-1)finish();}
     else S.view=i;
     renderSVG(); renderPanel(); panel.scrollTop=0; return;
   }
@@ -1459,18 +2157,38 @@ panel.addEventListener('click',e=>{
     for(const [k,t] of Object.entries(T)){const tp=S.taps[k]; if(!tp) return;
       const d=Math.hypot(tp[0]-t.best[0],tp[1]-t.best[1]);
       per[k]=d<=t.rBest?'best':d<=t.rGood?'good':d<=t.rGood*1.8?'inacc':'mistake'; sum+=G[per[k]].v;}
-    S.answers[S.si]={g:gradeOf(sum/Object.keys(T).length),per}; S.phase='answered'; renderSVG(); renderPanel(); panel.scrollTop=0;
+    S.answers[S.si]={g:gradeOf(sum/Object.keys(T).length),per}; S.phase='answered'; if(S.si===P().steps.length-1)finish(); renderSVG(); renderPanel(); panel.scrollTop=0; startCorr();
   }
-  if(act==='cont'){ if(S.si<P().steps.length-1) nextStep(); else finish(); }
+  if(act==='cont'&&S.si<P().steps.length-1) nextStep();
+  if(act==='sharetask'){showShareTask();return;}
+  if(act==='report'){showReport();return;}
   if(act==='dnext') openDaily();
+  if(act==='snext') nextInSet();
+  if(act==='setdone') setDone();
   if(act==='pnext'){const k=PRACT.indexOf(S.pi); startPuzzle(PRACT[(k+1)%PRACT.length]);}
   if(act==='retry') startPuzzle(S.pi);
   if(act==='home') showHome();
 });
 document.getElementById('dots').addEventListener('click',e=>{const b=e.target.closest('.dot');if(!b||b.disabled)return;const i=PUZZLES.findIndex(p=>p.id===b.dataset.id);if(i>=0&&i!==S.pi)startPuzzle(i);});
 document.getElementById('backbtn').addEventListener('click',showHome);
+document.getElementById('helpbtn').addEventListener('click',showGlossary);
+document.getElementById('setbtn').addEventListener('click',showSettings);
+window.addEventListener('hashchange',checkHash);
+document.getElementById('sheet').addEventListener('click',e=>{if(e.target.id==='sheet'||e.target.id==='sheet-close'){closeSheet();return;}const b=e.target.closest('button');if(!b)return;if(b.dataset.gl)showGlossary();else if(b.dataset.share)doShareTask();else if(b.dataset.rep){const k=b.dataset.rep;S.rep.r.has(k)?S.rep.r.delete(k):S.rep.r.add(k);b.classList.toggle('on');b.setAttribute('aria-pressed',S.rep.r.has(k));document.getElementById('repgh').href=reportHref();}else if(b.dataset.repcopy)copyReport();else if(b.dataset.planOpen){closeSheet();S.sub='plan';if(S.screen==='play')showHome();else{renderHeader();renderHome();homeEl.scrollTop=0;}}else if(b.dataset.stats!=null){PREFS.stats=b.dataset.stats==='1';store.set('prefs3',{level:curPrefs().level,hand:curPrefs().hand,stats:PREFS.stats});if(PREFS.stats){loadGC();track('settings/stats-on');}showSettings();}else if(b.dataset.lang)setPref('lang',b.dataset.lang);else if(b.dataset.hand)setPref('hand',b.dataset.hand);else if(b.dataset.lvl)setPref('level',b.dataset.lvl);});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet();});
+document.getElementById('sheet').addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#repgh')){track('report/github');setTimeout(()=>{closeSheet();toast(T.repThanks);},300);}});
 document.getElementById('home').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
   if(b.dataset.act==='dstart')openDaily();
+  else if(b.dataset.act==='glossary'){showGlossary();}
+  else if(b.dataset.act==='opencode'){const v=document.getElementById('codein');if(v)openCode(v.value);}
+  else if(b.dataset.act==='settings'){showSettings();}
+  else if(b.dataset.plan!=null){openPuzzle(+b.dataset.plan,'shared');}
+  else if(b.dataset.cat!=null){S.sub='cat';S.cat=+b.dataset.cat;renderHome();homeEl.scrollTop=0;}
+  else if(b.dataset.set!=null){openSet(S.cat,+b.dataset.set);}
+  else if(b.dataset.act==='pool'){S.sub='pool';renderHome();homeEl.scrollTop=0;}
+  else if(b.dataset.act==='totrain'){S.sub='train';renderHeader();renderHome();homeEl.scrollTop=0;}
+  else if(b.dataset.act==='practice'){S.sub='train';renderHeader();renderHome();homeEl.scrollTop=0;}
+  else if(b.dataset.act==='tohome'){S.sub=null;renderHeader();renderHome();homeEl.scrollTop=0;}
   else if(b.dataset.act==='share')shareDaily();
   else if(b.dataset.pf){S.pf=b.dataset.pf;renderHome();}
   else if(b.dataset.act==='editprefs'){S.tmp=JSON.parse(JSON.stringify(PREFS));S.editPrefs=true;renderHome();homeEl.scrollTop=0;}
@@ -1480,12 +2198,14 @@ document.getElementById('home').addEventListener('click',e=>{const b=e.target.cl
   else if(b.dataset.act==='saveprefs'&&S.tmp.discs.length){PREFS={discs:S.tmp.discs,level:S.tmp.level,set:true};store.set('prefs',PREFS);
     PUZZLES=buildPuzzles();S.editPrefs=false;S.tmp=null;renderHeader();renderHome();homeEl.scrollTop=0;}
   else if(b.dataset.pid!=null)openPuzzle(+b.dataset.pid,'practice');});
+homeEl.addEventListener('keydown',e=>{if(e.target.id==='codein'&&e.key==='Enter'){e.preventDefault();openCode(e.target.value);}});
 setInterval(()=>{if(S.screen!=='home')return;const dd=store.get('daily',null);if(!dd||dd.date!==todayStr()){renderHeader();renderHome();return;}
   const e=document.getElementById('cd');if(e&&e.dataset.live)e.textContent=T.newIn(untilMidnight());},30000);
 
 document.getElementById('lang').addEventListener('click',()=>{applyLang(LANG==='de'?'en':'de',true);if(S.screen==='home'){renderHeader();renderHome();}else render();});
-document.querySelector('.seg').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setView(b.dataset.v==='1');});
+loadGC();
 showHome();
+checkHash();
 </script>
 </body>
 </html>
