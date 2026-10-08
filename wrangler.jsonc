@@ -5,6 +5,8 @@
   "compatibility_date": "2026-10-08",
   "assets": { "directory": "./dist" },
   "preview_urls": true,
+  // needed by `wrangler preview`, which Cloudflare runs for non-main branches
+  "previews": {},
   "routes": [
     { "pattern": "badminton-daily-coach.com", "custom_domain": true },
     { "pattern": "www.badminton-daily-coach.com", "custom_domain": true }
