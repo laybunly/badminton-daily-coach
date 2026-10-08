@@ -1,7 +1,7 @@
 # Badminton Daily Coach – project notes for Claude
 
 Mobile web app with chess-style badminton tactics puzzles (doubles positioning and shot selection).
-Live on GitHub Pages: https://laybunly.github.io/badminton-daily-coach/
+Live on GitHub Pages: https://laybunly.github.io/badminton-daily-coach/ (built and deployed by `.github/workflows/deploy.yml` on every push to main).
 Owner: B (German speaker; app UI is German by default, English available).
 
 ## Working with the owner
@@ -12,7 +12,12 @@ Owner: B (German speaker; app UI is German by default, English available).
   Grades are "✓ Am besten / ○ Gut / ! Ungenau / ✗ Fehler" (EN: Best / Good / Inaccuracy / Mistake). Never "Bester".
 
 ## Architecture
-- Everything is one file: `index.html` (vanilla HTML/CSS/JS, no framework, no build step).
+- Vite + TypeScript, no UI framework. `index.html` (markup) → `src/main.ts` (boot + listeners). `npm run dev` / `npm run build` (→ `dist/`).
+  - `src/puzzles/` types, data (`data/*.json`), `catalog.ts` (`buildPuzzles`), `codes.ts`.
+  - `src/daily/` plan + rating · `src/court/` SVG render, animation, input · `src/ui/` screens, panel, sheets, share, report
+  - `src/state.ts` shared state (`S`, live bindings `LANG/T/PUZZLES/PREFS`) · `src/i18n/strings.ts` · `src/storage/` · `src/analytics/`
+  - `legacy/index.html`: frozen copy of the original single-file app. Never edit; it is the reference for golden/parity tests.
+  - PWA via vite-plugin-pwa (manifest + offline cache). Icons in `public/icons/` (`b1-512.png` is an upscaled placeholder).
 - Court is an SVG in cm: x 0–610, y 0–1340, net at y 670, user's half is y > 670. A side-view strip shows shuttle height.
 - State object `S`; render functions `renderSVG`, `renderPanel`, `renderHeader`, `renderHome`.
 - Shuttle animation loops via requestAnimationFrame (FLY 1300 ms, HOLD 900 ms). Serve puzzles use a static shuttle.
@@ -34,7 +39,7 @@ Owner: B (German speaker; app UI is German by default, English available).
 - Analytics: GoatCounter (https://badminton-daily-coach.goatcounter.com/) via `loadGC()` / `track(path,title)`,
   only if stats on, http(s), not on claude/anthropic hosts. Opt-out: settings, `#nostats`, `#stats`, `#toggle-goatcounter` (with toast).
 - Placing players: drag (75-unit touch offset) or tap. `touch-action:none` on the svg.
-- Favicon: B3 shuttle (SVG + 32px PNG) for tabs, B1 shuttle (180/192px PNG) for home screen; all embedded as data URIs in `<head>`.
+- Favicon: B3 shuttle (SVG + 32px PNG) for tabs, B1 shuttle (180/192px PNG) for home screen; files in `public/icons/`.
 
 ## Coaching rules already agreed with the owner (doubles)
 - Serve: server stands at the T, partner behind in the middle. Short serves land just past the short service line.
@@ -49,8 +54,12 @@ Owner: B (German speaker; app UI is German by default, English available).
 3D view, pause button, correction animation, "Ergebnis ansehen" step (explanation + next button shows right after answering).
 
 ## Testing
-Use Playwright (Chromium) for checks: full daily flow, render all 250 training puzzles in DE and EN with no console errors,
-shared-code links, report sending. Run tests before every commit.
+`npm test` runs everything (also in GitHub Actions on every PR). Run it before every commit.
+- `tests/unit/golden.test.ts` (vitest): data, codes, plan, 400 days of daily sets and all 12 lang/level/hand builds must equal
+  the legacy app (`tests/golden/legacy.json`, regenerated from `legacy/index.html` by `npm run golden`).
+- `tests/e2e/parity.spec.ts` (Playwright): new build vs legacy side by side, same DOM after every click, same localStorage and events.
+- `tests/e2e/flows.spec.ts`: all 287 puzzles played through (de/int/R, en/beg/L, de/adv/R) without console errors,
+  code links, `#plan`, report event, opt-out hashes, storage keys, PWA.
 
 ## Roadmap (agreed with the owner)
 Work happens mainly in Claude Code on the desktop (local dev server for quick testing).

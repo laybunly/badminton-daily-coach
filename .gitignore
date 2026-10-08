@@ -1,0 +1,6 @@
+node_modules
+dist
+tests/golden/legacy.json
+test-results
+playwright-report
+.env.local
