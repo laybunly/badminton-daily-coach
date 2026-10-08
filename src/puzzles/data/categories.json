@@ -1,0 +1,272 @@
+[
+ {
+  "k": "serve",
+  "de": "Aufschlag & Return",
+  "en": "Serve & return",
+  "sets": [
+   [
+    "Wo stehst du?",
+    "Where do you stand?"
+   ],
+   [
+    "Return auf kurzen Aufschlag",
+    "Returning a short serve"
+   ],
+   [
+    "Welcher Aufschlag?",
+    "Which serve?"
+   ],
+   [
+    "Return auf den Flick",
+    "Returning a flick"
+   ],
+   [
+    "Nach dem Return",
+    "After the return"
+   ]
+  ]
+ },
+ {
+  "k": "back",
+  "de": "Angriff aus dem Hinterfeld",
+  "en": "Attacking from the back",
+  "sets": [
+   [
+    "Ausgeglichene Abwehr",
+    "Balanced defence"
+   ],
+   [
+    "Die offene Lücke",
+    "The open gap"
+   ],
+   [
+    "Tief im Hinterfeld",
+    "Deep in the back court"
+   ],
+   [
+    "Gegner stehen tief",
+    "Opponents stand deep"
+   ],
+   [
+    "Gegner vorne-hinten",
+    "Opponents front and back"
+   ]
+  ]
+ },
+ {
+  "k": "mid",
+  "de": "Angriff aus dem Mittelfeld",
+  "en": "Attacking from the mid-court",
+  "sets": [
+   [
+    "Hoher Ball, Abwehr ausgeglichen",
+    "High ball, balanced defence"
+   ],
+   [
+    "Die offene Lücke",
+    "The open gap"
+   ],
+   [
+    "Gegner vorne-hinten",
+    "Opponents front and back"
+   ],
+   [
+    "Halbhoher Ball",
+    "Half-high shuttle"
+   ],
+   [
+    "Gegner stehen tief",
+    "Opponents stand deep"
+   ]
+  ]
+ },
+ {
+  "k": "net",
+  "de": "Netzspiel",
+  "en": "Net play",
+  "sets": [
+   [
+    "Über der Netzkante",
+    "Above the tape"
+   ],
+   [
+    "Unter der Netzkante, Gegner hinten",
+    "Below the tape, opponents back"
+   ],
+   [
+    "Der Netzspieler wartet",
+    "The net player is waiting"
+   ],
+   [
+    "Netzspieler auf der anderen Seite",
+    "Net player on the other side"
+   ],
+   [
+    "Über der Netzkante, Netzspieler nah",
+    "Above the tape, net player close"
+   ]
+  ]
+ },
+ {
+  "k": "def",
+  "de": "Verteidigung gegen den Smash",
+  "en": "Defending the smash",
+  "sets": [
+   [
+    "Smash aus dem Hinterfeld",
+    "Smash from the back"
+   ],
+   [
+    "Smash aus dem Mittelfeld",
+    "Smash from the mid-court"
+   ],
+   [
+    "Langsamer Halbsmash",
+    "Slow half smash"
+   ],
+   [
+    "Netzspieler in der Mitte",
+    "Net player in the middle"
+   ],
+   [
+    "Zu spät dran",
+    "Too late"
+   ]
+  ]
+ },
+ {
+  "k": "lift",
+  "de": "Stellung nach dem Lift",
+  "en": "Positioning after a lift",
+  "sets": [
+   [
+    "Lift ganz nach hinten",
+    "Lift to the very back"
+   ],
+   [
+    "Lift tief",
+    "Deep lift"
+   ],
+   [
+    "Lift ins hintere Mittelfeld",
+    "Lift to the rear mid-court"
+   ],
+   [
+    "Lift zu kurz",
+    "Lift too short"
+   ],
+   [
+    "Lift viel zu kurz",
+    "Lift far too short"
+   ]
+  ]
+ },
+ {
+  "k": "att",
+  "de": "Stellung im Angriff",
+  "en": "Positioning in attack",
+  "sets": [
+   [
+    "Du smashst gerade",
+    "You smash straight"
+   ],
+   [
+    "Du smashst cross",
+    "You smash cross-court"
+   ],
+   [
+    "Partner smasht gerade",
+    "Partner smashes straight"
+   ],
+   [
+    "Partner smasht cross",
+    "Partner smashes cross-court"
+   ],
+   [
+    "Smash in die Mitte",
+    "Smash to the middle"
+   ]
+  ]
+ },
+ {
+  "k": "rot",
+  "de": "Rotation",
+  "en": "Rotation",
+  "sets": [
+   [
+    "Du bekommst den kurzen Lift",
+    "You get the short lift"
+   ],
+   [
+    "Partner bekommt den kurzen Lift",
+    "Partner gets the short lift"
+   ],
+   [
+    "Lift über den Vorderspieler",
+    "Lift over the front player"
+   ],
+   [
+    "Vom Angriff in die Verteidigung",
+    "From attack to defence"
+   ],
+   [
+    "Nach deinem Clear",
+    "After your clear"
+   ]
+  ]
+ },
+ {
+  "k": "press",
+  "de": "Unter Druck",
+  "en": "Under pressure",
+  "sets": [
+   [
+    "Hinten links zu spät",
+    "Late at the back left"
+   ],
+   [
+    "Hinten rechts zu spät",
+    "Late at the back right"
+   ],
+   [
+    "Vorne tief am Netz",
+    "Low at the net"
+   ],
+   [
+    "Weit außen im Mittelfeld",
+    "Stretched wide in the mid-court"
+   ],
+   [
+    "Spät im Mittelfeld",
+    "Late in the mid-court"
+   ]
+  ]
+ },
+ {
+  "k": "drive",
+  "de": "Mittelfeld & Drive",
+  "en": "Mid-court & drives",
+  "sets": [
+   [
+    "Gegner stehen tief",
+    "Opponents stand deep"
+   ],
+   [
+    "Gegner vorne-hinten",
+    "Opponents front and back"
+   ],
+   [
+    "Gegner im Mittelfeld",
+    "Opponents in the mid-court"
+   ],
+   [
+    "Ball unter Netzhöhe",
+    "Shuttle below net height"
+   ],
+   [
+    "Ball auf Kopfhöhe",
+    "Shuttle at head height"
+   ]
+  ]
+ }
+]
