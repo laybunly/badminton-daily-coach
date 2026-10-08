@@ -1,7 +1,8 @@
 # Badminton Daily Coach – project notes for Claude
 
 Mobile web app with chess-style badminton tactics puzzles (doubles positioning and shot selection).
-Live on GitHub Pages: https://laybunly.github.io/badminton-daily-coach/ (built and deployed by `.github/workflows/deploy.yml` on every push to main).
+Live: https://badminton-daily-coach.com/ (Cloudflare Workers, connected to GitHub: builds `main` automatically, preview URL per branch).
+Old address https://laybunly.github.io/badminton-daily-coach/ only serves `redirect/` (forwards, keeps `#CODE`; `sw.js` removes the old offline copy), deployed by `.github/workflows/deploy.yml`.
 Owner: B (German speaker; app UI is German by default, English available).
 
 ## Working with the owner
