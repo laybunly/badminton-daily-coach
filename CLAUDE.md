@@ -8,7 +8,11 @@ Owner: B (German speaker; app UI is German by default, English available).
 ## Working with the owner
 - Give feedback / options first when asked ("tell me first", "don't do anything yet"). Only build after a go.
 - Show visual options (mockups, icon variants) before picking one.
-- Keep answers short. Explain trade-offs honestly; suggest the lowest-effort option first.
+- Keep answers short and in simple terms (owner is not a developer). Explain trade-offs honestly; suggest the lowest-effort option first.
+- Routine work needs no confirmation: running tests, creating files/folders, installing dev dependencies, commits and pushes
+  on feature branches, opening PRs. Only **deploying** needs the owner's explicit go ("deploy"):
+  merging to `main` (Cloudflare and GitHub Pages publish `main` automatically) and changing hosting/domain settings.
+- Never handle the owner's logins or secrets (Cloudflare, GitHub, Supabase service role key). Owner does dashboard steps; give click-by-click instructions.
 - German UI wording: keep English badminton terms (Clear, Smash, Drive, Lift, Push, Netzdrop, Flick).
   Grades are "✓ Am besten / ○ Gut / ! Ungenau / ✗ Fehler" (EN: Best / Good / Inaccuracy / Mistake). Never "Bester".
 
@@ -41,6 +45,14 @@ Owner: B (German speaker; app UI is German by default, English available).
   only if stats on, http(s), not on claude/anthropic hosts. Opt-out: settings, `#nostats`, `#stats`, `#toggle-goatcounter` (with toast).
 - Placing players: drag (75-unit touch offset) or tap. `touch-action:none` on the svg.
 - Favicon: B3 shuttle (SVG + 32px PNG) for tabs, B1 shuttle (180/192px PNG) for home screen; files in `public/icons/`.
+
+## Working from the phone / cloud sessions
+The owner often works from the phone (Claude app → Code, cloud session on this repo, Mac may be off).
+1. Start from an up-to-date `main`, work on a feature branch (`stepN-…` or a short topic name).
+2. `npm ci && npx playwright install --with-deps chromium`, then `npm test` before every commit.
+3. Push and open a PR. GitHub Actions runs the tests; Cloudflare builds a preview URL for the branch
+   (`<branch>-badminton-daily-coach.bunly-lay.workers.dev`). Send the owner the preview link to try on the phone.
+4. Merge only after the owner says "deploy". Then check https://badminton-daily-coach.com/ (no console errors).
 
 ## Coaching rules already agreed with the owner (doubles)
 - Serve: server stands at the T, partner behind in the middle. Short serves land just past the short service line.
