@@ -1,6 +1,8 @@
 // Puzzle schema. Court units are cm: x 0–610, y 0–1340, net at y 670, the user's half is y > 670.
 
-export type Lang = 'de' | 'en';
+export type Lang = 'de' | 'en' | 'fr';
+/** Languages stored inline in the puzzle data; French comes from its own overlay (`text.fr.json`). */
+export type DataLang = 'de' | 'en';
 export type Level = 'beg' | 'int' | 'adv';
 export type Hand = 'R' | 'L';
 export type Grade = 'best' | 'good' | 'inacc' | 'mistake';
@@ -9,7 +11,7 @@ export type PlayerKey = 'Y' | 'P' | 'A' | 'B';
 export type Pt = [number, number];
 /** x, y, height in cm */
 export type Pt3 = [number, number, number];
-export type Bi<T> = Record<Lang, T>;
+export type Bi<T> = Record<DataLang, T>;
 
 export interface Shuttle { from: Pt3; to: Pt3; peak: number }
 export interface Why { best: string; good: string }
@@ -89,6 +91,12 @@ export interface PuzzleText {
   steps: ({ q: string; why?: Why; opts?: [string, string][] } | null)[];
 }
 
-export interface Category { k: string; de: string; en: string; sets: [string, string][] }
+/** French overlay: like the English one, plus the texts of the level variants. */
+export interface PuzzleTextFr extends PuzzleText {
+  lvLesson?: Partial<Record<Level, string>>;
+  steps: ({ q: string; why?: Why; opts?: [string, string][]; lv?: Partial<Record<Level, { why?: Why; whys?: (string | null)[] }>> } | null)[];
+}
+
+export interface Category { k: string; de: string; en: string; fr: string; sets: [string, string, string][] }
 
 export interface Prefs { discs: string[]; level: Level; hand: Hand; stats: boolean; set: boolean }

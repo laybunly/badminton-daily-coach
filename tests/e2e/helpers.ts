@@ -8,7 +8,7 @@ export const NOW = new Date(2026, 9, 8, 10, 0, 0);
 export interface AppPage { page: Page; errors: string[]; url: string }
 
 /** Opens an app with a fake clock, blocked fonts/analytics and a GoatCounter stub that records events. */
-export async function openApp(browser: Browser, url: string, opts: { lang?: 'de' | 'en'; hash?: string; storage?: Record<string, unknown> } = {}): Promise<AppPage> {
+export async function openApp(browser: Browser, url: string, opts: { lang?: 'de' | 'en' | 'fr'; hash?: string; storage?: Record<string, unknown> } = {}): Promise<AppPage> {
   const ctx = await browser.newContext({ locale: 'de-DE', serviceWorkers: 'block' });
   const page = await ctx.newPage();
   const errors: string[] = [];
@@ -31,6 +31,8 @@ export async function snap(page: Page): Promise<string> {
   return page.evaluate(() => {
     const c = document.querySelector('.app')!.cloneNode(true) as HTMLElement;
     c.querySelector('#three')?.remove();
+    // French is new: the legacy app has no French chip
+    c.querySelector('[data-lang="fr"]')?.remove();
     // the moving shuttle depends on frame timing, not on app logic
     for (const id of ['sh-side', 'sh-side-lbl', 'sh-shadow', 'sh-top']) {
       const e = c.querySelector('#' + id);

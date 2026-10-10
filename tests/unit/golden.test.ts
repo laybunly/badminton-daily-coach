@@ -11,6 +11,8 @@ import type { Hand, Lang, Level } from '../../src/puzzles/types';
 const golden = JSON.parse(readFileSync('tests/golden/legacy.json', 'utf8'));
 // same JSON round trip as the snapshot
 const j = (v: unknown) => JSON.parse(JSON.stringify(v));
+// French was added after the original app: compare everything else
+const noFr = (v: unknown): any => JSON.parse(JSON.stringify(v), (k, x) => (k === 'fr' ? undefined : x));
 
 describe('golden comparison with the original app', () => {
   it('puzzle data', () => {
@@ -18,7 +20,7 @@ describe('golden comparison with the original app', () => {
     expect(j(PUZ_DE)).toEqual(golden.PUZ_DE);
     expect(j(PUZ_EN)).toEqual(golden.PUZ_EN);
     expect(j(PUZ_EN_TEXT)).toEqual(golden.PUZ_EN_TEXT);
-    expect(j(CATS)).toEqual(golden.CATS);
+    expect(noFr(CATS).map((c: any) => ({ ...c, sets: c.sets.map((s: string[]) => s.slice(0, 2)) }))).toEqual(golden.CATS);
     expect(GEN.map((p) => p.id)).toEqual(golden.GEN_IDS);
   });
   it('all 5-character codes', () => {
@@ -45,6 +47,6 @@ describe('golden comparison with the original app', () => {
       for (const [k, v] of Object.entries(I18N[l])) i18n[l][k] = typeof v === 'function' ? { fn: sample(v as never) } : v;
     }
     expect(j(i18n)).toEqual(golden.I18N);
-    expect(j(GLOSSARY)).toEqual(golden.GLOSSARY);
+    expect(noFr(GLOSSARY)).toEqual(golden.GLOSSARY);
   });
 });
