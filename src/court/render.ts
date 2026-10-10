@@ -38,7 +38,7 @@ function sideView(sh: Shuttle){
 }
 function defs(){
   let d='<defs>';
-  for(const [k,c] of Object.entries({n:'var(--m-neutral)',...MAT}))
+  for(const [k,c] of Object.entries({n:'var(--m-neutral)',...MAT,o1:'var(--o1)',o2:'var(--o2)',o3:'var(--o3)',o4:'var(--o4)'}))
     d+=`<marker id="ah-${k}" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:${c}"/></marker>`;
   return d+'</defs>';
 }
@@ -50,7 +50,8 @@ export function renderSVG(){
     const [cx,cy]=sh.to;
     st.options.forEach((o,i)=>{
       const [tx,ty]=o.d, L=Math.hypot(tx-cx,ty-cy), ex=tx-(tx-cx)/L*34, ey=ty-(ty-cy)/L*34;
-      const k=answered?o.g:'n', col=answered?MAT[o.g]:'var(--m-neutral)';
+      // before answering each option has its own colour, matching its number in the panel
+      const k=answered?o.g:'o'+(i+1), col=answered?MAT[o.g]:`var(--o${i+1})`;
       const a0=S.answers[S.si], hi=answered&&a0?(S.view!=null?S.view:a0.i):-1, on=i===hi;
       s+=`<line x1="${cx}" y1="${cy}" x2="${ex}" y2="${ey}" class="arrow ${answered?'':'n'}" style="stroke:${col};${answered?(on?'stroke-width:10;':'opacity:.28;'):''}" marker-end="url(#ah-${k})"/>`;
       s+=`<g class="tgt${on?' on':''}" transform="translate(${tx} ${ty})" style="${answered&&!on?'opacity:.45':''}"><circle r="${on?30:22}" style="fill:${col}"/><text y="${on?11:9}" text-anchor="middle">${LET[i]}</text></g>`;

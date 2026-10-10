@@ -39,7 +39,10 @@ export async function snap(page: Page): Promise<string> {
       if (e) for (const a of ['cx', 'cy', 'x', 'y', 'transform']) e.removeAttribute(a);
       if (e && id === 'sh-side-lbl') e.textContent = '';
     }
-    return (document.documentElement.lang + '|' + c.outerHTML.replace(/>\s+</g, '><')).split(location.origin).join('ORIGIN');
+    // answer colours before answering are new: map them back to the old neutral colour
+    c.querySelectorAll('marker[id^="ah-o"]').forEach((m) => m.remove());
+    const html = c.outerHTML.replace(/var\(--o\d\)/g, 'var(--m-neutral)').replace(/#ah-o\d/g, '#ah-n');
+    return (document.documentElement.lang + '|' + html.replace(/>\s+</g, '><')).split(location.origin).join('ORIGIN');
   });
 }
 
