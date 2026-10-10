@@ -161,13 +161,15 @@ details.lessons[open] summary{margin-bottom:6px}
 .sheet-card{background:var(--surface);color:var(--ink);width:100%;max-width:560px;border-radius:16px 16px 0 0;padding:20px 18px calc(18px + env(safe-area-inset-bottom,0px));max-height:75%;overflow-y:auto;display:flex;flex-direction:column;gap:12px}
 .sheet-card h3{margin:0;font:700 24px/1.1 var(--f-display)}
 .sheet-card p{margin:0}
-.sheet-card .plabel{margin-top:6px}
+.sheet-card .plabel{margin-top:14px;margin-bottom:4px}
 .sheet-card .btn{align-self:stretch}
 .gl-list{display:flex;flex-direction:column;gap:10px;font-size:14px}
 .gl-item b{display:block;font-size:15px}
 .helpbtn{margin-left:auto;font-weight:700;min-width:32px}
 .setbtn{min-width:32px;font-size:16px}
 .links{display:flex;justify-content:center;gap:4px;flex-wrap:wrap}
+.verdict .g-best{background:var(--m-best)} .verdict .g-good{background:var(--m-good)} .verdict .g-inacc{background:var(--m-inacc)} .verdict .g-mistake{background:var(--m-mistake)}
+.verdict .badge,.verdict .g{color:#16201C}
 .bestbox{border-top:1px solid var(--line);padding-top:8px;margin-top:4px;display:flex;flex-direction:column;gap:5px}
 .clist{display:flex;flex-direction:column;gap:8px}
 .ccard{display:flex;flex-direction:column;gap:8px;text-align:left;background:var(--bg);border:0;border-radius:12px;padding:12px 14px;cursor:pointer;color:var(--ink);font:inherit}
@@ -215,8 +217,8 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center}
 .side-trail{fill:none;stroke:var(--side-ink);stroke-width:3;stroke-dasharray:3 9;stroke-linecap:round}
 .side-sh{fill:var(--ink)}
 .lbl-half{font:600 22px var(--f-display);letter-spacing:.14em;fill:var(--muted)}
-.arrow{stroke-width:6;fill:none;stroke-linecap:round}
-.arrow.n{stroke:var(--m-neutral);stroke-dasharray:12 10}
+.arrow{stroke-width:4;fill:none;stroke-linecap:round}
+.arrow.n{stroke:var(--m-neutral);stroke-dasharray:12 10;opacity:.5}
 .tgt circle{stroke:var(--mat-edge);stroke-width:3}
 .tgt text{font:700 26px var(--f-display);fill:#16201C}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
