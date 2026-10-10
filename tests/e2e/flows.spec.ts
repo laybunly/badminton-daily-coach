@@ -7,7 +7,7 @@ import { I18N } from '../../src/i18n/strings';
 const CODES = Object.values(ID2CODE) as string[];
 const gc = (p: import('@playwright/test').Page) => p.evaluate(() => (window as any).__gc.map((e: any) => e.path));
 
-for (const [lang, level, hand] of [['de', 'int', 'R'], ['en', 'beg', 'L'], ['de', 'adv', 'R']] as const) {
+for (const [lang, level, hand] of [['de', 'int', 'R'], ['en', 'beg', 'L'], ['de', 'adv', 'R'], ['fr', 'beg', 'L']] as const) {
   test(`all ${CODES.length} puzzles play through without errors (${lang}/${level}/${hand})`, async ({ browser }) => {
     test.setTimeout(240_000);
     const { page, errors } = await openApp(browser, NEXT, { lang, storage: { cs_prefs3: JSON.stringify({ level, hand, stats: true }) } });
@@ -26,6 +26,27 @@ for (const [lang, level, hand] of [['de', 'int', 'R'], ['en', 'beg', 'L'], ['de'
     expect(errors).toEqual([]);
   });
 }
+
+test('French: chosen in settings, stored, browser language detected, glossary links', async ({ browser }) => {
+  const { page, errors } = await openApp(browser, NEXT, { lang: 'de' });
+  await page.click('[data-act="settings"]');
+  await page.click('[data-lang="fr"]');
+  await expect(page.locator('[data-lang="fr"]')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('#sheet-body h3')).toHaveText(I18N.fr.settingsT);
+  expect(await page.evaluate(() => [document.documentElement.lang, localStorage.getItem('cs_lang')])).toEqual(['fr', '"fr"']);
+  await page.click('#sheet-close');
+  await expect(page.locator('.app')).toContainText(I18N.fr.heroTitle);
+  await page.click('[data-act="dstart"]');
+  await settle(page);
+  await answer(page, 0);
+  await expect(page.locator('#panel .verdict')).toBeVisible();
+  await expect(page.locator('#panel .term').first()).toBeVisible();
+  expect(errors).toEqual([]);
+  const ctx = await browser.newContext({ locale: 'fr-FR', serviceWorkers: 'block' });
+  const p2 = await ctx.newPage();
+  await p2.goto(NEXT);
+  expect(await p2.evaluate(() => document.documentElement.lang)).toBe('fr');
+});
 
 test('shared code link opens the task and clears the hash', async ({ browser }) => {
   const code = CODES[42];

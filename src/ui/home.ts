@@ -10,11 +10,14 @@ import { renderHeader } from './header';
 import { openDaily, openPuzzle, openSet } from './flow';
 import { showGlossary, showSettings } from './sheets';
 import { openCode } from './share';
+import type { Lang } from '../puzzles/types';
+
+const LOCALE: Record<Lang, string> = { de: 'de-DE', en: 'en-GB', fr: 'fr-FR' };
 
 function renderPlan(){const d0=dayIndex(), rows: string[]=[];
   for(let d=d0+1;d<=d0+20;d++){const ids=planFor(d)||dailyIds(d);
     const dt=new Date(LAUNCH.getFullYear(),LAUNCH.getMonth(),LAUNCH.getDate()+d);
-    let ds='';try{ds=dt.toLocaleDateString(LANG==='de'?'de-DE':'en-GB',{weekday:'short',day:'numeric',month:'short'});}catch(e){}
+    let ds='';try{ds=dt.toLocaleDateString(LOCALE[LANG],{weekday:'short',day:'numeric',month:'short'});}catch(e){}
     rows.push(`<section class="card"><h3>${T.day} ${d+1} · ${ds}</h3><div class="plist">`+ids.map(id=>{const i=PUZZLES.findIndex(p=>p.id===id),p=PUZZLES[i],r=S.results[id];
       return `<button class="prow" data-plan="${i}"><span class="pt">${p.title}<small>${p.theme} · ${T.level} ${p.rating} · Code ${ID2CODE[id]}</small></span>${r!=null?`<span class="g g-${gradeOf(r)}">${G[gradeOf(r)].l}</span>`:''}</button>`;}).join('')+`</div></section>`);}
   const all=rows.length*5, uniq=new Set<string>();for(let d=d0+1;d<=d0+20;d++)(planFor(d)||dailyIds(d)).forEach(id=>uniq.add(id));
@@ -41,13 +44,13 @@ function renderCat(){const c=CATS[S.cat];
   homeEl.innerHTML=`<div class="row"><button class="backbtn" data-act="totrain">← ${T.training}</button></div>
   <section class="card"><h3>${c[LANG]}</h3><div class="plist">`+
   c.sets.map((nm,s)=>{const ids=catIds(S.cat,s), done=ids.filter(id=>S.results[id]!=null).length;
-    return `<button class="prow" data-set="${s}"><span class="pt">${T.setN(s+1)} · ${nm[LANG==='de'?0:1]}<small>${miniSq(ids)}</small></span><span class="g ${done===ids.length?'g-best':'g-new'}">${done?done+'/5':T.newTag}</span></button>`;}).join('')+`</div></section>`;}
+    return `<button class="prow" data-set="${s}"><span class="pt">${T.setN(s+1)} · ${nm[LANG==='de'?0:LANG==='en'?1:2]}<small>${miniSq(ids)}</small></span><span class="g ${done===ids.length?'g-best':'g-new'}">${done?done+'/5':T.newTag}</span></button>`;}).join('')+`</div></section>`;}
 export function renderHome(){
   document.querySelectorAll<HTMLElement>('.stat').forEach(e=>{e.hidden=!S.sub;});
   homeEl.classList.toggle('center',!S.sub);
   if(S.sub==='plan'){renderPlan();return;} if(S.sub==='train'){renderTraining();return;} if(S.sub==='cat'){renderCat();return;} if(S.sub==='pool'){renderPractice();return;}
   const dd=getDaily(), done=dd.ids.filter(id=>dd.res[id]!=null).length, fin=done===dd.ids.length, sk=streakNow();
-  let date='';try{date=new Date().toLocaleDateString(LANG==='de'?'de-DE':'en-GB',{weekday:'long',day:'numeric',month:'long'});}catch(e){}
+  let date='';try{date=new Date().toLocaleDateString(LOCALE[LANG],{weekday:'long',day:'numeric',month:'long'});}catch(e){}
   const sq=dd.ids.map(id=>{const r=dd.res[id];return `<span class="sq ${r==null?'':'r-'+gradeOf(r)}"></span>`;}).join('');
   let h=`<div class="hero hero-big"><div class="eyebrow">${T.day} ${dd.day}${date?' · '+date:''}</div>
     <h1>${fin?T.doneTitle:T.heroTitle}</h1><div class="sqs" role="img" aria-label="${done}/5">${sq}</div>`;

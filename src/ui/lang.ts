@@ -5,9 +5,11 @@ import { updPlayBtn } from '../court/animation';
 import { $ } from './dom';
 import type { Lang } from '../puzzles/types';
 
-export function detectLang(): Lang{const st=store.get<string|null>('lang',null);if(st==='de'||st==='en')return st;
+const LANGS: Lang[]=['de','en','fr'];
+const isLang=(v: unknown): v is Lang=>LANGS.includes(v as Lang);
+export function detectLang(): Lang{const st=store.get<string|null>('lang',null);if(isLang(st))return st;
   const ls=(navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||'en']);
-  for(const l of ls){const p=String(l).slice(0,2).toLowerCase();if(p==='de'||p==='en')return p;}return 'en';}
+  for(const l of ls){const p=String(l).slice(0,2).toLowerCase();if(isLang(p))return p;}return 'en';}
 export function applyLang(l: Lang,save: boolean){
   setLangState(l); if(save)store.set('lang',l);
   document.documentElement.lang=l;

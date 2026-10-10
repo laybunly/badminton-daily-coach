@@ -2,7 +2,7 @@
 
 Mobile web app with chess-style badminton tactics puzzles (doubles positioning and shot selection).
 Live on GitHub Pages: https://laybunly.github.io/badminton-daily-coach/ (built and deployed by `.github/workflows/deploy.yml` on every push to main).
-Owner: B (German speaker; app UI is German by default, English available).
+Owner: B (German speaker; app UI is German by default, English and French available).
 
 ## Working with the owner
 - Give feedback / options first when asked ("tell me first", "don't do anything yet"). Only build after a go.
@@ -10,6 +10,9 @@ Owner: B (German speaker; app UI is German by default, English available).
 - Keep answers short. Explain trade-offs honestly; suggest the lowest-effort option first.
 - German UI wording: keep English badminton terms (Clear, Smash, Drive, Lift, Push, Netzdrop, Flick).
   Grades are "✓ Am besten / ○ Gut / ! Ungenau / ✗ Fehler" (EN: Best / Good / Inaccuracy / Mistake). Never "Bester".
+- French wording: French badminton terms (dégagé, lob, amorti, contre-amorti, poussette, bloc, rush, demi-smash; smash, drive, flick stay),
+  "tu", French typography (non-breaking space before ? ! : ;, « »). Grades: Meilleur / Bon / Imprécision / Erreur.
+  The French texts were machine-assisted and still need a review by a French-speaking player or coach.
 
 ## Architecture
 - Vite + TypeScript, no UI framework. `index.html` (markup) → `src/main.ts` (boot + listeners). `npm run dev` / `npm run build` (→ `dist/`).
@@ -22,7 +25,8 @@ Owner: B (German speaker; app UI is German by default, English available).
 - State object `S`; render functions `renderSVG`, `renderPanel`, `renderHeader`, `renderHome`.
 - Shuttle animation loops via requestAnimationFrame (FLY 1300 ms, HOLD 900 ms). Serve puzzles use a static shuttle.
 - Puzzles:
-  - `PUZ_DE` hand-written puzzles + `PUZ_EN_TEXT` English overlay.
+  - `PUZ_DE` hand-written puzzles + `PUZ_EN_TEXT` English overlay + `PUZ_FR_TEXT` French overlay (`text.fr.json`,
+    also holds the French level-variant texts `lvLesson` / step `lv`, since `Bi<>` in the German data is de/en only).
   - `GEN`: 250 generated training puzzles from `CATS` via `mkShot` / `mkPlace` (10+ categories, 5 sets × 5).
   - `buildPuzzles()` applies, in order: language → level variants (`lv`, `lvLesson`) → handedness text swap (`handText`)
     → backhand shift for `bhY` targets (beginner 30, intermediate 20, advanced 0) → tolerance `TOL`
@@ -33,6 +37,8 @@ Owner: B (German speaker; app UI is German by default, English available).
 - Storage: `store.get/set` on localStorage (keys prefixed `cs_`) with in-memory `MEM` fallback.
   `PREFS = {discs:['d'], level, hand, stats, set:true}` saved under `prefs3`. Settings changes after answering are deferred via `S.pend`.
 - Glossary of 30 terms; `linkify()` makes terms in questions/explanations tappable.
+- Languages: de, en, fr. Chosen in settings (the header `#lang` button is hidden); `detectLang()` uses the stored `lang`, then the browser.
+  `handText` also swaps "ton coin … coup droit/revers" and "Amorti/Smash de revers" for left-handers.
 - Task codes: `ID2CODE` / `CODE2IDX`, 5 chars, FNV hash. `#CODE` opens a shared task. Codes must never change.
 - Report sheet: sends anonymous GoatCounter event `report/CODE/reasons` (title = task name · language · comment ≤200 chars),
   plus copy-text and prefilled GitHub issue link.
@@ -58,7 +64,9 @@ Owner: B (German speaker; app UI is German by default, English available).
 - `tests/unit/golden.test.ts` (vitest): data, codes, plan, 400 days of daily sets and all 12 lang/level/hand builds must equal
   the legacy app (`tests/golden/legacy.json`, regenerated from `legacy/index.html` by `npm run golden`).
 - `tests/e2e/parity.spec.ts` (Playwright): new build vs legacy side by side, same DOM after every click, same localStorage and events.
-- `tests/e2e/flows.spec.ts`: all 287 puzzles played through (de/int/R, en/beg/L, de/adv/R) without console errors,
+- `tests/unit/french.test.ts`: French has no legacy reference; every fr build must equal the en build apart from the texts,
+  be fully translated, and the left-handed swap must hit the same texts as in English. Golden tests ignore the `fr` fields.
+- `tests/e2e/flows.spec.ts`: all 287 puzzles played through (de/int/R, en/beg/L, de/adv/R, fr/beg/L) without console errors,
   code links, `#plan`, report event, opt-out hashes, storage keys, PWA.
 
 ## Roadmap (agreed with the owner)

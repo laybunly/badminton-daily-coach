@@ -17,7 +17,7 @@ export function showTerm(k: string){const g=GLOSSARY.find(x=>x.k===k);if(!g)retu
   openSheet(`<h3>${g.t[LANG]}</h3><p>${g.d[LANG]}</p><button class="linkbtn small" data-gl="all">${T.allTerms}</button>`);}
 export function showSettings(){const cp=curPrefs();
   openSheet(`<h3>${T.settingsT}</h3><div class="plabel">${T.langQ}</div><div class="filters" role="group" aria-label="${T.langQ}">`+
-   [['de','Deutsch'],['en','English']].map(([k,l])=>`<button class="chip ${LANG===k?'on':''}" data-lang="${k}" aria-pressed="${LANG===k}" lang="${k}">${l}</button>`).join('')+
+   [['de','Deutsch'],['en','English'],['fr','Français']].map(([k,l])=>`<button class="chip ${LANG===k?'on':''}" data-lang="${k}" aria-pressed="${LANG===k}" lang="${k}">${l}</button>`).join('')+
    `</div><div class="plabel">${T.handQ}</div><div class="filters" role="group" aria-label="${T.handQ}">`+
    [['R',T.handR],['L',T.handL]].map(([k,l])=>`<button class="chip ${cp.hand===k?'on':''}" data-hand="${k}" aria-pressed="${cp.hand===k}">${l}</button>`).join('')+
    `</div><div class="plabel">${T.yourLevel}</div><div class="levels" role="group" aria-label="${T.yourLevel}">`+

@@ -3,26 +3,32 @@
   "k": "serve",
   "de": "Aufschlag & Return",
   "en": "Serve & return",
+  "fr": "Service et relance",
   "sets": [
    [
     "Wo stehst du?",
-    "Where do you stand?"
+    "Where do you stand?",
+    "Où te places-tu ?"
    ],
    [
     "Return auf kurzen Aufschlag",
-    "Returning a short serve"
+    "Returning a short serve",
+    "Relancer un service court"
    ],
    [
     "Welcher Aufschlag?",
-    "Which serve?"
+    "Which serve?",
+    "Quel service ?"
    ],
    [
     "Return auf den Flick",
-    "Returning a flick"
+    "Returning a flick",
+    "Relancer un flick"
    ],
    [
     "Nach dem Return",
-    "After the return"
+    "After the return",
+    "Après la relance"
    ]
   ]
  },
@@ -30,26 +36,32 @@
   "k": "back",
   "de": "Angriff aus dem Hinterfeld",
   "en": "Attacking from the back",
+  "fr": "Attaquer depuis le fond",
   "sets": [
    [
     "Ausgeglichene Abwehr",
-    "Balanced defence"
+    "Balanced defence",
+    "Défense équilibrée"
    ],
    [
     "Die offene Lücke",
-    "The open gap"
+    "The open gap",
+    "L’espace libre"
    ],
    [
     "Tief im Hinterfeld",
-    "Deep in the back court"
+    "Deep in the back court",
+    "Tout au fond du terrain"
    ],
    [
     "Gegner stehen tief",
-    "Opponents stand deep"
+    "Opponents stand deep",
+    "Adversaires en arrière"
    ],
    [
     "Gegner vorne-hinten",
-    "Opponents front and back"
+    "Opponents front and back",
+    "Adversaires en avant-arrière"
    ]
   ]
  },
@@ -57,26 +69,32 @@
   "k": "mid",
   "de": "Angriff aus dem Mittelfeld",
   "en": "Attacking from the mid-court",
+  "fr": "Attaquer depuis le milieu du terrain",
   "sets": [
    [
     "Hoher Ball, Abwehr ausgeglichen",
-    "High ball, balanced defence"
+    "High ball, balanced defence",
+    "Volant haut, défense équilibrée"
    ],
    [
     "Die offene Lücke",
-    "The open gap"
+    "The open gap",
+    "L’espace libre"
    ],
    [
     "Gegner vorne-hinten",
-    "Opponents front and back"
+    "Opponents front and back",
+    "Adversaires en avant-arrière"
    ],
    [
     "Halbhoher Ball",
-    "Half-high shuttle"
+    "Half-high shuttle",
+    "Volant mi-haut"
    ],
    [
     "Gegner stehen tief",
-    "Opponents stand deep"
+    "Opponents stand deep",
+    "Adversaires en arrière"
    ]
   ]
  },
@@ -84,26 +102,32 @@
   "k": "net",
   "de": "Netzspiel",
   "en": "Net play",
+  "fr": "Jeu au filet",
   "sets": [
    [
     "Über der Netzkante",
-    "Above the tape"
+    "Above the tape",
+    "Au-dessus de la bande"
    ],
    [
     "Unter der Netzkante, Gegner hinten",
-    "Below the tape, opponents back"
+    "Below the tape, opponents back",
+    "Sous la bande, adversaires au fond"
    ],
    [
     "Der Netzspieler wartet",
-    "The net player is waiting"
+    "The net player is waiting",
+    "Le joueur au filet attend"
    ],
    [
     "Netzspieler auf der anderen Seite",
-    "Net player on the other side"
+    "Net player on the other side",
+    "Joueur au filet de l’autre côté"
    ],
    [
     "Über der Netzkante, Netzspieler nah",
-    "Above the tape, net player close"
+    "Above the tape, net player close",
+    "Au-dessus de la bande, joueur au filet proche"
    ]
   ]
  },
@@ -111,26 +135,32 @@
   "k": "def",
   "de": "Verteidigung gegen den Smash",
   "en": "Defending the smash",
+  "fr": "Défendre le smash",
   "sets": [
    [
     "Smash aus dem Hinterfeld",
-    "Smash from the back"
+    "Smash from the back",
+    "Smash depuis le fond"
    ],
    [
     "Smash aus dem Mittelfeld",
-    "Smash from the mid-court"
+    "Smash from the mid-court",
+    "Smash depuis le milieu du terrain"
    ],
    [
     "Langsamer Halbsmash",
-    "Slow half smash"
+    "Slow half smash",
+    "Demi-smash lent"
    ],
    [
     "Netzspieler in der Mitte",
-    "Net player in the middle"
+    "Net player in the middle",
+    "Joueur au filet au milieu"
    ],
    [
     "Zu spät dran",
-    "Too late"
+    "Too late",
+    "Trop en retard"
    ]
   ]
  },
@@ -138,26 +168,32 @@
   "k": "lift",
   "de": "Stellung nach dem Lift",
   "en": "Positioning after a lift",
+  "fr": "Placement après un lob",
   "sets": [
    [
     "Lift ganz nach hinten",
-    "Lift to the very back"
+    "Lift to the very back",
+    "Lob tout au fond"
    ],
    [
     "Lift tief",
-    "Deep lift"
+    "Deep lift",
+    "Lob long"
    ],
    [
     "Lift ins hintere Mittelfeld",
-    "Lift to the rear mid-court"
+    "Lift to the rear mid-court",
+    "Lob à l’arrière du milieu du terrain"
    ],
    [
     "Lift zu kurz",
-    "Lift too short"
+    "Lift too short",
+    "Lob trop court"
    ],
    [
     "Lift viel zu kurz",
-    "Lift far too short"
+    "Lift far too short",
+    "Lob beaucoup trop court"
    ]
   ]
  },
@@ -165,26 +201,32 @@
   "k": "att",
   "de": "Stellung im Angriff",
   "en": "Positioning in attack",
+  "fr": "Placement en attaque",
   "sets": [
    [
     "Du smashst gerade",
-    "You smash straight"
+    "You smash straight",
+    "Tu smashes long de ligne"
    ],
    [
     "Du smashst cross",
-    "You smash cross-court"
+    "You smash cross-court",
+    "Tu smashes croisé"
    ],
    [
     "Partner smasht gerade",
-    "Partner smashes straight"
+    "Partner smashes straight",
+    "Ton partenaire smashe long de ligne"
    ],
    [
     "Partner smasht cross",
-    "Partner smashes cross-court"
+    "Partner smashes cross-court",
+    "Ton partenaire smashe croisé"
    ],
    [
     "Smash in die Mitte",
-    "Smash to the middle"
+    "Smash to the middle",
+    "Smash au milieu"
    ]
   ]
  },
@@ -192,26 +234,32 @@
   "k": "rot",
   "de": "Rotation",
   "en": "Rotation",
+  "fr": "Rotation",
   "sets": [
    [
     "Du bekommst den kurzen Lift",
-    "You get the short lift"
+    "You get the short lift",
+    "Le lob court est pour toi"
    ],
    [
     "Partner bekommt den kurzen Lift",
-    "Partner gets the short lift"
+    "Partner gets the short lift",
+    "Le lob court est pour ton partenaire"
    ],
    [
     "Lift über den Vorderspieler",
-    "Lift over the front player"
+    "Lift over the front player",
+    "Lob par-dessus le joueur avant"
    ],
    [
     "Vom Angriff in die Verteidigung",
-    "From attack to defence"
+    "From attack to defence",
+    "De l’attaque à la défense"
    ],
    [
     "Nach deinem Clear",
-    "After your clear"
+    "After your clear",
+    "Après ton dégagé"
    ]
   ]
  },
@@ -219,26 +267,32 @@
   "k": "press",
   "de": "Unter Druck",
   "en": "Under pressure",
+  "fr": "Sous pression",
   "sets": [
    [
     "Hinten links zu spät",
-    "Late at the back left"
+    "Late at the back left",
+    "En retard au fond à gauche"
    ],
    [
     "Hinten rechts zu spät",
-    "Late at the back right"
+    "Late at the back right",
+    "En retard au fond à droite"
    ],
    [
     "Vorne tief am Netz",
-    "Low at the net"
+    "Low at the net",
+    "Bas au filet"
    ],
    [
     "Weit außen im Mittelfeld",
-    "Stretched wide in the mid-court"
+    "Stretched wide in the mid-court",
+    "Débordé au milieu du terrain"
    ],
    [
     "Spät im Mittelfeld",
-    "Late in the mid-court"
+    "Late in the mid-court",
+    "En retard au milieu du terrain"
    ]
   ]
  },
@@ -246,26 +300,32 @@
   "k": "drive",
   "de": "Mittelfeld & Drive",
   "en": "Mid-court & drives",
+  "fr": "Milieu du terrain et drives",
   "sets": [
    [
     "Gegner stehen tief",
-    "Opponents stand deep"
+    "Opponents stand deep",
+    "Adversaires en arrière"
    ],
    [
     "Gegner vorne-hinten",
-    "Opponents front and back"
+    "Opponents front and back",
+    "Adversaires en avant-arrière"
    ],
    [
     "Gegner im Mittelfeld",
-    "Opponents in the mid-court"
+    "Opponents in the mid-court",
+    "Adversaires au milieu du terrain"
    ],
    [
     "Ball unter Netzhöhe",
-    "Shuttle below net height"
+    "Shuttle below net height",
+    "Volant sous la hauteur du filet"
    ],
    [
     "Ball auf Kopfhöhe",
-    "Shuttle at head height"
+    "Shuttle at head height",
+    "Volant à hauteur de tête"
    ]
   ]
  }
