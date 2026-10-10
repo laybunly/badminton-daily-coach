@@ -6,6 +6,8 @@
   --best:#178C61; --good:#2F6FC6; --inacc:#B07A0E; --mistake:#C93A42;
   --accent:#2E6A52; --on-accent:#FFFFFF;
   --m-best:#8FF5C3; --m-good:#A6CCFF; --m-inacc:#FFD166; --m-mistake:#FF8E93; --m-neutral:rgba(243,248,245,.75);
+  /* option colours before answering (after answering the grade colours --m-* take over) */
+  --o1:#B48CFF; --o2:#FF8A3D; --o3:#3FD0E0; --o4:#FF6FD8;
   --f-display:"Barlow Condensed","Arial Narrow",sans-serif;
   --f-body:"Barlow",system-ui,-apple-system,sans-serif;
 }
@@ -63,6 +65,8 @@ h2{font:700 22px/1.05 var(--f-display);margin:0;text-wrap:balance}
 .opts{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .opt{display:flex;align-items:center;gap:8px;width:100%;text-align:left;font:500 14px/1.25 var(--f-body);color:var(--ink);background:var(--bg);border:2px solid transparent;border-radius:9px;padding:7px 8px;cursor:pointer;min-width:0}
 .opt .k{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--mat);color:#fff;font:700 14px var(--f-display)}
+.opt[data-opt="0"] .k{background:var(--o1)} .opt[data-opt="1"] .k{background:var(--o2)} .opt[data-opt="2"] .k{background:var(--o3)} .opt[data-opt="3"] .k{background:var(--o4)}
+.opt[data-opt] .k{color:#16201C}
 .opt .lbl{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .g{align-self:flex-start;font:600 10px var(--f-body);letter-spacing:.06em;text-transform:uppercase;padding:2px 5px;border-radius:4px;color:#fff}
 .opt.sel{border-color:var(--ink)}
