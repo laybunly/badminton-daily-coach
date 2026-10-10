@@ -1,4 +1,11 @@
 // Boot. The order below mirrors the original single-file app.
+// Fonts are bundled with the app (no request to Google: privacy).
+import '@fontsource/barlow/400.css';
+import '@fontsource/barlow/500.css';
+import '@fontsource/barlow/600.css';
+import '@fontsource/barlow-condensed/500.css';
+import '@fontsource/barlow-condensed/600.css';
+import '@fontsource/barlow-condensed/700.css';
 import './styles.css';
 import { S, T, PUZZLES, PREFS, LANG, curPrefs } from './state';
 import { store } from './storage/store';

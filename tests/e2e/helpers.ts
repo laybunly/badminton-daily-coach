@@ -41,6 +41,8 @@ export async function snap(page: Page): Promise<string> {
     }
     // answer colours before answering are new: map them back to the old neutral colour
     c.querySelectorAll('marker[id^="ah-o"]').forEach((m) => m.remove());
+    // the privacy link is new too
+    c.querySelectorAll('.privlink').forEach((m) => m.remove());
     const html = c.outerHTML.replace(/var\(--o\d\)/g, 'var(--m-neutral)').replace(/#ah-o\d/g, '#ah-n');
     return (document.documentElement.lang + '|' + html.replace(/>\s+</g, '><')).split(location.origin).join('ORIGIN');
   });
