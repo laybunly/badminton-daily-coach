@@ -48,6 +48,21 @@ test('French: chosen in settings, stored, browser language detected, glossary li
   expect(await p2.evaluate(() => document.documentElement.lang)).toBe('fr');
 });
 
+test('privacy page: linked from home and settings in the current language, no Google requests', async ({ browser }) => {
+  const { page, errors } = await openApp(browser, NEXT, { lang: 'fr' });
+  const hosts = new Set<string>();
+  page.on('request', (r) => hosts.add(new URL(r.url()).host));
+  await page.reload();
+  await expect(page.locator('a.privlink')).toHaveAttribute('href', './datenschutz.html#fr');
+  await page.click('[data-act="settings"]');
+  await expect(page.locator('#sheet-body a.privlink')).toHaveText('Confidentialité');
+  await page.click('#sheet-body a.privlink');
+  await expect(page).toHaveURL(/datenschutz\.html#fr$/);
+  for (const id of ['de', 'en', 'fr']) await expect(page.locator('#' + id)).toContainText('Bunly Lay');
+  expect([...hosts].filter((h) => /google|gstatic/.test(h))).toEqual([]);
+  expect(errors).toEqual([]);
+});
+
 test('shared code link opens the task and clears the hash', async ({ browser }) => {
   const code = CODES[42];
   const { page, errors } = await openApp(browser, NEXT, { hash: code.toLowerCase() });

@@ -172,6 +172,7 @@ details.lessons[open] summary{margin-bottom:6px}
 .helpbtn{margin-left:auto;font-weight:700;min-width:32px}
 .setbtn{min-width:32px;font-size:16px}
 .links{display:flex;justify-content:center;gap:4px;flex-wrap:wrap}
+.privlink{color:var(--muted)} .privlink.linkrow{display:block;text-align:center;font-weight:500;padding-top:0}
 .verdict .g-best{background:var(--m-best)} .verdict .g-good{background:var(--m-good)} .verdict .g-inacc{background:var(--m-inacc)} .verdict .g-mistake{background:var(--m-mistake)}
 .verdict .badge,.verdict .g{color:#16201C}
 .bestbox{border-top:1px solid var(--line);padding-top:8px;margin-top:4px;display:flex;flex-direction:column;gap:5px}

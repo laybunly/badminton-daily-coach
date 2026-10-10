@@ -50,6 +50,9 @@ Owner: B (German speaker; app UI is German by default, English and French availa
 - Analytics: GoatCounter (https://badminton-daily-coach.goatcounter.com/) via `loadGC()` / `track(path,title)`,
   only if stats on, http(s), not on claude/anthropic hosts. Opt-out: settings, `#nostats`, `#stats`, `#toggle-goatcounter` (with toast).
 - Placing players: drag (75-unit touch offset) or tap. `touch-action:none` on the svg.
+- Privacy: `public/datenschutz.html` (static page, DE binding + EN/FR, sections `#de/#en/#fr`), linked from home and settings
+  (`src/ui/privacy.ts`); excluded from the SW navigation fallback. Fonts are bundled via `@fontsource` (no Google requests).
+  Update the page whenever a new service gets data (e.g. Supabase). No Impressum yet (owner's decision, hobby project).
 - Favicon: B3 shuttle (SVG + 32px PNG) for tabs, B1 shuttle (180/192px PNG) for home screen; files in `public/icons/`.
 
 ## Working from the phone / cloud sessions

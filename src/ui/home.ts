@@ -10,6 +10,7 @@ import { renderHeader } from './header';
 import { openDaily, openPuzzle, openSet } from './flow';
 import { showGlossary, showSettings } from './sheets';
 import { openCode } from './share';
+import { privacyLink } from './privacy';
 import type { Lang } from '../puzzles/types';
 
 const LOCALE: Record<Lang, string> = { de: 'de-DE', en: 'en-GB', fr: 'fr-FR' };
@@ -61,7 +62,7 @@ export function renderHome(){
   h+=`</div>`;
   if(fin) h+=`<details class="card lessons"><summary>${T.lessons}</summary>`+dd.ids.map(id=>{const p=PUZZLES.find(x=>x.id===id)!;
     return `<div class="lrow"><span class="sq r-${gradeOf(dd.res[id])}"></span><div><b>${p.title}</b>${p.lesson}</div></div>`;}).join('')+`</details>`;
-  h+=`<div class="links"><button class="linkrow" data-act="practice">${T.practiceLink} →</button><button class="linkrow" data-act="glossary">${T.glossary}</button><button class="linkrow" data-act="settings">${T.settingsT}</button></div>`;
+  h+=`<div class="links"><button class="linkrow" data-act="practice">${T.practiceLink} →</button><button class="linkrow" data-act="glossary">${T.glossary}</button><button class="linkrow" data-act="settings">${T.settingsT}</button></div>`+privacyLink('linkrow small');
   homeEl.innerHTML=h;
 }
 function renderPractice(){
